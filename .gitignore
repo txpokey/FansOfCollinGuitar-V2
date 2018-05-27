@@ -25,6 +25,7 @@ out/
 sdkman/
 stacktrace.log
 .*.swp
+.touchFile
 target/
 target-eclipse/
 web-app/plugins/
