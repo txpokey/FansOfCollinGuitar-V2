@@ -27,7 +27,22 @@ apply plugin: 'de.richsource.gradle.plugins.typescript'
 
 // Define the main class for the application
 mainClassName = 'App'
+import com.moowork.gradle.node.NodeExtension
+import com.moowork.gradle.node.variant.VariantBuilder
 
+node {
+    download = true
+}
+
+String nodeExecutable() {
+    NodeExtension nodeExt = NodeExtension.get(project)
+    return new VariantBuilder(nodeExt).build().nodeExec
+}
+
+compileTypeScript {
+    compilerExecutable "${nodeExecutable()} node_modules/typescript/lib/tsc.js"
+    dependsOn "npmInstall"
+}
 bootJar {
     baseName = rootProject.name
     version =  '0.1.0'
