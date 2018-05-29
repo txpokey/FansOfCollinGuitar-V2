@@ -13,8 +13,8 @@ import { FeaturesModule } from './features/features.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FeaturesModule
+    FeaturesModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
