@@ -1,5 +1,7 @@
-import { Injectable , OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import {Injectable, OnInit} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {IFooterDetail} from "../layout/footer/FooterDetail";
+import {IFooter} from "../layout/footer/Footer";
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 
@@ -7,28 +9,47 @@ const footerSetupUrl = "../../assets/json/footer-controller.json";
   providedIn: 'root'
 })
 export class FileAsSourceForJsonService implements OnInit {
-  public _footerSetupUrl = footerSetupUrl ;
   // constructor( private _http: Http  ) { }
-  constructor() { }
-
-  public footerSetupData : any[] = this.privateGetFooterSetUpFromArray() ;
+  constructor() {
+  }
 
   ngOnInit(): void {
-    // this.getFooterSetUp() ;
     console.log("FileAsSourceForJsonService is HERE");
+  }
 
-  }
   getFooterSetUp() {
-    // return this._http.get(this._footerSetupUrl);
-    return this.privateGetFooterSetUpFromArray() ;
+    return this.privateGetFooterSetUpFromArray();
   }
-  private privateGetFooterSetUpFromArray(): any[] {
-      return [
-        {
-          "label": "Faculty",
-          "icon" : "fa fa-graduation-cap",
-          "logo" : "#0",
-          "url": "mailto:fvera@collin.edu"
-        }];
+
+  private privateGetFooterSetUpFromArray(): IFooter[] {
+    return [
+      {
+        "label": "Guitar Studies Social Media Contacts",
+        "runtime": ["guitar-dept-display-flex-column", "guitar-dept-display-flex-nowrap"],
+        "payload": [
+          {
+            "label": "Faculty",
+            "icon": "fa fa-graduation-cap",
+            "logo": "#0",
+            "url": "mailto:fvera@collin.edu"
+          }
+        ]
+      }
+    ];
+  }
+
+  private privateGetFooterSetUpFromArray0(): IFooterDetail[] {
+    return [
+      {
+        "label": "Faculty",
+        "icon": "fa fa-graduation-cap",
+        "logo": "#0",
+        "url": "mailto:fvera@collin.edu"
+      }];
+  }
+
+  private privateGetFooterSetUpFromHttp(): any[] {
+    // return this._http.get(footerSetupUrl);
+    return;
   }
 }

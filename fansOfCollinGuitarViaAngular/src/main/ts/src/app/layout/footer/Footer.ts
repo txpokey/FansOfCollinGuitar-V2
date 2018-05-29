@@ -4,7 +4,7 @@ import {IFooterDetail} from "./FooterDetail";
 
 export interface IFooter   {
   label: string;
-  runtime: string;
+  runtime: string[];
   payload: IFooterDetail[];
 }
 
