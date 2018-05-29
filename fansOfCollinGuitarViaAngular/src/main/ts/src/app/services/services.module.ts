@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FileAsSourceForJsonComponent } from './file-as-source-for-json/file-as-source-for-json.component';
+// import {FileAsSourceForJsonService} from "./file-as-source-for-json.service";
+
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [FileAsSourceForJsonComponent],
-  exports: [FileAsSourceForJsonComponent]
+  declarations: [],
+  exports: []
 })
 export class ServicesModule { }

@@ -6,8 +6,7 @@ import { ServicesModule } from '../services/services.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    ServicesModule
+    CommonModule
   ],
   declarations: [HeaderComponent, FooterComponent],
   exports: [HeaderComponent, FooterComponent]
