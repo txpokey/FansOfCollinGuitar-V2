@@ -1,7 +1,8 @@
 import {Injectable, OnInit} from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {IFooterDetail} from "../layout/footer/FooterDetail";
-import {IFooter} from "../layout/footer/Footer";
+import {IFooterConfig} from "../layout/footer/FooterConfig";
+import {IFooterConfigDetail} from "../layout/footer/FooterConfigDetail";
+
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 
@@ -21,7 +22,7 @@ export class FileAsSourceForJsonService implements OnInit {
     return this.privateGetFooterSetUpFromArray();
   }
 
-  private privateGetFooterSetUpFromArray(): IFooter[] {
+  private privateGetFooterSetUpFromArray(): IFooterConfig[] {
     return [
       {
         "label": "Guitar Studies Social Media Contacts",
@@ -38,7 +39,7 @@ export class FileAsSourceForJsonService implements OnInit {
     ];
   }
 
-  private privateGetFooterSetUpFromArray0(): IFooterDetail[] {
+  private privateGetFooterSetUpFromArray0(): IFooterConfigDetail[] {
     return [
       {
         "label": "Faculty",

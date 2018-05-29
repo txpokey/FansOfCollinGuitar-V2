@@ -1,6 +1,6 @@
 /* Defines the footerDetailed data */
 
-export interface IFooterDetail   {
+export interface IFooterConfigDetail   {
   label: string;
   icon: string;
   logo: string;
