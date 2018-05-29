@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-// import {ServicesModule} from "../../services/services.module";
 import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json.service";
+
 
 @Component({
   selector: 'guitar-footer',
   templateUrl: './footer.component.html',
+  providers: [FileAsSourceForJsonService],
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
@@ -16,7 +17,6 @@ export class FooterComponent implements OnInit {
     this.serviceStone = this._service.getFooterSetUp() ;
     this.touchStone = this._service._footerSetupUrl ;
     console.log("FooterComponent is HERE");
-
   }
 
 }
