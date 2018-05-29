@@ -11,13 +11,16 @@ export class FileAsSourceForJsonService implements OnInit {
   // constructor( private _http: Http  ) { }
   constructor() { }
 
-  footerSetupData : any[] = this.privateGetFooterSetUpFromArray() ;
+  public footerSetupData : any[] = this.privateGetFooterSetUpFromArray() ;
 
   ngOnInit(): void {
     // this.getFooterSetUp() ;
+    console.log("FileAsSourceForJsonService is HERE");
+
   }
   getFooterSetUp() {
     // return this._http.get(this._footerSetupUrl);
+    return this.privateGetFooterSetUpFromArray() ;
   }
   private privateGetFooterSetUpFromArray(): any[] {
       return [

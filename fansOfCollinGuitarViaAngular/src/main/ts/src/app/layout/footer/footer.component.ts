@@ -9,11 +9,14 @@ import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json
 })
 export class FooterComponent implements OnInit {
   private touchStone : string ;
+  private serviceStone : any[] ;
   constructor( private _service: FileAsSourceForJsonService ) { }
 
   ngOnInit() {
-    this._service.getFooterSetUp() ;
+    this.serviceStone = this._service.getFooterSetUp() ;
     this.touchStone = this._service._footerSetupUrl ;
+    console.log("FooterComponent is HERE");
+
   }
 
 }
