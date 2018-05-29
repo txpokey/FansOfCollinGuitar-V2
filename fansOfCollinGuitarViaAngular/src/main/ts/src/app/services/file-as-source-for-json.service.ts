@@ -1,8 +1,13 @@
 import {Injectable, OnInit} from '@angular/core';
-import {Http, Response} from '@angular/http';
+// import {Http, Response} from '@angular/http';
 import {IFooterConfig} from "../layout/footer/FooterConfig";
 import {IFooterConfigDetail} from "../layout/footer/FooterConfigDetail";
-
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs/internal/Observable";
+// import 'rxjs/add/operator/do';
+// import 'rxjs/add/operator/catch';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/observable/throw';
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 
@@ -10,16 +15,24 @@ const footerSetupUrl = "../../assets/json/footer-controller.json";
   providedIn: 'root'
 })
 export class FileAsSourceForJsonService implements OnInit {
-  // constructor( private _http: Http  ) { }
-  constructor() {
-  }
+  private myAny : any ;
+  // constructor() { }
+  // constructor( private _http: Http ) { }
+  constructor( private _http: HttpClient ) { }
 
   ngOnInit(): void {
     console.log("FileAsSourceForJsonService is HERE");
   }
 
   getFooterSetUp() {
-    return this.privateGetFooterSetUpFromArray();
+    // return this.privateGetFooterSetUpFromArray();  // WORKS
+    return this.privateGetFooterSetUpFromHttp() ;
+  }
+
+  private privateGetFooterSetUpFromHttp(): any[] {
+    this.myAny = this._http.get(footerSetupUrl);
+    return this.myAny ;
+    // return;
   }
 
   private privateGetFooterSetUpFromArray(): IFooterConfig[] {
@@ -49,8 +62,4 @@ export class FileAsSourceForJsonService implements OnInit {
       }];
   }
 
-  private privateGetFooterSetUpFromHttp(): any[] {
-    // return this._http.get(footerSetupUrl);
-    return;
-  }
 }

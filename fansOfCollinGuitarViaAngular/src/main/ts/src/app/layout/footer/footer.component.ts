@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json.service";
-import {IFooterDetail} from "./FooterDetail";
+import {IFooterConfig} from "./FooterConfig";
 
 
 @Component({
@@ -10,8 +10,8 @@ import {IFooterDetail} from "./FooterDetail";
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  private touchStone : IFooterDetail ;
-  private serviceStone : IFooterDetail[] ;
+  private touchStone : IFooterConfig ;
+  private serviceStone : IFooterConfig[] ;
   constructor( private _service: FileAsSourceForJsonService ) { }
 
   ngOnInit() {

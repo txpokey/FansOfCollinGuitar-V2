@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { FeaturesModule } from './features/features.module';
 import { LayoutModule } from './layout/layout.module';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { LayoutModule } from './layout/layout.module';
     BrowserModule,
     FeaturesModule,
     LayoutModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
