@@ -2,7 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 // import {Http, Response} from '@angular/http';
 import {IFooterConfig} from "../layout/footer/FooterConfig";
 import {IFooterConfigDetail} from "../layout/footer/FooterConfigDetail";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 // import 'rxjs/add/operator/do';
 // import 'rxjs/add/operator/catch';
@@ -21,21 +21,27 @@ export class FileAsSourceForJsonService implements OnInit {
   constructor( private _http: HttpClient ) { }
 
   ngOnInit(): void {
-    console.log("FileAsSourceForJsonService is HERE");
+    console.log("FileAsSourceForJsonService is HERE: NEVER RUNS");
   }
 
   getFooterSetUp() {
-    // return this.privateGetFooterSetUpFromArray();  // WORKS
-    return this.privateGetFooterSetUpFromHttp() ;
+    return this.privateGetFooterSetUpFromArray();  // WORKS
+    // return this.privateGetFooterSetUpFromHttp() ;
   }
+// : Observable<IFooterConfig[]>
+  private privateGetFooterSetUpFromHttp() {
+    this.myAny  = this._http.get<IFooterConfig[]>(footerSetupUrl);
+    return this.myAny ;
+  }
+  private handleError(err: HttpErrorResponse) { }
 
-  private privateGetFooterSetUpFromHttp(): any[] {
+  private privateGetFooterSetUpFromHttp0(): any[] {
     this.myAny = this._http.get(footerSetupUrl);
     return this.myAny ;
     // return;
   }
 
-  private privateGetFooterSetUpFromArray(): IFooterConfig[] {
+  private privateGetFooterSetUpFromArray00(): IFooterConfig[] {
     return [
       {
         "label": "Guitar Studies Social Media Contacts",
@@ -61,5 +67,80 @@ export class FileAsSourceForJsonService implements OnInit {
         "url": "mailto:fvera@collin.edu"
       }];
   }
-
+  private privateGetFooterSetUpFromArray(): IFooterConfig[] {
+    return [
+      {
+        "label": "Guitar Studies Social Media Contacts",
+        "runtime" : [ "guitar-dept-display-flex-column", "guitar-dept-display-flex-nowrap"],
+        "payload": [
+          {
+            "label": "Faculty",
+            "icon" : "fa fa-graduation-cap",
+            "logo" : "#0",
+            "url": "mailto:fvera@collin.edu"
+          },
+          {
+            "label": "Facebook",
+            "icon" : "fa fa-facebook",
+            "logo" : "#0",
+            "url": "https://www.facebook.com/groups/419901974694874/"
+          },
+          {
+            "label": "You Tube",
+            "icon" : "fa fa-youtube",
+            "logo" : "#0",
+            "url": "https://www.youtube.com/channel/UCBb4mtRZixug9VaNYIePxOQ"
+          },
+          {
+            "label": "Instagram",
+            "icon" : "fa fa-instagram",
+            "logo" : "#0",
+            "url": "https://www.instagram.com/collincollegemusic/"
+          },
+          {
+            "label": "help",
+            "icon" : "fa fa-info-circle",
+            "logo" : "#0",
+            "url": "../html/news/misc/guitarHowTo-news.html"
+          },
+          {
+            "label": "webmaster",
+            "icon" : "fa fa-envelope-o",
+            "logo" : "#0",
+            "url": "mailto:tritonpi-collinguitarwebmaster0@yahoo.com"
+          }
+        ]
+      },
+      {
+        "label": "Guitar Competition Sponsors",
+        "runtime" : [ "guitar-dept-display-flex-row", "guitar-dept-display-flex-wrap"],
+        "payload": [
+          {
+            "label": "Los Angeles Guitar Academy",
+            "icon" : "#0",
+            "logo" : "../assets/images/sponsors/LAGA-logos/LAGA.email-image.png",
+            "url": "https://onlineguitaracademy.net/"
+          },
+          {
+            "label": "Savarez",
+            "icon" : "#0",
+            "logo" : "../assets/images/sponsors/Savarez/Savarez-logo.jpg",
+            "url": "http://www.savarez.com/"
+          },
+          {
+            "label": "Strings by Mail",
+            "icon" : "#0",
+            "logo" : "../assets/images/sponsors/StringsbyMail/StringsbyMail-logo.jpg",
+            "url": "http://www.stringsbymail.com/"
+          },
+          {
+            "label": "Category Software",
+            "icon" : "#0",
+            "logo" : "../assets/images/sponsors/categorySoftware/categorySoftware.wTitle-logo.jpg",
+            "url": "#0"
+          }
+        ]
+      }
+    ] ;
+  }
 }
