@@ -2,7 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 // import {Http, Response} from '@angular/http';
 import {IFooterConfig} from "../layout/footer/FooterConfig";
 import {IFooterConfigDetail} from "../layout/footer/FooterConfigDetail";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 // import 'rxjs/add/operator/do';
 // import 'rxjs/add/operator/catch';
@@ -25,12 +25,13 @@ export class FileAsSourceForJsonService implements OnInit {
   }
 
   getFooterSetUp() {
-    return this.privateGetFooterSetUpFromArray();  // WORKS
-    // return this.privateGetFooterSetUpFromHttp() ;
+    // return this.privateGetFooterSetUpFromArray();  // WORKS
+    return this.privateGetFooterSetUpFromHttp() ;
   }
 // : Observable<IFooterConfig[]>
-  private privateGetFooterSetUpFromHttp() {
-    this.myAny  = this._http.get<IFooterConfig[]>(footerSetupUrl);
+  private privateGetFooterSetUpFromHttp(): Observable<HttpResponse<IFooterConfig[]>> {
+    this.myAny  = this._http.get<IFooterConfig[]>(footerSetupUrl,
+      {     observe: 'response', responseType: 'json'   });
     return this.myAny ;
   }
   private handleError(err: HttpErrorResponse) { }
