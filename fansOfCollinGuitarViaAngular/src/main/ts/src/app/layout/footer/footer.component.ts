@@ -4,6 +4,7 @@ import {IFooterConfig} from "./FooterConfig";
 import {Observable} from "rxjs/internal/Observable";
 import {HttpResponse} from "@angular/common/http";
 
+const EMPTY_URL = '#0' ;
 
 @Component({
   selector: 'guitar-footer',
@@ -13,8 +14,7 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class FooterComponent implements OnInit {
   private errorMessage : any ;
-  private touchStone : IFooterConfig ;
-  private data : IFooterConfig[] ;
+  private guitarProgramFooter : IFooterConfig[] ;
   private observe : Observable<HttpResponse<IFooterConfig[]>> ;
   constructor( private _service: FileAsSourceForJsonService ) { }
 
@@ -24,17 +24,21 @@ export class FooterComponent implements OnInit {
     //   .subscribe(data  => this.data = data ,
     //     error => this.errorMessage = <any>error);
     this.observe.forEach( ( dat: HttpResponse<IFooterConfig[]> ) => {
-      this.data = dat.body ;
+      this.guitarProgramFooter = dat.body ;
       console.log(dat);
     });
-    this.touchStone = null ;
     console.log("FooterComponent is HERE");
   }
   ngOnInit0() {
     this.observe = this._service.getFooterSetUp() ;
-    this.touchStone = this.data[0] ;
     console.log("FooterComponent is HERE");
   }
 
+  hasIcon = function(candidateLink) {
+    return  EMPTY_URL !== candidateLink.icon ;
+  };
+  hasLogo = function(candidateLink) {
+    return  EMPTY_URL !== candidateLink.logo ;
+  };
 }
 

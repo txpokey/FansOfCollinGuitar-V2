@@ -1,3 +1,32 @@
-<p>
-  footer service probe {{ data ? data[0].label : "loading...." }} works!
-</p>
+<footer>
+
+<section id="guitar-dept-footer-section" class="guitar-debt-sticky-footer">
+  <div
+       class="guitar-dept-display-flex-row" style="justify-content: space-between">
+    <div *ngFor='let footerModel of guitarProgramFooter' class="padded-right">
+      <div class="Grid  Grid-cell ">
+        {{footerModel.label}}
+      </div>
+      <nav>
+        <ul class="emasculated-ul {{footerModel.runtime.join(' ')}}">
+          <li *ngFor="let guitarProgramLink of footerModel.payload" class="guitar-dept-text-button">
+            <a href="{{guitarProgramLink.url}}" target="_blank">
+              <div class="guitar-dept-footer-text-button">
+                <i *ngIf="hasIcon(guitarProgramLink)"
+                   class="{{guitarProgramLink.icon}}">
+                  {{guitarProgramLink.label}}
+                </i>
+              </div>
+              <img *ngIf="hasLogo(guitarProgramLink)"
+                   alt="{{guitarProgramLink.label}}"
+                   class="guitar-dept-footer-media-image"
+                   src="{{guitarProgramLink.logo}}">
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+</footer>
+
