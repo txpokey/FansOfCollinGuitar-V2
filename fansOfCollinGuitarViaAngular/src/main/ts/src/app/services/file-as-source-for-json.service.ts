@@ -4,6 +4,7 @@ import {IFooterConfigDetail} from "../layout/footer/FooterConfigDetail";
 import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 import {IHeaderConfig} from "../layout/header/HeaderConfig";
+import {IGuitarNewsConfig} from "../features/news/GuitarNewsConfig";
 
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
@@ -36,7 +37,10 @@ export class FileAsSourceForJsonService implements OnInit {
 
   getHeaderSetUp() {
     // return this.privateGetHeaderSetUpFromArray();  // WORKS
-    return this.privateGetHeaderSetUpFromHttp(); // TESTING
+    return this.privateGetHeaderSetUpFromHttp(); // WORKS
+  }
+  getNewsFeed() {
+    return this.privateGetNewsFeedFromArray(); // TESTING
   }
 
   private privateGetHeaderSetUpFromHttp(): Observable<HttpResponse<IHeaderConfig>> {
@@ -47,6 +51,45 @@ export class FileAsSourceForJsonService implements OnInit {
 
   private handleError(err: HttpErrorResponse) {
   }
+
+  private privateGetNewsFeedFromArray(): IGuitarNewsConfig {
+    return {
+      "title": "Spring 2018 Highlights",
+      "payload": [
+      {
+        "test": false,
+        "name": "2018 Spring Guitar Events at Collin College",
+        "date": "Date",
+        "time": "Time",
+        "where": "Location/Room",
+        "event": "Events",
+        "image": "Photo",
+        "url": "#0"
+      },
+      {
+        "test": true,
+        "name": "6th Annual Collin College Guitar Festival",
+        "date": "2/09/2018-2/11/2018",
+        "time": "--",
+        "where": "Spring Creek",
+        "event": "6th Annual Collin College Guitar Festival",
+        "image": "../assets/pdf/news/2018/spring/current/CCGF2018.jpg",
+        "url": "../html/news/2018/spring/current/guitarFestival-news.html"
+      },
+      {
+        "test": true,
+        "name": "Fan Club Website: Updated for Spring 2018",
+        "date": "1/8/2018",
+        "time": "12am",
+        "where": "internet",
+        "event": "Using Collin College Guitar Studies Website",
+        "image": "../assets/images/header/guitarStudies.light-logo.jpg",
+        "url": "../html/news/2018/spring/current/guitarWebsite-news.html"
+      }
+    ]
+    } ;
+  }
+
 
   private privateGetHeaderSetUpFromArray(): IHeaderConfig {
     return {
@@ -82,7 +125,7 @@ export class FileAsSourceForJsonService implements OnInit {
         }
       ]
     };
-  };
+  }
 
     // private privateGetFooterSetUpFromHttp0(): any[] {
     //   this.myAny = this._http.get(footerSetupUrl);

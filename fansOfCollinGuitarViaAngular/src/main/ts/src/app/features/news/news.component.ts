@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {TabStateComponent} from "../../services/tab-state/tab-state.component";
+import {IGuitarNewsConfig} from "./GuitarNewsConfig";
+import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json.service";
 
 @Component({
   selector: 'guitar-news',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsComponent implements OnInit {
 
-  constructor() { }
+  public guitarProgramNews: IGuitarNewsConfig;
+
+  constructor(public tabStates: TabStateComponent, private service: FileAsSourceForJsonService ) { }
 
   ngOnInit() {
+    this.guitarProgramNews = this.service.getNewsFeed() ;
     console.log("newsComponent is HERE");
   }
 
