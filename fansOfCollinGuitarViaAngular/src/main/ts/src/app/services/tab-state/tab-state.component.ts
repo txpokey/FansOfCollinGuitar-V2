@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   // selector: 'app-tab-state',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   // styleUrls: ['./tab-state.component.css']
 })
 export class TabStateComponent implements OnInit {
+  @Output() notify: EventEmitter<string> =
+    new EventEmitter<string>() ;
   NO_TAB_ACTIVE : number = -1 ;
   tab : number = this.NO_TAB_ACTIVE ;
   activeTab: number = this.tab ;

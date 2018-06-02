@@ -73,7 +73,7 @@ export class FileAsSourceForJsonService implements OnInit {
         "time": "--",
         "where": "Spring Creek",
         "event": "6th Annual Collin College Guitar Festival",
-        "image": "../assets/pdf/news/2018/spring/current/CCGF2018.jpg",
+        "image": "../assets/images/news/2018/spring/current/CCGF2018.jpg",
         "url": "../html/news/2018/spring/current/guitarFestival-news.html"
       },
       {

@@ -7,21 +7,25 @@
   <div class="guitar-dept-news-media-content-title Grid-bordered-bottom">
     {{guitarProgramNews.title}}
   </div>
-  <!--<div id="setup-news-content-blocks" class="guitar-dept-display-flex-row guitar-dept-display-flex-wrap guitar-dept-flex-space-around">-->
-    <!--<div *ngFor="let guitarNewsModel of guitarProgramNews.payload  | filterByObject { url: '!#0' }"-->
-         <!--class="guitar-dept-display-flex-row">-->
-      <!--<div id="setup-news-content-single-block" class="guitar-dept-display-flex-column">-->
-        <!--<div *ngIf="tabStates.showTab(index)"-->
-             <!--[ngClass]="{ 'active' : tabStates.isSet(index) }">-->
-          <!--<img class="guitar-dept-media-news-image padded-above"-->
-               <!--(click)="tabStates.setTab(index)" src="{{guitarNewsModel.image}}">-->
-          <!--<div class="guitar-dept-news-media-label padded-right">{{guitarNewsModel.name}}</div>-->
-          <!--<div class="guitar-dept-news-media-label padded-right">{{guitarNewsModel.date}}</div>-->
-        <!--</div>-->
-      <!--</div>-->
+  <div id="setup-news-content-blocks" class="guitar-dept-display-flex-row guitar-dept-display-flex-wrap guitar-dept-flex-space-around">
+    <div class="guitar-dept-display-flex-row"
+         *ngFor="let guitarNewsModel of guitarProgramNews.payload ; index as index " >
+      <div id="setup-news-content-single-block" class="guitar-dept-display-flex-column">
+        <div *ngIf="tabStates.showTab(index)"
+             [ngClass]="{'active':tabStates.isSet(index)}">
+          FOO{{ tabStates.showTab(index) ? 'showTab' + index : 'hideTab' + index }}FOO
+          <img class="guitar-dept-media-news-image padded-above"
+               (click)="tabStates.setTab(index)" src="{{guitarNewsModel.image}}">
+          <div class="guitar-dept-news-media-label padded-right">{{guitarNewsModel.name}}</div>
+          <div class="guitar-dept-news-media-label padded-right">{{guitarNewsModel.date}}</div>
+        </div>
+      </div>
       <!--<div *ngIf="tabStates.isSet(index)" class="guitar-dept-display-flex-row"-->
            <!--ng-include="guitarNewsModel.url">-->
       <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+    </div>
+  </div>
 </section>
+<!--{{ tabStates.isSet(index) ? 'active' : 'notactive' }}-->
+<!--<div *ngFor="let slide of carouselSlideDeck; first as isFirst"-->
+     <!--[ngClass]="{'carousel-item': true , 'animate-repeat': true, 'active' : isFirst }" >-->
