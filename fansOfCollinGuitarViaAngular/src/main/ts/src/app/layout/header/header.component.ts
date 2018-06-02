@@ -3,6 +3,7 @@ import {HttpResponse} from "@angular/common/http";
 import {IHeaderConfig} from "../header/HeaderConfig";
 import {Observable} from "rxjs/internal/Observable";
 import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json.service";
+const carouselSlideDeck = [0, 1, 2];
 
 @Component({
   selector: 'guitar-header',
@@ -13,7 +14,7 @@ import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json
 export class HeaderComponent implements OnInit {
   // private observe: Observable<HttpResponse<IHeaderConfig>>;
   private observe: IHeaderConfig;
-  public carouselSlideDeck = [0, 1, 2];
+  public carouselSlideDeck: number[] = carouselSlideDeck ;
   public targets;
   public title;
 
@@ -30,6 +31,8 @@ export class HeaderComponent implements OnInit {
     //   this.targets = dat.body.targets;
     //   this.title = dat.body.title;
     // });
+    console.log("carouselSlideDeck:header.onInit> " + carouselSlideDeck);
+
     console.log("FooterComponent is HERE");
   }
 }

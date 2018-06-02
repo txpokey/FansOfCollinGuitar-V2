@@ -1,0 +1,13 @@
+<!--guitar department carousel-->
+<div id="carouselPickers" class="carousel slide" data-ride="carousel" data-interval="7500" >
+  <div class="carousel-inner" >
+    <div *ngFor="let slide of carouselSlideDeck; first as isFirst"
+         [ngClass]="{'carousel-item': true , 'animate-repeat': true, 'active' : isFirst }" >
+      <img src="../assets/images/carousel/{{slide}}R.jpg" alt="carouselSlideDeck {{slide}}" >
+    </div>
+  </div>
+</div>
+<script>
+  //    this will cause animation to auto start, assuming you place it in the right spot in the flow of interpreting this code
+  $('.carousel').carousel().next();
+</script>
