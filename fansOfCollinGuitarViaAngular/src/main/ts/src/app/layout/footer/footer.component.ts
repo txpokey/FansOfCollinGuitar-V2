@@ -16,10 +16,10 @@ export class FooterComponent implements OnInit {
   private errorMessage : any ;
   private guitarProgramFooter : IFooterConfig[] ;
   private observe : Observable<HttpResponse<IFooterConfig[]>> ;
-  constructor( private _service: FileAsSourceForJsonService ) { }
+  constructor( private service: FileAsSourceForJsonService ) { }
 
   ngOnInit() {
-    this.observe = this._service.getFooterSetUp();
+    this.observe = this.service.getFooterSetUp();
     // this.observe
     //   .subscribe(data  => this.data = data ,
     //     error => this.errorMessage = <any>error);
@@ -30,7 +30,7 @@ export class FooterComponent implements OnInit {
     console.log("FooterComponent is HERE");
   }
   ngOnInit0() {
-    this.observe = this._service.getFooterSetUp() ;
+    this.observe = this.service.getFooterSetUp() ;
     console.log("FooterComponent is HERE");
   }
 

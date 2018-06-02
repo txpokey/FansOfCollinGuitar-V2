@@ -3,15 +3,17 @@ import {IFooterConfig} from "../layout/footer/FooterConfig";
 import {IFooterConfigDetail} from "../layout/footer/FooterConfigDetail";
 import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
+import {IHeaderConfig} from "../layout/header/HeaderConfig";
 
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
+const headerSetupUrl = "../../assets/json/header-controller.json";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileAsSourceForJsonService implements OnInit {
-  private myAny: any;
+  private myAny: any;  // TODO : not reentrant
   // constructor() { }
   // constructor( private _http: Http ) { }
   constructor(private _http: HttpClient) {
@@ -32,16 +34,63 @@ export class FileAsSourceForJsonService implements OnInit {
     return this.myAny;
   }
 
+  getHeaderSetUp() {
+    return this.privateGetHeaderSetUpFromArray();  // TESTING
+    // return this.privateGetHeaderSetUpFromHttp();
+  }
+
+  private privateGetHeaderSetUpFromHttp(): Observable<HttpResponse<IHeaderConfig>> {
+    this.myAny = this._http.get<IHeaderConfig>(headerSetupUrl,
+      {observe: 'response', responseType: 'json'});
+    return this.myAny;
+  }
+
   private handleError(err: HttpErrorResponse) {
   }
 
-  // private privateGetFooterSetUpFromHttp0(): any[] {
-  //   this.myAny = this._http.get(footerSetupUrl);
-  //   return this.myAny;
-  //   // return;
-  // }
+  private privateGetHeaderSetUpFromArray(): IHeaderConfig {
+    return {
+      "title": "Fan Club: Collin College Guitar Studies",
+      "targets": [
+        {
+          "label": "News",
+          "url": "../html/guitarNews.html"
+        },
+        {
+          "label": "Classes",
+          "url": "../html/guitarCoursesBySchoolTerm.html"
+        },
+        {
+          "label": "TEXTBOOKS",
+          "url": "../html/guitarTextbooks.html"
+        },
+        {
+          "label": "Events",
+          "url": "../html/guitarEvents.html"
+        },
+        {
+          "label": "Performances",
+          "url": "../html/guitarPerformances.html"
+        },
+        {
+          "label": "LINKS",
+          "url": "../html/guitarLinks.html"
+        },
+        {
+          "label": "faculty",
+          "url": "../html/guitarFaculty.html"
+        }
+      ]
+    };
+  };
 
-  private privateGetFooterSetUpFromArray(): IFooterConfig[] {
+    // private privateGetFooterSetUpFromHttp0(): any[] {
+    //   this.myAny = this._http.get(footerSetupUrl);
+    //   return this.myAny;
+    //   // return;
+    // }
+
+  private privateGetFooterSetUpFromArray() : IFooterConfig[] {
     return [
       {
         "label": "Guitar Studies Social Media Contacts",
@@ -116,5 +165,6 @@ export class FileAsSourceForJsonService implements OnInit {
         ]
       }
     ];
-  }
+  };
 }
+
