@@ -35,8 +35,8 @@ export class FileAsSourceForJsonService implements OnInit {
   }
 
   getHeaderSetUp() {
-    return this.privateGetHeaderSetUpFromArray();  // TESTING
-    // return this.privateGetHeaderSetUpFromHttp();
+    // return this.privateGetHeaderSetUpFromArray();  // WORKS
+    return this.privateGetHeaderSetUpFromHttp(); // TESTING
   }
 
   private privateGetHeaderSetUpFromHttp(): Observable<HttpResponse<IHeaderConfig>> {
@@ -54,31 +54,31 @@ export class FileAsSourceForJsonService implements OnInit {
       "targets": [
         {
           "label": "News",
-          "url": "../html/guitarNews.html"
+          "url": "news"
         },
         {
           "label": "Classes",
-          "url": "../html/guitarCoursesBySchoolTerm.html"
+          "url": "guitarCoursesBySchoolTerm"
         },
         {
           "label": "TEXTBOOKS",
-          "url": "../html/guitarTextbooks.html"
+          "url": "guitarTextbooks"
         },
         {
           "label": "Events",
-          "url": "../html/guitarEvents.html"
+          "url": "guitarEvents"
         },
         {
           "label": "Performances",
-          "url": "../html/guitarPerformances.html"
+          "url": "guitarPerformances"
         },
         {
           "label": "LINKS",
-          "url": "../html/guitarLinks.html"
+          "url": "guitarLinks"
         },
         {
           "label": "faculty",
-          "url": "../html/guitarFaculty.html"
+          "url": "guitarFaculty"
         }
       ]
     };

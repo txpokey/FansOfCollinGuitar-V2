@@ -12,8 +12,8 @@ const carouselSlideDeck = [0, 1, 2];
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  // private observe: Observable<HttpResponse<IHeaderConfig>>;
-  private observe: IHeaderConfig;
+  private observe: Observable<HttpResponse<IHeaderConfig>>;
+  // private observeMock: IHeaderConfig;
   public carouselSlideDeck: number[] = carouselSlideDeck ;
   public targets;
   public title;
@@ -22,17 +22,16 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.observe = this.service.getHeaderSetUp();
+    // this.targets = this.observeMock.targets;
+    // this.title = this.observeMock.title;
+    this.observe.forEach((dat: HttpResponse<IHeaderConfig>) => {
+      this.targets = dat.body.targets;
+      this.title = dat.body.title;
+    }) ;
+
+    // console.log(this.observeMock);
     console.log(this.observe);
-    this.targets = this.observe.targets;
-    this.title = this.observe.title;
-
-    // this.observe.forEach((dat: HttpResponse<IHeaderConfig>) => {
-    //   console.log(dat);
-    //   this.targets = dat.body.targets;
-    //   this.title = dat.body.title;
-    // });
     console.log("carouselSlideDeck:header.onInit> " + carouselSlideDeck);
-
     console.log("FooterComponent is HERE");
   }
 }

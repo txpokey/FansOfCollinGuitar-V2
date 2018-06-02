@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("navbar:onInit:targets:> " + this.targets);
   }
 
 }
