@@ -97,7 +97,7 @@ export class FileAsSourceForJsonService implements OnInit {
       "targets": [
         {
           "label": "News",
-          "url": "news"
+          "url": "guitarNews"
         },
         {
           "label": "Classes",
