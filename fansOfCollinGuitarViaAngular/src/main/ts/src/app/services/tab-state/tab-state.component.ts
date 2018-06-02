@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-tab-state',
-  templateUrl: './tab-state.component.html',
-  styleUrls: ['./tab-state.component.css']
+  // selector: 'app-tab-state',
+  // templateUrl: './tab-state.component.html',
+  // styleUrls: ['./tab-state.component.css']
 })
 export class TabStateComponent implements OnInit {
   NO_TAB_ACTIVE : number = -1 ;

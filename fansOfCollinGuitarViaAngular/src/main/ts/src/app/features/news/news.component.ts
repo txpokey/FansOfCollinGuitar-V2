@@ -6,6 +6,7 @@ import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json
 @Component({
   selector: 'guitar-news',
   templateUrl: './news.component.html',
+  providers: [FileAsSourceForJsonService,TabStateComponent],
   styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
