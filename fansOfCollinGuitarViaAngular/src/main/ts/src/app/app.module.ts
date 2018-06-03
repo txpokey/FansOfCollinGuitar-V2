@@ -8,12 +8,11 @@ import {FeaturesModule} from './features/features.module';
 import {LayoutModule} from './layout/layout.module';
 import {HttpClientModule} from "@angular/common/http";
 import {ServicesModule} from "./services/services.module";
-import {FilterByObjectPipe} from "./services/filter-by-object/filter-by-object.pipe";
+import {PipesCommonModule} from "./pipes/pipes-common/pipes-common.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    FilterByObjectPipe,
     WelcomeComponent
   ],
   imports: [
@@ -22,6 +21,7 @@ import {FilterByObjectPipe} from "./services/filter-by-object/filter-by-object.p
     LayoutModule,
     HttpClientModule,
     ServicesModule,
+    PipesCommonModule,
     AppRoutingModule
   ],
   providers: [],
