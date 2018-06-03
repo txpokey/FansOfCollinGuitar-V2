@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json.service";
 import {IFooterConfig} from "./FooterConfig";
 import {Observable} from "rxjs/internal/Observable";
 import {HttpResponse} from "@angular/common/http";
+import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json/file-as-source-for-json.service";
 
 const EMPTY_URL = '#0' ;
 

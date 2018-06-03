@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {HttpResponse} from "@angular/common/http";
 import {IHeaderConfig} from "../header/HeaderConfig";
 import {Observable} from "rxjs/internal/Observable";
-import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json.service";
+import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json/file-as-source-for-json.service";
+
 const carouselSlideDeck = [0, 1, 2];
 
 @Component({
