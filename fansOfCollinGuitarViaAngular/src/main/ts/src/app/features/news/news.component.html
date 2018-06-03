@@ -1,9 +1,5 @@
-<p>
-  news works!
-</p>
 <!--  guitar news container  -->
 <section id="guitar-dept-news-section">
-
   <div class="guitar-dept-news-media-content-title Grid-bordered-bottom">
     {{guitarProgramNews.title}}
   </div>
@@ -13,22 +9,15 @@
       <div id="setup-news-content-single-block" class="guitar-dept-display-flex-column">
         <div *ngIf="tabStates.showTab(index)"
              [ngClass]="{'active':tabStates.isSet(index)}">
-          FOO{{ tabStates.showTab(index) ? 'showTab' + index : 'hideTab' + index }}FOO
           <img class="guitar-dept-media-news-image padded-above"
                (click)="tabStates.setTab(index)" src="{{guitarNewsModel.image}}">
           <div class="guitar-dept-news-media-label padded-right">{{guitarNewsModel.name}}</div>
           <div class="guitar-dept-news-media-label padded-right">{{guitarNewsModel.date}}</div>
         </div>
       </div>
-      <!--<div *ngIf="tabStates.isSet(index)" class="guitar-dept-display-flex-row"-->
-           <!--[innerHtml]="guitarNewsModel.url">-->
-      <!--</div> -->
       <include-template *ngIf="tabStates.isSet(index)" class="guitar-dept-display-flex-row"
            [requestedUrl]="guitarNewsModel.url">
       </include-template>
     </div>
   </div>
 </section>
-<!--{{ tabStates.isSet(index) ? 'active' : 'notactive' }}-->
-<!--<div *ngFor="let slide of carouselSlideDeck; first as isFirst"-->
-     <!--[ngClass]="{'carousel-item': true , 'animate-repeat': true, 'active' : isFirst }" >-->

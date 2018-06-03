@@ -9,27 +9,41 @@ import {Observable} from "rxjs/internal/Observable";
 })
 export class IncludeTemplateComponent implements OnInit {
 
-  @Input() requestedUrl : string ;
+  @Input() requestedUrl: string;
 
-  public runTimeContent: string = "!AYOOB";
-  constructor(private _http: HttpClient) { }
+  public runTimeContent: string;
+
+  constructor(private _http: HttpClient) {
+  }
 
   ngOnInit() {
-    // this.runTimeContent = this.getContent();
+    this.privateGetContent();
     console.log("includeTemplateComponent loaded");
   }
 
-  getContent() : string {
-    let observed : Observable<string> = this.privateGetTemplateContentFromHttp() ;
-    let content : string = "BOOYA!" ;
-    observed.forEach( dat => {
-      content = dat ;
-      console.log(dat);
-    }) ;
-    return content ;
+  isContentLoaded(): boolean {
+    return undefined !== this.runTimeContent;
   }
+
+  getContent(): string {
+    return this.runTimeContent;
+  }
+
+  getContent0(): string {
+    let ret: string = "!AYOOB";
+    ret = this.isContentLoaded() ? this.runTimeContent : this.runTimeContent = this.privateGetContent();
+    return ret;
+  }
+
+  private privateGetContent(): string {
+    let observed: Observable<string> = this.privateGetTemplateContentFromHttp();
+    let content: string = "BOOYA!";
+    observed.subscribe(payload => this.runTimeContent = payload);
+    return content;
+  }
+
   private privateGetTemplateContentFromHttp(): Observable<string> {
-    let myAny : any ;
+    let myAny: any;
     myAny = this._http.get(this.requestedUrl,
       {observe: 'body', responseType: 'text'});
     return myAny;

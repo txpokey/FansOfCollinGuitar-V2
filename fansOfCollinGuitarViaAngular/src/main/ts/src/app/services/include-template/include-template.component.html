@@ -1,5 +1,4 @@
-<p>
-  include-template works!
-</p>
-<div [innerHtml]="runTimeContent"></div>
-<!--<div [innerHtml]="getContent()"></div>-->
+<div *ngIf="isContentLoaded()">
+  <div [innerHtml]="runTimeContent"></div>
+</div>
+
