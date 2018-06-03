@@ -8,8 +8,16 @@ export class FilterByObjectPipe implements PipeTransform {
   transform00(value: any, args?: any): any {
     return null;
   }
-  transform(value: any[]): any[] {
+  transform1(value: any[]): any[] { // WORKS
     return value.filter( v => v.hasOwnProperty('url')) ;
+  }
+  transform(value: any[]): any[] { // INTEST
+    return value.filter( v => {
+      if( v.hasOwnProperty('test') ) {
+        let probe: boolean = v['test'];
+        return probe ;
+      };
+    }) ;
   }
   transform0(value: any, args?: any): any {
     var ret : boolean = true ;
