@@ -5,7 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterByObjectPipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
+  transform(value: any[]): any[] {
+    return value.filter( v => v.hasOwnProperty('url')) ;
+  }
+  transform0(value: any, args?: any): any {
     var ret : boolean = true ;
     for( let key in args ) {
       let candidate: boolean = false ;

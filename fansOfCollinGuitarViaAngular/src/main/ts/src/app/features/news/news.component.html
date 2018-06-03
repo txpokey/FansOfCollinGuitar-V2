@@ -4,7 +4,7 @@
     {{guitarProgramNews.title}}
   </div>
   <div id="setup-news-content-blocks" class="guitar-dept-display-flex-row guitar-dept-display-flex-wrap guitar-dept-flex-space-around">
-    <div *ngFor="let guitarNewsModel of guitarProgramNews.payload" class="guitar-dept-display-flex-row">
+    <div *ngFor="let guitarNewsModel of (guitarProgramNews.payload | filterByObject)" >
       <div id="setup-news-content-single-block" class="guitar-dept-display-flex-column">
         <div *ngIf="tabStates.showTab(index)"
              [ngClass]="{'active':tabStates.isSet(index)}">
@@ -21,3 +21,6 @@
   </div>
 </section>
 <!--| filterByObject: { url: '!#0' }; index as index-->
+<!--class="guitar-dept-display-flex-row"-->
+<!--<div *ngFor="let guitarNewsModel of (guitarProgramNews.payload | filterByObject )"-->
+<!--<div *ngFor="let guitarNewsModel of (guitarProgramNews.payload )"-->

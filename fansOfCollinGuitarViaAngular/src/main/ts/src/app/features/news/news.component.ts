@@ -3,7 +3,7 @@ import {TabStateComponent} from "../../services/tab-state/tab-state.component";
 import {IGuitarNewsConfig} from "./GuitarNewsConfig";
 import {IncludeTemplateComponent} from "../../services/include-template/include-template.component";
 import {FileAsSourceForJsonService} from "../../services/file-as-source-for-json/file-as-source-for-json.service";
-// import {FilterByObjectPipe} from "../../services/filter-by-object/filter-by-object.pipe";
+import {FilterByObjectPipe} from "../../services/filter-by-object/filter-by-object.pipe";
 
 @Component({
   selector: 'guitar-news',

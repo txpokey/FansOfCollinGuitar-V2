@@ -8,10 +8,12 @@ import {FeaturesModule} from './features/features.module';
 import {LayoutModule} from './layout/layout.module';
 import {HttpClientModule} from "@angular/common/http";
 import {ServicesModule} from "./services/services.module";
+import {FilterByObjectPipe} from "./services/filter-by-object/filter-by-object.pipe";
 
 @NgModule({
   declarations: [
     AppComponent,
+    FilterByObjectPipe,
     WelcomeComponent
   ],
   imports: [
