@@ -12,6 +12,13 @@ export class FilterByObjectPipe implements PipeTransform {
     return value.filter( v => v.hasOwnProperty('url')) ;
   }
   transform(value: any[], args?: any): any[] {// INTEST
+    // let keyPicker: boolean = args['test'];
+    return value.filter( v => {
+        return this.transformx0( v , args ) ;
+      }
+    );
+  }
+  transform_2(value: any[], args?: any): any[] {// WORKS
     let keyPicker: boolean = args['test'];
     return value.filter( v => {
       if( v.hasOwnProperty('test') ) {
@@ -30,18 +37,20 @@ export class FilterByObjectPipe implements PipeTransform {
     }) ;
   }
 
-  transformx0(value: any, args?: any): any {
-    var ret : boolean = true ;
-    for( let key in args ) {
+  transformx0(value: any, args?: any): boolean {
+    var ret : boolean = false ;
+    for( let akey in args ) {
       let candidate: boolean = false ;
-      if( value.hasOwnProperty(key) ) {
+      if( value.hasOwnProperty(akey) ) {
         let inverter : boolean = false ;
-        let input = value[key] ;
-        let filterRaw = args[key] ;
+        let input = value[akey] ;
+        let filterRaw = args[akey] ;
         let filter = filterRaw ;
-        if ( 0 === filterRaw.search("!") ) {
-          filter = filterRaw.slice(1) ;
-          inverter = true ;
+        if (  typeof filterRaw === 'string' ) {
+          if ( 0 === filterRaw.search("!") ) {
+            filter = filterRaw.slice(1) ;
+            inverter = true ;
+          }
         }
         candidate = filter == input ;
         ret = inverter ? !candidate : candidate ;
