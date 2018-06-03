@@ -21,8 +21,11 @@
         </div>
       </div>
       <!--<div *ngIf="tabStates.isSet(index)" class="guitar-dept-display-flex-row"-->
-           <!--ng-include="guitarNewsModel.url">-->
-      <!--</div>-->
+           <!--[innerHtml]="guitarNewsModel.url">-->
+      <!--</div> -->
+      <include-template *ngIf="tabStates.isSet(index)" class="guitar-dept-display-flex-row"
+           [requestedUrl]="guitarNewsModel.url">
+      </include-template>
     </div>
   </div>
 </section>
