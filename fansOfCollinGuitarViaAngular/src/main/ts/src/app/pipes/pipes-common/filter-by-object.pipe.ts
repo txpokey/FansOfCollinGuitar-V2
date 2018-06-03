@@ -8,10 +8,20 @@ export class FilterByObjectPipe implements PipeTransform {
   transform00(value: any, args?: any): any {
     return null;
   }
-  transform1(value: any[]): any[] { // WORKS
+  transform_0(value: any[]): any[] { // WORKS
     return value.filter( v => v.hasOwnProperty('url')) ;
   }
-  transform(value: any[]): any[] { // INTEST
+  transform(value: any[], args?: any): any[] {// INTEST
+    let keyPicker: boolean = args['test'];
+    return value.filter( v => {
+      if( v.hasOwnProperty('test') ) {
+        let probe: boolean = v['test'];
+        return probe == keyPicker ;
+      };
+    }) ;
+  }
+
+  transform_1(value: any[]): any[] { // WORKS
     return value.filter( v => {
       if( v.hasOwnProperty('test') ) {
         let probe: boolean = v['test'];
@@ -19,7 +29,8 @@ export class FilterByObjectPipe implements PipeTransform {
       };
     }) ;
   }
-  transform0(value: any, args?: any): any {
+
+  transformx0(value: any, args?: any): any {
     var ret : boolean = true ;
     for( let key in args ) {
       let candidate: boolean = false ;
