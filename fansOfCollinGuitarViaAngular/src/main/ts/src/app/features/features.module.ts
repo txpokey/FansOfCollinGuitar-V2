@@ -1,14 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { FeaturesRoutingModule } from './features-routing.module';
-import { NewsComponent } from './news/news.component';
-import { LayoutModule } from '../layout/layout.module';
+import {FeaturesRoutingModule} from './features-routing.module';
+import {NewsComponent} from './news/news.component';
+import {LayoutModule} from '../layout/layout.module';
+import {ServicesModule} from "../services/services.module";
 
 @NgModule({
   imports: [
     CommonModule,
     LayoutModule,
+    ServicesModule,
     FeaturesRoutingModule
   ],
   declarations: [NewsComponent],

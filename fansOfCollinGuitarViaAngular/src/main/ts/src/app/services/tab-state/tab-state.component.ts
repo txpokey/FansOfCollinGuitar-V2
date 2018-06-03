@@ -2,8 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   // selector: 'app-tab-state',
-  // templateUrl: './tab-state.component.html',
-  // styleUrls: ['./tab-state.component.css']
+  templateUrl: './tab-state.component.html',
+  styleUrls: ['./tab-state.component.css']
 })
 export class TabStateComponent implements OnInit {
   @Output() notify: EventEmitter<string> =
