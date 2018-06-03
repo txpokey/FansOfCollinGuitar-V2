@@ -10,6 +10,6 @@ import {IncludeTemplateComponent} from './include-template/include-template.comp
   ],
   // declarations: [FileAsSourceForJsonService, TabStateComponent, FilterByObjectPipe, IncludeTemplateComponent],
   declarations: [TabStateComponent, FilterByObjectPipe, IncludeTemplateComponent],
-  exports: [TabStateComponent, IncludeTemplateComponent]
+  exports: [TabStateComponent, IncludeTemplateComponent, FilterByObjectPipe]
 })
 export class ServicesModule { }
