@@ -6,7 +6,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class FilterByObjectPipe implements PipeTransform {
 
   transform(value: any[], args?: any): any[] {// WORKS
-    // let keyPicker: boolean = args['test'];
     return value.filter(v => {
         return this.transformx0(v, args);
       }
@@ -14,7 +13,7 @@ export class FilterByObjectPipe implements PipeTransform {
   }
 
   private transformx0(value: any, args?: any): boolean {
-    var ret: boolean = false;
+    let ret: boolean = false;
     for (let akey in args) {
       let candidate: boolean = false;
       if (value.hasOwnProperty(akey)) {
