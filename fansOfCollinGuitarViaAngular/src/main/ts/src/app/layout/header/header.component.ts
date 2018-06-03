@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
     }) ;
 
     // console.log(this.observeMock);
-    console.log(this.observe);
+    // console.log(this.observe);
     console.log("carouselSlideDeck:header.onInit> " + carouselSlideDeck);
     console.log("FooterComponent is HERE");
   }
