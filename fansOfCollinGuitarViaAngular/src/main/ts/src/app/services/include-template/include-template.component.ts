@@ -29,12 +29,6 @@ export class IncludeTemplateComponent implements OnInit {
     return this.runTimeContent;
   }
 
-  getContent0(): string {
-    let ret: string = "!AYOOB";
-    ret = this.isContentLoaded() ? this.runTimeContent : this.runTimeContent = this.privateGetContent();
-    return ret;
-  }
-
   private privateGetContent(): string {
     let observed: Observable<string> = this.privateGetTemplateContentFromHttp();
     let content: string = "BOOYA!";
