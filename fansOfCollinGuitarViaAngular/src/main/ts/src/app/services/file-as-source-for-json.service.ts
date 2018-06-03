@@ -1,6 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
 import {IFooterConfig} from "../layout/footer/FooterConfig";
-import {IFooterConfigDetail} from "../layout/footer/FooterConfigDetail";
 import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 import {IHeaderConfig} from "../layout/header/HeaderConfig";
@@ -74,7 +73,7 @@ export class FileAsSourceForJsonService implements OnInit {
         "where": "Spring Creek",
         "event": "6th Annual Collin College Guitar Festival",
         "image": "../assets/images/news/2018/spring/current/CCGF2018.jpg",
-        "url": "../html/news/2018/spring/current/guitarFestival-news.html"
+        "url": "../assets/html/news/2018/spring/current/guitarFestival-news.html"
       },
       {
         "test": true,
@@ -84,7 +83,7 @@ export class FileAsSourceForJsonService implements OnInit {
         "where": "internet",
         "event": "Using Collin College Guitar Studies Website",
         "image": "../assets/images/header/guitarStudies.light-logo.jpg",
-        "url": "../html/news/2018/spring/current/guitarWebsite-news.html"
+        "url": "../assets/html/news/2018/spring/current/guitarWebsite-news.html"
       }
     ]
     } ;
