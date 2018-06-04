@@ -4,6 +4,8 @@ import {Observable} from "rxjs/internal/Observable";
 import {IFooterConfig} from "../../layout/footer/FooterConfig";
 import {IHeaderConfig} from "../../layout/header/HeaderConfig";
 import {IGuitarNewsConfig} from "../../features/news/GuitarNewsConfig";
+import {IGuitarEvent} from "../../features/lists/events/GuitarEvent";
+import {GUITAREVENTS} from 'src/app/features/lists/events/GuitarEvent';
 
 
 
@@ -30,10 +32,21 @@ export class FileAsSourceForJsonService implements OnInit {
   }
 
   private privateGetFooterSetUpFromHttp(): Observable<HttpResponse<IFooterConfig[]>> {
-    this.myAny = this._http.get<IFooterConfig[]>(footerSetupUrl,
+    let myAny: any = this._http.get<IFooterConfig[]>(footerSetupUrl,
       {observe: 'response', responseType: 'json'});
-    return this.myAny;
+    return myAny;
   }
+
+  getEventsSetUp() {
+    return this.privateGetEventsSetUpFromArray();  // INTEST
+    // return this.privateGetEventsSetUpFromHttp(); // STUB
+  }
+
+  // private privateGetEventsSetUpFromHttp(): Observable<HttpResponse<IFooterConfig[]>> {
+  //   let myAny: any = this._http.get<IFooterConfig[]>(footerSetupUrl,
+  //     {observe: 'response', responseType: 'json'});
+  //   return myAny;
+  // }
 
   getHeaderSetUp() {
     // return this.privateGetHeaderSetUpFromArray();  // WORKS
@@ -50,6 +63,9 @@ export class FileAsSourceForJsonService implements OnInit {
   }
 
   private handleError(err: HttpErrorResponse) {
+  }
+  private privateGetEventsSetUpFromArray(): IGuitarEvent[] {
+    return GUITAREVENTS ;
   }
 
   private privateGetNewsFeedFromArray(): IGuitarNewsConfig {

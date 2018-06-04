@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FileAsSourceForJsonService} from "../../../services/file-as-source-for-json/file-as-source-for-json.service";
 
 @Component({
   selector: 'guitar-events',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: FileAsSourceForJsonService) {  }
 
   ngOnInit() {
-    console.log("eventsComponent is HERE");
+    let myAny: any  = this.service.getEventsSetUp() ;
+    console.log("eventsComponent is HERE:> " + myAny );
   }
 
 }
