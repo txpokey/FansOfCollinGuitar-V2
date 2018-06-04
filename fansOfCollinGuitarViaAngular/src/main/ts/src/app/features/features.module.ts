@@ -6,6 +6,7 @@ import {NewsComponent} from './news/news.component';
 import {LayoutModule} from '../layout/layout.module';
 import {ServicesModule} from "../services/services.module";
 import { PipesCommonModule } from '../pipes/pipes-common/pipes-common.module';
+import { EventsComponent } from './lists/events/events.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { PipesCommonModule } from '../pipes/pipes-common/pipes-common.module';
     PipesCommonModule,
     FeaturesRoutingModule
   ],
-  declarations: [NewsComponent],
-  exports: [NewsComponent, FeaturesRoutingModule]
+  declarations: [NewsComponent, EventsComponent],
+  exports: [NewsComponent, FeaturesRoutingModule, EventsComponent]
 })
 export class FeaturesModule { }
