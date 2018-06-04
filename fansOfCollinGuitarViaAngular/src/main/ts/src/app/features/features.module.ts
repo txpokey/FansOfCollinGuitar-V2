@@ -7,6 +7,7 @@ import {LayoutModule} from '../layout/layout.module';
 import {ServicesModule} from "../services/services.module";
 import { PipesCommonModule } from '../pipes/pipes-common/pipes-common.module';
 import { EventsComponent } from './lists/events/events.component';
+import { LinksComponent } from './lists/links/links.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { EventsComponent } from './lists/events/events.component';
     PipesCommonModule,
     FeaturesRoutingModule
   ],
-  declarations: [NewsComponent, EventsComponent],
-  exports: [NewsComponent, FeaturesRoutingModule, EventsComponent]
+  declarations: [NewsComponent, EventsComponent, LinksComponent],
+  exports: [NewsComponent, FeaturesRoutingModule, EventsComponent, LinksComponent]
 })
 export class FeaturesModule { }

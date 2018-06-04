@@ -1,0 +1,19 @@
+<!--  guitarProgramLinks Container  -->
+<section id="guitar-program-links-section">
+  <div class="guitar-dept-display-flex-column">
+    <div class="Grid-column-collection" *ngFor="let guitarProgramLink of guitarProgramLinks">
+      <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header">
+        {{guitarProgramLink.label}}
+      </div>
+      <div *ngFor="let guitarProgramLinkDetails of guitarProgramLink.payload"
+           class="guitar-dept-display-flex-wrap Grid-bordered guitar-dept-display-flex-row">
+        <a href="{{guitarProgramLinkDetails.url}}" target="_blank">
+          <div class="guitar-dept-display-flex-wrap  Grid-cell">
+            {{guitarProgramLinkDetails.label}}
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+

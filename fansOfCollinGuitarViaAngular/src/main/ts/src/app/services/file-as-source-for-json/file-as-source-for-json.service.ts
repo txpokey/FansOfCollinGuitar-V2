@@ -5,6 +5,7 @@ import {GUITARFOOTER, IFooterConfig} from "../../layout/footer/FooterConfig";
 import {GUITARHEADER, IHeaderConfig} from "../../layout/header/HeaderConfig";
 import {GUITARNEWS, IGuitarNewsConfig} from "../../features/news/GuitarNewsConfig";
 import {GUITAREVENTS, IGuitarEvent} from "../../features/lists/events/GuitarEvent";
+import {GUITARLINKS, IGuitarLinks} from "../../features/lists/links/GuitarLinks";
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 const headerSetupUrl = "../../assets/json/header-controller.json";
@@ -31,7 +32,12 @@ export class FileAsSourceForJsonService implements OnInit {
   }
 
   getEventsSetUp() {
-    return this.privateGetEventsSetUpFromArray();  // INTEST
+    return this.privateGetEventsSetUpFromArray();  // WORKS
+    // return this.privateGetEventsSetUpFromHttp(); // STUB
+  }
+
+  getLinksSetUp() {
+    return this.privateGetLinksSetUpFromArray();  // INTEST
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
   getNewsFeed() {
@@ -62,6 +68,10 @@ export class FileAsSourceForJsonService implements OnInit {
 
   private privateGetEventsSetUpFromArray(): IGuitarEvent[] {
     return GUITAREVENTS ;
+  }
+
+  private privateGetLinksSetUpFromArray(): IGuitarLinks[] {
+    return GUITARLINKS;
   }
 
   private privateGetNewsFeedFromArray(): IGuitarNewsConfig {
