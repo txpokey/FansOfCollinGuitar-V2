@@ -1,7 +1,9 @@
 /* Defines the footer data */
 
-import {IHeaderConfigDetail} from "./HeaderConfigDetail";
-
+export interface IHeaderConfigDetail   {
+  label: string;
+  url: string;
+}
 export interface IHeaderConfig   {
   title: string;
   targets: IHeaderConfigDetail[];

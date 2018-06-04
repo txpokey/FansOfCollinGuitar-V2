@@ -1,13 +1,10 @@
 import {Injectable, OnInit} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 import {GUITARFOOTER, IFooterConfig} from "../../layout/footer/FooterConfig";
 import {GUITARHEADER, IHeaderConfig} from "../../layout/header/HeaderConfig";
 import {GUITARNEWS, IGuitarNewsConfig} from "../../features/news/GuitarNewsConfig";
-import {IGuitarEvent} from "../../features/lists/events/GuitarEvent";
-import {GUITAREVENTS} from 'src/app/features/lists/events/GuitarEvent';
-
-
+import {GUITAREVENTS, IGuitarEvent} from "../../features/lists/events/GuitarEvent";
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 const headerSetupUrl = "../../assets/json/header-controller.json";

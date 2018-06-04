@@ -1,6 +1,15 @@
 /* Defines the news data */
 
-import {IGuitarNewsConfigDetail} from "./GuitarNewsConfigDetail";
+export interface IGuitarNewsConfigDetail   {
+  test: boolean;
+  name: string;
+  date: string;
+  time: string;
+  where: string;
+  event: string;
+  image: string;
+  url: string;
+}
 
 export interface IGuitarNewsConfig   {
   title: string;

@@ -1,6 +1,11 @@
 /* Defines the footer data */
 
-import {IFooterConfigDetail} from "./FooterConfigDetail";
+export interface IFooterConfigDetail   {
+  label: string;
+  icon: string;
+  logo: string;
+  url: string;
+}
 
 export interface IFooterConfig {
   label: string;
