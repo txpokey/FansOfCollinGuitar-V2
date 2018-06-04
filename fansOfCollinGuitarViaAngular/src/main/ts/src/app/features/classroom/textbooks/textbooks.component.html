@@ -17,9 +17,6 @@
           <div class="guitar-dept-news-media-label padded-right">{{guitarTextbookModel.edition}}</div>
         </div>
       </div>
-      <!--<div ng-show="textbookTab.isTabSet(index)" class="guitar-dept-display-flex-row"-->
-           <!--ng-include="guitarTextbookModel.url">-->
-      <!--</div>-->
       <include-template *ngIf="textbookTab.isSet(index)" class="guitar-dept-display-flex-row"
                         [requestedUrl]="guitarTextbookModel.url">
       </include-template>

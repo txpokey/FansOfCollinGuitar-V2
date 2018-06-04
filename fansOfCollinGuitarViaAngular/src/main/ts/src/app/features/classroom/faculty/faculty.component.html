@@ -1,3 +1,27 @@
-<p>
-  faculty works!
-</p>
+<!--  faculty animator Container  -->
+<section id="guitar-dept-faculty-section" >
+
+  <div class="guitar-dept-news-media-content-title Grid-bordered-bottom">
+    {{guitarDepartmentFaculty.title}}
+  </div>
+  <div id="setup-faculty-content-blocks" class="guitar-dept-display-flex-row guitar-dept-display-flex-wrap guitar-dept-flex-space-around">
+    <div
+      *ngFor="let guitarInstructor of (guitarDepartmentFaculty.payload  | filterByObject: { url: '!#0' }); index as index"
+         class="guitar-dept-display-flex-row">
+      <div id="setup-faculty-content-single-block" class="guitar-dept-display-flex-column">
+        <div *ngIf="teacherTab.showTab(index)"
+             [ngClass]="{ 'active':teacherTab.isSet(index) }">
+          <img class="guitar-dept-media-faculty-image padded-above"
+               (click)="teacherTab.setTab(index)" src="{{guitarInstructor.image}}">
+          <div class="guitar-dept-faculty-media-label padded-right">{{guitarInstructor.name}}</div>
+        </div>
+      </div>
+      <!--<div *ngIf="teacherTab.isSet(index)" class="guitar-dept-display-flex-row"-->
+           <!--ng-include="guitarInstructor.url">-->
+      <!--</div>-->
+      <include-template *ngIf="teacherTab.isSet(index)" class="guitar-dept-display-flex-row"
+                        [requestedUrl]="guitarInstructor.url">
+      </include-template>
+    </div>
+  </div>
+</section>

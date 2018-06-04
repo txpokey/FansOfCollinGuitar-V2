@@ -11,13 +11,13 @@ import {IncludeTemplateComponent} from "../../../services/include-template/inclu
   styleUrls: ['./faculty.component.css']
 })
 export class FacultyComponent implements OnInit {
-  textbooks: IGuitarFaculty ;
+  guitarDepartmentFaculty: IGuitarFaculty ;
 
-  constructor(public textbookTab: TabStateComponent, private service: FileAsSourceForJsonService ) { }
+  constructor(public teacherTab: TabStateComponent, private service: FileAsSourceForJsonService ) { }
 
   ngOnInit() {
     let myAny: any  = this.service.getFacultySetUp() ;
-    this.textbooks = myAny ;
+    this.guitarDepartmentFaculty = myAny ;
     console.log("facultyComponent is HERE:> " + myAny );
   }
 
