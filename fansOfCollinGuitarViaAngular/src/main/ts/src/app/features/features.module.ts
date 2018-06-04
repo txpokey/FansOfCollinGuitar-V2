@@ -10,6 +10,7 @@ import { EventsComponent } from './lists/events/events.component';
 import { LinksComponent } from './lists/links/links.component';
 import { TextbooksComponent } from './classroom/textbooks/textbooks.component';
 import { FacultyComponent } from './classroom/faculty/faculty.component';
+import { ScheduleComponent } from './classroom/schedule/schedule.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { FacultyComponent } from './classroom/faculty/faculty.component';
     PipesCommonModule,
     FeaturesRoutingModule
   ],
-  declarations: [NewsComponent, EventsComponent, LinksComponent, TextbooksComponent, FacultyComponent],
-  exports: [NewsComponent, FeaturesRoutingModule, EventsComponent, LinksComponent, TextbooksComponent, FacultyComponent]
+  declarations: [NewsComponent, EventsComponent, LinksComponent, TextbooksComponent, FacultyComponent, ScheduleComponent],
+  exports: [NewsComponent, FeaturesRoutingModule, EventsComponent, LinksComponent, TextbooksComponent, FacultyComponent, ScheduleComponent]
 })
 export class FeaturesModule { }

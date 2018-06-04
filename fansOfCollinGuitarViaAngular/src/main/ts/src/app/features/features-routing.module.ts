@@ -5,12 +5,14 @@ import {EventsComponent} from "./lists/events/events.component";
 import {LinksComponent} from "./lists/links/links.component";
 import {TextbooksComponent} from "./classroom/textbooks/textbooks.component";
 import {FacultyComponent} from "./classroom/faculty/faculty.component";
+import {ScheduleComponent} from "./classroom/schedule/schedule.component";
 
 const routes: Routes = [
   { path: 'guitarEvents', component: EventsComponent },
   { path: 'guitarFaculty', component: FacultyComponent },
   { path: 'guitarLinks', component: LinksComponent },
   { path: 'guitarNews', component: NewsComponent },
+  { path: 'guitarCoursesBySchoolTerm', component: ScheduleComponent },
   { path: 'guitarTextbooks', component: TextbooksComponent },
 
 ];

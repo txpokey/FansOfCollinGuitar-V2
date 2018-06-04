@@ -8,6 +8,11 @@ import {GUITAREVENTS, IGuitarEvent} from "../../features/lists/events/GuitarEven
 import {GUITARLINKS, IGuitarLinks} from "../../features/lists/links/GuitarLinks";
 import {GUITARBOOKS, IGuitarBooks} from "../../features/classroom/textbooks/GuitarBooks";
 import {GUITARFACULTY, IGuitarFaculty} from "../../features/classroom/faculty/GuitarFaculty";
+import {
+  GUITAR_PROGRAM_SCHEDULE, IGuitarProgramSchedule,
+  IMusicDeptCatalog,
+  MUSIC_DEPT_CATALOG
+} from "../../features/classroom/schedule/GuitarClassSchedule";
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 const headerSetupUrl = "../../assets/json/header-controller.json";
@@ -42,7 +47,7 @@ export class FileAsSourceForJsonService implements OnInit {
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
   getFacultySetUp() {
-    return this.privateGetFacultySetUpFromArray();  // INTEST
+    return this.privateGetFacultySetUpFromArray();  // WORKS
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
 
@@ -50,6 +55,12 @@ export class FileAsSourceForJsonService implements OnInit {
   getLinksSetUp() {
     return this.privateGetLinksSetUpFromArray();  // WORKS
     // return this.privateGetEventsSetUpFromHttp(); // STUB
+  }
+  getMusicDeptCatalog() {
+    return this.privateGetMusicDeptCatalogSetUpFromArray(); // INTEST
+  }
+  getGuitarProgramSchedule() {
+    return this.privateGetGuitarProgramScheduleSetUpFromArray(); // INTEST
   }
   getNewsFeed() {
     return this.privateGetNewsFeedFromArray(); // WORKS
@@ -83,14 +94,19 @@ export class FileAsSourceForJsonService implements OnInit {
     return GUITAREVENTS ;
   }
 
-  //export const GUITARFACULTY : IGuitarFaculty = {
   private privateGetFacultySetUpFromArray(): IGuitarFaculty {
     return GUITARFACULTY ;
   }
 
-
   private privateGetLinksSetUpFromArray(): IGuitarLinks[] {
     return GUITARLINKS;
+  }
+
+  private privateGetMusicDeptCatalogSetUpFromArray(): IMusicDeptCatalog {
+    return MUSIC_DEPT_CATALOG;
+  }
+  private privateGetGuitarProgramScheduleSetUpFromArray(): IGuitarProgramSchedule {
+    return GUITAR_PROGRAM_SCHEDULE;
   }
 
   private privateGetNewsFeedFromArray(): IGuitarNewsConfig {
