@@ -7,6 +7,7 @@ import {GUITARNEWS, IGuitarNewsConfig} from "../../features/news/GuitarNewsConfi
 import {GUITAREVENTS, IGuitarEvent} from "../../features/lists/events/GuitarEvent";
 import {GUITARLINKS, IGuitarLinks} from "../../features/lists/links/GuitarLinks";
 import {GUITARBOOKS, IGuitarBooks} from "../../features/classroom/textbooks/GuitarBooks";
+import {GUITARFACULTY, IGuitarFaculty} from "../../features/classroom/faculty/GuitarFaculty";
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 const headerSetupUrl = "../../assets/json/header-controller.json";
@@ -31,16 +32,20 @@ export class FileAsSourceForJsonService implements OnInit {
     // return this.privateGetFooterSetUpFromArray();  // WORKS
     return this.privateGetFooterSetUpFromHttp();
   }
+  getBooksSetUp() {
+    return this.privateGetBooksSetUpFromArray();  // WORKS
+    // return this.privateGetEventsSetUpFromHttp(); // STUB
+  }
 
   getEventsSetUp() {
     return this.privateGetEventsSetUpFromArray();  // WORKS
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
-
-  getBooksSetUp() {
-    return this.privateGetBooksSetUpFromArray();  // INTEST
+  getFacultySetUp() {
+    return this.privateGetFacultySetUpFromArray();  // INTEST
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
+
 
   getLinksSetUp() {
     return this.privateGetLinksSetUpFromArray();  // WORKS
@@ -71,14 +76,18 @@ export class FileAsSourceForJsonService implements OnInit {
   //     {observe: 'response', responseType: 'json'});
   //   return myAny;
   // }
-  // GUITARBOOKS : IGuitarBooks
+  private privateGetBooksSetUpFromArray(): IGuitarBooks {
+    return GUITARBOOKS ;
+  }
   private privateGetEventsSetUpFromArray(): IGuitarEvent[] {
     return GUITAREVENTS ;
   }
 
-  private privateGetBooksSetUpFromArray(): IGuitarBooks {
-    return GUITARBOOKS ;
+  //export const GUITARFACULTY : IGuitarFaculty = {
+  private privateGetFacultySetUpFromArray(): IGuitarFaculty {
+    return GUITARFACULTY ;
   }
+
 
   private privateGetLinksSetUpFromArray(): IGuitarLinks[] {
     return GUITARLINKS;
