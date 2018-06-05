@@ -19,7 +19,7 @@ import {ClassScheduleModule} from "./classroom/class-schedule/class-schedule.mod
     ServicesModule,
     PipesCommonModule,
     ClassScheduleModule,
-    FeaturesRoutingModule,
+    FeaturesRoutingModule
 
   ],
   declarations: [NewsComponent, EventsComponent, LinksComponent, TextbooksComponent, FacultyComponent],
