@@ -9,9 +9,10 @@ import {GUITARLINKS, IGuitarLinks} from "../../features/lists/links/GuitarLinks"
 import {GUITARBOOKS, IGuitarBooks} from "../../features/classroom/textbooks/GuitarBooks";
 import {GUITARFACULTY, IGuitarFaculty} from "../../features/classroom/faculty/GuitarFaculty";
 import {
-  GUITAR_PROGRAM_COURSE_SCHEDULE, IGuitarProgramCourseScheduleByTerm, IMusicDeptCatalogByTerm,
+  GUITAR_PROGRAM_COURSE_SCHEDULE,
+  IGuitarProgramCourseScheduleByTerm, IMusicDeptCatalogByTerm,
   MUSIC_DEPT_CATALOG
-} from "../../features/classroom/schedule/GuitarClassSchedule";
+} from "../../features/classroom/class-schedule/GuitarClassSchedulePlanner";
 
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";

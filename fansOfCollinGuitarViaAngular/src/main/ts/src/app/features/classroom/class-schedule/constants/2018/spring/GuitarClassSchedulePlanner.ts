@@ -1,39 +1,4 @@
-export interface IMusicDeptCatalogEntries   {
-  relevent: boolean ;
-  discipline: string ;
-  class: number ;
-  name: string ;
-}
-export interface IMusicDeptCatalogByTerm   {
-  schoolTermLabel: string ;
-  schoolYear: number ;
-  schoolSemester: string ;
-  payload: IMusicDeptCatalogEntries[] ;
-}
-export interface IGuitarProgramCourseScheduleEntries   {
-  active: boolean ;
-  CRN: number ;
-  Subj: string ;
-  Crse: number ;
-  Sec: string ;
-  Cred: number ;
-  Title: string ;
-  Days: string ;
-  Time: string ;
-  calendar: string ;
-  Location: string ;
-  Cap: number ;
-  Rem: number ;
-  WLCap: number ;
-  WLRem: string ;
-  Instructor: string ;
-}
-export interface IGuitarProgramCourseScheduleByTerm   {
-  schoolTermLabel: string ;
-  schoolYear: number ;
-  schoolSemester: string ;
-  payload: IGuitarProgramCourseScheduleEntries[] ;
-}
+import {IGuitarProgramCourseScheduleByTerm, IMusicDeptCatalogByTerm} from "../../../GuitarClassSchedulePlanner";
 
 export const GUITAR_PROGRAM_SCHEDULE_2018_SPRING : IGuitarProgramCourseScheduleByTerm = {
   "schoolTermLabel": "Spring 2018 Credit",
@@ -2540,9 +2505,4 @@ export const MUSIC_DEPT_CATALOG_2018_SPRING : IMusicDeptCatalogByTerm = {
     }
   ]
 };
-export const GUITAR_PROGRAM_COURSE_SCHEDULE: IGuitarProgramCourseScheduleByTerm[] = [
-  GUITAR_PROGRAM_SCHEDULE_2018_SPRING
-] ;
-export const MUSIC_DEPT_CATALOG : IMusicDeptCatalogByTerm[] = [
-  MUSIC_DEPT_CATALOG_2018_SPRING
-] ;
+
