@@ -1,7 +1,23 @@
 
 <section>
-  <p>
-    class-schedule-planner works!
-  </p>
+  <div class="guitar-dept-display-flex-column"
+       *ngFor="let musicCatalogBySchoolTerm of musicCatalogMeta.semestersByYearsFound">
+    <!--<div class="guitar-dept-display-flex-column"-->
+         <!--*ngFor="let musicCatalogEntries of musicCatalogBySchoolTerm.payload">-->
+      <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header " style="text-transform: capitalize;">
+        {{musicCatalogBySchoolTerm.schoolSemester}}&nbsp;{{musicCatalogBySchoolTerm.schoolYear}}&nbsp;:&nbsp; HERE
+      </div>
+      <!--<div *ngFor="let guitarProgramCourse of courses | filterByObject: { relevent:true }"-->
+           <!--class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">-->
+        <!--<div-->
+          <!--ng-click="ctx.setCoursePick(musicCatalogBySchoolTermController,guitarProgramCourse)"-->
+          <!--data-toggle="modal" data-target="#myModal-{{requestedSchoolYear}}-{{requestedSchoolSemester}}"-->
+          <!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">-->
+          <!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramCourse.class}}</div>-->
+          <!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramCourse.name}}</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  </div>
 </section>
 
