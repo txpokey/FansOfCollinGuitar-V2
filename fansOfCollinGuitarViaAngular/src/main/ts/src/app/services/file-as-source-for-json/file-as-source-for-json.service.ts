@@ -9,10 +9,10 @@ import {GUITARLINKS, IGuitarLinks} from "../../features/lists/links/GuitarLinks"
 import {GUITARBOOKS, IGuitarBooks} from "../../features/classroom/textbooks/GuitarBooks";
 import {GUITARFACULTY, IGuitarFaculty} from "../../features/classroom/faculty/GuitarFaculty";
 import {
-  GUITAR_PROGRAM_SCHEDULE, IGuitarProgramSchedule,
-  IMusicDeptCatalog,
+  GUITAR_PROGRAM_COURSE_SCHEDULE, IGuitarProgramCourseScheduleByTerm, IMusicDeptCatalogByTerm,
   MUSIC_DEPT_CATALOG
 } from "../../features/classroom/schedule/GuitarClassSchedule";
+
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 const headerSetupUrl = "../../assets/json/header-controller.json";
@@ -59,8 +59,8 @@ export class FileAsSourceForJsonService implements OnInit {
   getMusicDeptCatalog() {
     return this.privateGetMusicDeptCatalogSetUpFromArray(); // INTEST
   }
-  getGuitarProgramSchedule() {
-    return this.privateGetGuitarProgramScheduleSetUpFromArray(); // INTEST
+  getGuitarProgramCourseSchedule() {
+    return this.privateGetGuitarProgramCourseScheduleSetUpFromArray(); // INTEST
   }
   getNewsFeed() {
     return this.privateGetNewsFeedFromArray(); // WORKS
@@ -101,12 +101,11 @@ export class FileAsSourceForJsonService implements OnInit {
   private privateGetLinksSetUpFromArray(): IGuitarLinks[] {
     return GUITARLINKS;
   }
-
-  private privateGetMusicDeptCatalogSetUpFromArray(): IMusicDeptCatalog {
+  private privateGetMusicDeptCatalogSetUpFromArray(): IMusicDeptCatalogByTerm[] {
     return MUSIC_DEPT_CATALOG;
   }
-  private privateGetGuitarProgramScheduleSetUpFromArray(): IGuitarProgramSchedule {
-    return GUITAR_PROGRAM_SCHEDULE;
+  private privateGetGuitarProgramCourseScheduleSetUpFromArray(): IGuitarProgramCourseScheduleByTerm[] {
+    return GUITAR_PROGRAM_COURSE_SCHEDULE;
   }
 
   private privateGetNewsFeedFromArray(): IGuitarNewsConfig {

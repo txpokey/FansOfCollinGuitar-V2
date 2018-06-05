@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FileAsSourceForJsonService} from "../../../services/file-as-source-for-json/file-as-source-for-json.service";
-import {IGuitarProgramSchedule, IMusicDeptCatalog} from "./GuitarClassSchedule";
+import {IGuitarProgramCourseScheduleByTerm, IMusicDeptCatalogByTerm} from "./GuitarClassSchedule";
 
 @Component({
   selector: 'guitar-schedule',
@@ -9,15 +9,15 @@ import {IGuitarProgramSchedule, IMusicDeptCatalog} from "./GuitarClassSchedule";
 })
 export class ScheduleComponent implements OnInit {
 
-  musicDeptCatalog : IMusicDeptCatalog ;
-  guitarProgramSchedule : IGuitarProgramSchedule ;
+  musicDeptCatalog : IMusicDeptCatalogByTerm[] ;
+  guitarProgramSchedule : IGuitarProgramCourseScheduleByTerm[] ;
 
   constructor(private service: FileAsSourceForJsonService) {  }
 
   ngOnInit() {
     let myAny: any  = this.service.getMusicDeptCatalog() ;
     this.musicDeptCatalog = myAny ;
-    myAny  = this.service.getGuitarProgramSchedule() ;
+    myAny  = this.service.getGuitarProgramCourseSchedule() ;
     this.guitarProgramSchedule = myAny ;
     console.log("scheduleComponent is HERE:> " + myAny );
   }
