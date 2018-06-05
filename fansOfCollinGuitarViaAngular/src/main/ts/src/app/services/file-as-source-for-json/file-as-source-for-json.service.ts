@@ -29,6 +29,13 @@ export class FileAsSourceForJsonService implements OnInit {
     console.log("FileAsSourceForJsonService is HERE: NEVER RUNS");
   }
 
+  public hashKey( key?: any ) : string {
+    let hashKey = "" ;
+    for( let k in key ) {
+      hashKey += key[k] + '|' ;
+    }
+    return hashKey ;
+  }
   getHeaderSetUp() {
     // return this.privateGetHeaderSetUpFromArray();  // WORKS
     return this.privateGetHeaderSetUpFromHttp(); // WORKS
