@@ -48,6 +48,24 @@ export class ClassSchedulePlannerComponent implements OnInit {
     return ;
   }
   private computeGroupByMapForGuitarSections( obj: any , pay: any, g: Map<any,any> ): any {
+    let musicKey = { schoolSemester: obj.schoolSemester , schoolYear: obj.schoolYear, discipline: pay.Subj } ;
+    let guitarKey = { schoolSemester: obj.schoolSemester , schoolYear: obj.schoolYear, discipline: pay.Subj , course: pay.Crse } ;
+    let guitarKeyAsObject = { schoolSemester: obj.schoolSemester , schoolYear: obj.schoolYear, discipline: pay.Subj , course: pay.Crse } ;
+    let hash = this.hashKey( guitarKey );
+    let withGKey = guitarKey['gKeyAsObject'] = guitarKeyAsObject ;
+    let withMKey = guitarKey['mKeyAsObject'] = musicKey ;
+    let newPay = guitarKey['pay'] = pay ;
+
+    let discovered = g.get(hash);
+    // value = 'undefined' === typeof value ? [pay] : value.push( pay ) ;
+    let depth = isUndefined(discovered) ? (discovered = []).push(guitarKey) : discovered.push( guitarKey ) ;
+    let revalue = g.set(hash,discovered);
+    let allKeysNow = Array.from( g.keys() );
+    let count = allKeysNow.length ;
+    return ;
+  }
+
+  private computeGroupByMapForGuitarSections_0( obj: any , pay: any, g: Map<any,any> ): any {
     let key = { schoolSemester: obj.schoolSemester , schoolYear: obj.schoolYear, discipline: pay.Subj } ;
     let newAddition = { schoolSemester: obj.schoolSemester , schoolYear: obj.schoolYear, discipline: pay.Subj, pay: pay } ;
     let hash = this.hashKey( key );
