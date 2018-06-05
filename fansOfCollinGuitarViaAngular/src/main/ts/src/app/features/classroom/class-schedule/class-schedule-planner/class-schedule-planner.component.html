@@ -1,23 +1,42 @@
 
 <section>
   <div class="guitar-dept-display-flex-column"
-       *ngFor="let musicCatalogBySchoolTerm of musicCatalogMeta.semestersByYearsFound">
+       *ngFor="let schoolTerm of musicCatalogMeta.semestersByYearsFound">
     <div class="guitar-dept-display-flex-column"
-         *ngFor="let musicCatalogDiscipline of musicCatalogBySchoolTerm.discipline">
+         *ngFor="let musicDiscipline of schoolTerm.discipline">
       <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header " style="text-transform: capitalize;">
-        {{musicCatalogBySchoolTerm.schoolSemester}}&nbsp;{{musicCatalogBySchoolTerm.schoolYear}}&nbsp;:&nbsp; {{musicCatalogDiscipline}}
+        {{schoolTerm.schoolSemester}}&nbsp;{{schoolTerm.schoolYear}}&nbsp;:&nbsp; {{musicDiscipline}}
       </div>
-      <!--<div *ngFor="let guitarProgramCourse of courses | filterByObject: { relevent:true }"-->
-           <!--class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">-->
-        <!--<div-->
-          <!--ng-click="ctx.setCoursePick(musicCatalogBySchoolTermController,guitarProgramCourse)"-->
-          <!--data-toggle="modal" data-target="#myModal-{{requestedSchoolYear}}-{{requestedSchoolSemester}}"-->
-          <!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">-->
-          <!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramCourse.class}}</div>-->
-          <!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramCourse.name}}</div>-->
-        <!--</div>-->
-      <!--</div>-->
+      {{ hashKey({ schoolSemester:  schoolTerm.schoolSemester , schoolYear: schoolTerm.schoolYear , discipline: musicDiscipline }) }}
+      <div
+        *ngFor="let guitarCourse of musicCatalogMeta.groupBy.get( hashKey({ schoolSemester:  schoolTerm.schoolSemester , schoolYear: schoolTerm.schoolYear , discipline: musicDiscipline }) ) "
+           class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">
+        <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
+          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.gKeyAsObject.course}}</div>
+          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.pay.Title}}</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+music-catalog-entry
+
+<!--<div data-toggle="modal" data-target="#myModal-{{schoolTerm.schoolYear}}-{{schoolTerm.schoolSemester}}"-->
+     <!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">-->
+  <!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.gKeyAsObject.course}}</div>-->
+  <!--&lt;!&ndash;<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>&ndash;&gt;-->
+<!--</div>-->
+
+<!-- -=-=- -->
+
+<!--<div *ngFor="let guitarCourse of courses | filterByObject: { relevent:true }"-->
+<!--class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">-->
+<!--<div-->
+<!--ng-click="ctx.setCoursePick(schoolTermController,guitarCourse)"-->
+<!--data-toggle="modal" data-target="#myModal-{{requestedSchoolYear}}-{{requestedSchoolSemester}}"-->
+<!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">-->
+<!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}</div>-->
+<!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>-->
+<!--</div>-->
+<!--</div>-->

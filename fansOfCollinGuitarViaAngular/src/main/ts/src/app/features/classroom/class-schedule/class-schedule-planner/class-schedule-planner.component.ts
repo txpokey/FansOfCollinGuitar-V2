@@ -21,8 +21,8 @@ export class ClassSchedulePlannerComponent implements OnInit {
     this.musicDeptCatalog = myAny ;
     myAny  = this.service.getGuitarProgramCourseSchedule() ;
     this.guitarProgramSchedule = myAny ;
-    this.computeMusicDisciplineMaps();
     this.computeGuitarSectionMaps();
+    this.computeMusicDisciplineMaps();
     console.log("scheduleComponent is HERE:> " + myAny );
   }
 
@@ -38,13 +38,19 @@ export class ClassSchedulePlannerComponent implements OnInit {
     let collector: any[] = [] ;
     let yearsFound: Set<number> = new Set( this.guitarProgramSchedule.map(obj => obj.schoolYear));
     let semestersFound: Set<string> = new Set( this.guitarProgramSchedule.map(obj => obj.schoolSemester));
-    let groupBy = new Map() ;
+    let guitarGroupBy = new Map() ;
+    let musicGroupBy = new Map() ;
     this.guitarProgramSchedule.forEach( obj =>
-      obj.payload.forEach( pay => this.computeGroupByMapForGuitarSections( obj, pay, groupBy )  )) ;
+      obj.payload.forEach( pay => {
+        this.computeGroupByMapForGuitarSections( obj, pay, guitarGroupBy ) ;
+        this.computeGroupByMapForMusicCourses( obj, pay, musicGroupBy ) ;
+      }  )) ;
 
     this.guitarSectionMeta.yearsFound = yearsFound ;
     this.guitarSectionMeta.semestersFound = semestersFound ;
-    this.guitarSectionMeta.groupBy = groupBy ;
+    this.guitarSectionMeta.groupBy = guitarGroupBy ;
+    this.musicCatalogMeta.groupBy = musicGroupBy ;
+
     return ;
   }
   private computeGroupByMapForGuitarSections( obj: any , pay: any, g: Map<any,any> ): any {
@@ -57,7 +63,22 @@ export class ClassSchedulePlannerComponent implements OnInit {
     let newPay = guitarKey['pay'] = pay ;
 
     let discovered = g.get(hash);
-    // value = 'undefined' === typeof value ? [pay] : value.push( pay ) ;
+    let depth = isUndefined(discovered) ? (discovered = []).push(guitarKey) : discovered.push( guitarKey ) ;
+    let revalue = g.set(hash,discovered);
+    let allKeysNow = Array.from( g.keys() );
+    let count = allKeysNow.length ;
+    return ;
+  }
+  private computeGroupByMapForMusicCourses( obj: any , pay: any, g: Map<any,any> ): any {
+    let musicKey = { schoolSemester: obj.schoolSemester , schoolYear: obj.schoolYear, discipline: pay.Subj } ;
+    let guitarKey = { schoolSemester: obj.schoolSemester , schoolYear: obj.schoolYear, discipline: pay.Subj , course: pay.Crse } ;
+    let guitarKeyAsObject = { schoolSemester: obj.schoolSemester , schoolYear: obj.schoolYear, discipline: pay.Subj , course: pay.Crse } ;
+    let hash = this.hashKey( musicKey );
+    let withGKey = guitarKey['gKeyAsObject'] = guitarKeyAsObject ;
+    let withMKey = guitarKey['mKeyAsObject'] = musicKey ;
+    let newPay = guitarKey['pay'] = pay ;
+
+    let discovered = g.get(hash);
     let depth = isUndefined(discovered) ? (discovered = []).push(guitarKey) : discovered.push( guitarKey ) ;
     let revalue = g.set(hash,discovered);
     let allKeysNow = Array.from( g.keys() );
@@ -65,18 +86,17 @@ export class ClassSchedulePlannerComponent implements OnInit {
     return ;
   }
 
-  private computeGroupByMapForGuitarSections_0( obj: any , pay: any, g: Map<any,any> ): any {
-    let key = { schoolSemester: obj.schoolSemester , schoolYear: obj.schoolYear, discipline: pay.Subj } ;
-    let newAddition = { schoolSemester: obj.schoolSemester , schoolYear: obj.schoolYear, discipline: pay.Subj, pay: pay } ;
-    let hash = this.hashKey( key );
-    let discovered = g.get(hash);
-    // value = 'undefined' === typeof value ? [pay] : value.push( pay ) ;
-    let depth = isUndefined(discovered) ? (discovered = []).push(newAddition) : discovered.push( newAddition ) ;
-    let revalue = g.set(hash,discovered);
-    let allKeysNow = Array.from( g.keys() );
-    let count = allKeysNow.length ;
-    return ;
+ // private computeGroupByMapForMusicCourses( obj: any , pay: any, g: Map<any,any> ): any {
+ private computeGroupByMapForMusicCourses0( schoolSemester: any , schoolYear: any, discipline: any , sux: any ): any {
+    let inputReference = this.guitarSectionMeta.groupBy ;
+    let hashForPick = this.hashKey( { schoolSemester: schoolSemester , schoolYear: schoolYear, discipline: discipline, sux: sux } );
+    let discoveredMappingByHashPicked = inputReference.get( hashForPick ) ;
+    let courseListAsArray = Array.of( discoveredMappingByHashPicked.map(
+        courseMapping => courseMapping['gKeyAsObject']
+    )) ;
+   return courseListAsArray ;
   }
+
 
   private computeMusicDisciplineMaps(): void {
     let collector: any[] = [] ;
