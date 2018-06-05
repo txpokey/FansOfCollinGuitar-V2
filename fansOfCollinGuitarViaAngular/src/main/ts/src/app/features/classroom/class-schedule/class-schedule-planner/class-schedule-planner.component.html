@@ -9,10 +9,10 @@
       </div>
       {{ hashKey({ schoolSemester:  schoolTerm.schoolSemester , schoolYear: schoolTerm.schoolYear , discipline: musicDiscipline }) }}
       <div
-        *ngFor="let guitarCourse of musicCatalogMeta.groupBy.get( hashKey({ schoolSemester:  schoolTerm.schoolSemester , schoolYear: schoolTerm.schoolYear , discipline: musicDiscipline }) ) "
+        *ngFor="let guitarCourse of getClassesFromMusicCatalogBySchoolTermAsArray( { schoolSemester:  schoolTerm.schoolSemester , schoolYear: schoolTerm.schoolYear , discipline: musicDiscipline } ) "
            class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">
         <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
-          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.gKeyAsObject.course}}</div>
+          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.course}}</div>
           <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.pay.Title}}</div>
         </div>
       </div>
