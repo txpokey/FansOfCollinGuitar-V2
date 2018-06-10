@@ -1,3 +1,8 @@
-<p>
-  music-catalog-entry works!
-</p>
+<div
+  *ngFor="let guitarCourse of findClasses( { schoolSemester:  semester , schoolYear: year , discipline: discipline } ) "
+  class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">
+  <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
+    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.course}}</div>
+    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.pay.Title}}</div>
+  </div>
+</div>

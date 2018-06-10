@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {IGuitarProgramCourseScheduleByTerm, IMusicDeptCatalogByTerm} from "../GuitarClassSchedulePlanner";
 import {FileAsSourceForJsonService} from "../../../../services/file-as-source-for-json/file-as-source-for-json.service";
 import {isUndefined} from "util";
 
-
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'class-schedule-planner',
   templateUrl: './class-schedule-planner.component.html',
@@ -34,7 +36,7 @@ export class ClassSchedulePlannerComponent implements OnInit {
     return this.service.hashKey(key) ;
   }
 
-  getClassesFromMusicCatalogBySchoolTermAsArray( lookupKey: any ) : any {
+  findClassesFromMusicCatalogBySchoolTermAsArray( lookupKey: any ) : any {
     let ret0 = this.musicCatalogMeta.groupBy.get( this.hashKey(lookupKey) ) ;
     let ret1 = ret0.values() ;
     let ret = Array.from( ret1 ) ;

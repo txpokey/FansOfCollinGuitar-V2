@@ -7,20 +7,11 @@
       <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header " style="text-transform: capitalize;">
         {{schoolTerm.schoolSemester}}&nbsp;{{schoolTerm.schoolYear}}&nbsp;:&nbsp; {{musicDiscipline}}
       </div>
-      {{ hashKey({ schoolSemester:  schoolTerm.schoolSemester , schoolYear: schoolTerm.schoolYear , discipline: musicDiscipline }) }}
-      <div
-        *ngFor="let guitarCourse of getClassesFromMusicCatalogBySchoolTermAsArray( { schoolSemester:  schoolTerm.schoolSemester , schoolYear: schoolTerm.schoolYear , discipline: musicDiscipline } ) "
-           class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">
-        <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
-          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.course}}</div>
-          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.pay.Title}}</div>
-        </div>
-      </div>
+      <music-catalog-entry [semester]="schoolTerm.schoolSemester"
+                           [year]="schoolTerm.schoolYear" [discipline]="musicDiscipline"></music-catalog-entry>
     </div>
   </div>
 </section>
-
-music-catalog-entry
 
 <!--<div data-toggle="modal" data-target="#myModal-{{schoolTerm.schoolYear}}-{{schoolTerm.schoolSemester}}"-->
      <!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">-->
