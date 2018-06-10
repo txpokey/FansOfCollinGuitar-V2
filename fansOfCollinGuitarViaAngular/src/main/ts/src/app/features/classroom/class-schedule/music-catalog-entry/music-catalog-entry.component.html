@@ -2,7 +2,7 @@
   *ngFor="let guitarCourse of findClasses( { schoolSemester:  semester , schoolYear: year , discipline: discipline } ) "
   class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">
   <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
-    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.course}}</div>
-    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.pay.Title}}</div>
+    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}</div>
+    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>
   </div>
 </div>

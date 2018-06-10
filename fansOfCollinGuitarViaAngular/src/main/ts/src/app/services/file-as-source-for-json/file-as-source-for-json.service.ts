@@ -68,7 +68,7 @@ export class FileAsSourceForJsonService implements OnInit {
     return this.privateGetMusicDeptCatalogSetUpFromArray(); // INTEST
   }
   getGuitarProgramCourseSchedule() {
-    return this.privateGetGuitarProgramCourseScheduleSetUpFromArray(); // INTEST
+    return this.privateGetGuitarProgramCourseScheduleSetUpFromArray(); // WORKS
   }
   getNewsFeed() {
     return this.privateGetNewsFeedFromArray(); // WORKS

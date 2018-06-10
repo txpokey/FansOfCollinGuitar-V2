@@ -29,6 +29,10 @@ export class MusicCatalogEntryComponent implements OnInit {
     let myLookup: any[] = this.planner.findClassesFromMusicCatalogBySchoolTermAsArray(key);
     return myLookup ;
   }
+  findClasses_0( key: any ): any[] {
+    let myLookup: any[] = this.planner.findClassesFromMusicCatalogBySchoolTermAsArray(key);
+    return myLookup ;
+  }
 
   ngOnInit() {
     let myPlan = this.planner.musicCatalogMeta;

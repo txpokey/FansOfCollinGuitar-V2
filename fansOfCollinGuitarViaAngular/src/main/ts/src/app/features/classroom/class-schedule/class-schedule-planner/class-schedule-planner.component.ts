@@ -19,30 +19,34 @@ export class ClassSchedulePlannerComponent implements OnInit {
   constructor(private service: FileAsSourceForJsonService) {  }
 
   ngOnInit() {
-    let myAny: any  = this.service.getMusicDeptCatalog() ;
-    this.musicDeptCatalog = myAny ;
-    myAny  = this.service.getGuitarProgramCourseSchedule() ;
-    this.guitarProgramSchedule = myAny ;
+    this.musicDeptCatalog = this.service.getMusicDeptCatalog() ;
+    this.guitarProgramSchedule = this.service.getGuitarProgramCourseSchedule() ;
     this.computeGuitarSectionMaps();
     this.computeMusicDisciplineMaps();
-    console.log("scheduleComponent is HERE:> " + myAny );
+    console.log("scheduleComponent is HERE!" );
   }
 
-  private composeSingleMap( a: any, b: any ): any {
-    let ret = { schoolSemester: a , schoolYear: b } ;
-    return ret ;
-  }
+  // private composeSingleMap( a: any, b: any ): any {
+  //   let ret = { schoolSemester: a , schoolYear: b } ;
+  //   return ret ;
+  // }
   private hashKey( key: any ): string {
     return this.service.hashKey(key) ;
   }
 
   findClassesFromMusicCatalogBySchoolTermAsArray( lookupKey: any ) : any {
     let ret0 = this.musicCatalogMeta.groupBy.get( this.hashKey(lookupKey) ) ;
+    let ret = ret0.payload ;
+    return ret ;
+  }
+  findClassesFromMusicCatalogBySchoolTermAsArray_0( lookupKey: any ) : any {
+    let ret0 = this.musicCatalogMeta.groupBy.get( this.hashKey(lookupKey) ) ;
     let ret1 = ret0.values() ;
     let ret = Array.from( ret1 ) ;
 
     return ret ;
   }
+
   private computeGuitarSectionMaps(): void {
     let collector: any[] = [] ;
     let yearsFound: Set<number> = new Set( this.guitarProgramSchedule.map(obj => obj.schoolYear));
@@ -96,7 +100,6 @@ export class ClassSchedulePlannerComponent implements OnInit {
     return ;
   }
 
- // private computeGroupByMapForMusicCourses( obj: any , pay: any, g: Map<any,any> ): any {
  private computeGroupByMapForMusicCourses0( schoolSemester: any , schoolYear: any, discipline: any , sux: any ): any {
     let inputReference = this.guitarSectionMeta.groupBy ;
     let hashForPick = this.hashKey( { schoolSemester: schoolSemester , schoolYear: schoolYear, discipline: discipline, sux: sux } );
@@ -107,7 +110,7 @@ export class ClassSchedulePlannerComponent implements OnInit {
    return courseListAsArray ;
   }
 
-
+// TODO : breack this up and let the music catalog widget compute this stuff
   private computeMusicDisciplineMaps(): void {
     let collector: any[] = [] ;
     let yearsFound: Set<number> = new Set( this.musicDeptCatalog.map(obj => obj.schoolYear));
@@ -122,7 +125,29 @@ export class ClassSchedulePlannerComponent implements OnInit {
     this.musicCatalogMeta.yearsFound = yearsFound ;
     this.musicCatalogMeta.semestersFound = semestersFound ;
     this.musicCatalogMeta.semestersByYearsFound = Array.from(crossProduct) ;
+    // TODO : get better names...
+    let groupByCandidate = new Map() ;
+      this.musicDeptCatalog.forEach( term => {
+        term.payload.forEach( termPayloadItem => {
+          if( termPayloadItem.relevent ) {
+            this.computeMusicDepartmentCatalogGroupByItemFromTermPayloadItem( term, termPayloadItem, groupByCandidate ) ;
+          } ;
+        }) ;
+        console.log( "watchTheTerm:> " + term );
+      })
+    this.musicCatalogMeta.groupBy = groupByCandidate ;
     return ;
+  }
+  private computeMusicDepartmentCatalogGroupByItemFromTermPayloadItem(term: any, termPayloadItem: any , groupByCandidate: Map<string,any>): void {
+    let hashInput = { schoolSemester: term.schoolSemester , schoolYear: term.schoolYear, discipline: termPayloadItem.discipline } ;
+    let hashKey = this.hashKey(hashInput);
+    let discovered = groupByCandidate.get(hashKey);
+    // console.log( "watchTheHashKey:> " + hashKey );
+
+    let depth = isUndefined(discovered) ? (discovered = { hashInput: hashInput, payload: [termPayloadItem]}) : discovered.payload.push( termPayloadItem ) ;
+    // console.log( "watchTheDiscovery:> " + discovered );
+    groupByCandidate.set(hashKey, discovered) ;
+    return
   }
 
 }
