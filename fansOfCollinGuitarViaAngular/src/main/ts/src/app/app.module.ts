@@ -9,6 +9,7 @@ import {LayoutModule} from './layout/layout.module';
 import {HttpClientModule} from "@angular/common/http";
 import {ServicesModule} from "./services/services.module";
 import {PipesCommonModule} from "./pipes/pipes-common/pipes-common.module";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {PipesCommonModule} from "./pipes/pipes-common/pipes-common.module";
     WelcomeComponent
   ],
   imports: [
+    NgbModule.forRoot(),
     BrowserModule,
     FeaturesModule,
     LayoutModule,
