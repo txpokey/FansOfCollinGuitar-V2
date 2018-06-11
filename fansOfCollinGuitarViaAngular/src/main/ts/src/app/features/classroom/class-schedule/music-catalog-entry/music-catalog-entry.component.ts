@@ -27,7 +27,9 @@ export class MusicCatalogEntryComponent implements OnInit {
     let myLookup: any[] = this.planner.findClassesFromMusicCatalogBySchoolTermAsArray(key);
     return myLookup ;
   }
-
+  openBackDropCustomClass(content) {
+    this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
+  }
   ngOnInit() {
     // let myPlan = this.planner.musicCatalogReportData;
     // this.isLookupInScope();

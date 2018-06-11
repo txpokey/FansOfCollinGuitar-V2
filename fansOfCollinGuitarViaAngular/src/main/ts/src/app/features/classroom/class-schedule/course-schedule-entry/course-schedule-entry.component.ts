@@ -1,5 +1,6 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {ClassSchedulePlannerComponent} from "../class-schedule-planner/class-schedule-planner.component";
 
 @Component({
   selector: 'course-schedule-entry',
@@ -9,16 +10,34 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class CourseScheduleEntryComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) {}
+  @Input() guitarCourse: any;
+  @Input() guitarCourseKey: any;
+
+  constructor(private planner: ClassSchedulePlannerComponent, private modalService: NgbModal) {}
 
   ngOnInit() {
   }
+  // let guitarKey = {
+  //   schoolSemester: obj.schoolSemester,
+  //   schoolYear: obj.schoolYear,
+  //   discipline: pay.Subj,
+  //   course: pay.Crse
+  // };
+  findClassSectionsByKey( key: any ) : any[] {
+    let foo = this.planner.findClassesFromGuitarProgramScheduleBySchoolTermAsArray( key ) ;
+    return foo ;
+  }
+
   closeResult: string;
 
 
   openBackDropCustomClass(content) {
     this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
   }
+  //
+  // openBackDropCustomClass(guitarCourse,guitarCourseKey,content) {
+  //   this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
+  // }
 
   openWindowCustomClass(content) {
     this.modalService.open(content, { windowClass: 'dark-modal' });

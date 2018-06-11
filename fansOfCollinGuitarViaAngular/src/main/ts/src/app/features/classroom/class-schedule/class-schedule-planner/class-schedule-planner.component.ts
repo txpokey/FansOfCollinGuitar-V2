@@ -38,6 +38,11 @@ export class ClassSchedulePlannerComponent implements OnInit {
     let ret = ret0.payload;
     return ret;
   }
+  findClassesFromGuitarProgramScheduleBySchoolTermAsArray(lookupKey: any): any {
+    let ret = this.guitarSectionReportData.groupBy.get(this.hashKey(lookupKey));
+    // let ret = ret0.payload;
+    return ret;
+  }
 
   private computeGuitarProgramReportData(): void {
     let yearsFound: Set<number> = new Set(this.guitarProgramSchedule.map(obj => obj.schoolYear));
