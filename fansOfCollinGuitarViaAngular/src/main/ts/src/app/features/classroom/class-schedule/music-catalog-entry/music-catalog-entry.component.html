@@ -4,5 +4,31 @@
   <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
     <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}</div>
     <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>
+    <!--<course-schedule-entry [semester]="schoolTerm.schoolSemester"-->
+                           <!--[year]="schoolTerm.schoolYear" [discipline]="musicDiscipline"></course-schedule-entry>-->
   </div>
 </div>
+<course-schedule-entry></course-schedule-entry>
+
+<!--(click)="openWindowCustomClass(content)">Modal with window custom class<...-->
+
+<!-- -=-=- -->
+
+<!--<div data-toggle="modal" data-target="#myModal-{{schoolTerm.schoolYear}}-{{schoolTerm.schoolSemester}}"-->
+<!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">-->
+<!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.gKeyAsObject.course}}</div>-->
+<!--&lt;!&ndash;<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>&ndash;&gt;-->
+<!--</div>-->
+
+<!-- -=-=- -->
+
+<!--<div *ngFor="let guitarCourse of courses | filterByObject: { relevent:true }"-->
+<!--class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">-->
+<!--<div-->
+<!--ng-click="ctx.setCoursePick(schoolTermController,guitarCourse)"-->
+<!--data-toggle="modal" data-target="#myModal-{{requestedSchoolYear}}-{{requestedSchoolSemester}}"-->
+<!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">-->
+<!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}</div>-->
+<!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>-->
+<!--</div>-->
+<!--</div>-->

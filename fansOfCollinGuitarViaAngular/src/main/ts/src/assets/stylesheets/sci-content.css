@@ -24,7 +24,11 @@
 .guitar-dept-column-color-wheat,
 .guitar-dept-column-color,
 .guitar-dept-column-header { /*Bad naming as this is only being used on grid pages*/
-    background-color: wheat;
+    background-color: wheat !important;
+  /*box-shadow: inset 0 0 0 0px lightGreen;*/
+  /*border: 1px solid white;*/
+  /*padding: 0;*/
+
 }
 
 

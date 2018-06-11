@@ -1,33 +1,38 @@
-
 <section>
-  <div class="guitar-dept-display-flex-column"
-       *ngFor="let schoolTerm of musicCatalogReportData.semestersByYearsFound">
+  <ngb-accordion #acc="ngbAccordion">
     <div class="guitar-dept-display-flex-column"
-         *ngFor="let musicDiscipline of schoolTerm.discipline">
-      <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header " style="text-transform: capitalize;">
-        {{schoolTerm.schoolSemester}}&nbsp;{{schoolTerm.schoolYear}}&nbsp;:&nbsp; {{musicDiscipline}}
+         *ngFor="let schoolTerm of musicCatalogReportData.semestersByYearsFound">
+      <div class="guitar-dept-display-flex-column"
+           *ngFor="let musicDiscipline of schoolTerm.discipline; index as index">
+        <ngb-panel id="toggle-{{index}}" >
+          <ng-template ngbPanelTitle >
+            <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header " style="text-transform: capitalize;">
+              {{schoolTerm.schoolSemester}}&nbsp;{{schoolTerm.schoolYear}}&nbsp;:&nbsp; {{musicDiscipline}}
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <music-catalog-entry [semester]="schoolTerm.schoolSemester"
+                                 [year]="schoolTerm.schoolYear" [discipline]="musicDiscipline"></music-catalog-entry>
+          </ng-template>
+        </ngb-panel>
       </div>
-      <music-catalog-entry [semester]="schoolTerm.schoolSemester"
-                           [year]="schoolTerm.schoolYear" [discipline]="musicDiscipline"></music-catalog-entry>
     </div>
-  </div>
+  </ngb-accordion>
 </section>
 
-<!--<div data-toggle="modal" data-target="#myModal-{{schoolTerm.schoolYear}}-{{schoolTerm.schoolSemester}}"-->
-     <!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">-->
-  <!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.gKeyAsObject.course}}</div>-->
-  <!--&lt;!&ndash;<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>&ndash;&gt;-->
-<!--</div>-->
+<!--<section>-->
+  <!--<div class="guitar-dept-display-flex-column"-->
+       <!--*ngFor="let schoolTerm of musicCatalogReportData.semestersByYearsFound">-->
+    <!--<div class="guitar-dept-display-flex-column"-->
+         <!--*ngFor="let musicDiscipline of schoolTerm.discipline; index as index">-->
+      <!--<div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header " style="text-transform: capitalize;">-->
+        <!--{{schoolTerm.schoolSemester}}&nbsp;{{schoolTerm.schoolYear}}&nbsp;:&nbsp; {{musicDiscipline}}-->
+      <!--</div>-->
+      <!--<music-catalog-entry [semester]="schoolTerm.schoolSemester"-->
+                           <!--[year]="schoolTerm.schoolYear" [discipline]="musicDiscipline"></music-catalog-entry>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</section>-->
 
-<!-- -=-=- -->
+<!--=-=-=- -->
 
-<!--<div *ngFor="let guitarCourse of courses | filterByObject: { relevent:true }"-->
-<!--class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">-->
-<!--<div-->
-<!--ng-click="ctx.setCoursePick(schoolTermController,guitarCourse)"-->
-<!--data-toggle="modal" data-target="#myModal-{{requestedSchoolYear}}-{{requestedSchoolSemester}}"-->
-<!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">-->
-<!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}</div>-->
-<!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>-->
-<!--</div>-->
-<!--</div>-->

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ClassSchedulePlannerComponent} from "../class-schedule-planner/class-schedule-planner.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'music-catalog-entry',
@@ -11,7 +12,7 @@ export class MusicCatalogEntryComponent implements OnInit {
   @Input() year: number;
   @Input() discipline: string;
 
-  constructor(private planner: ClassSchedulePlannerComponent) {
+  constructor(private planner: ClassSchedulePlannerComponent, private modalService: NgbModal) {
   }
 
   isLookupInScope() { // DEBUG
