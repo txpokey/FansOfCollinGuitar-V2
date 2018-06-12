@@ -11,8 +11,8 @@
             </div>
           </ng-template>
           <ng-template ngbPanelContent>
-            <music-catalog-entry [semester]="schoolTerm.schoolSemester"
-                                 [year]="schoolTerm.schoolYear" [discipline]="musicDiscipline"></music-catalog-entry>
+            <music-catalog-entry
+              [inputKey]="assembleMusicCatalogElementInputKey( { schoolTerm: schoolTerm , discipline: musicDiscipline } )"></music-catalog-entry>
           </ng-template>
         </ngb-panel>
       </div>

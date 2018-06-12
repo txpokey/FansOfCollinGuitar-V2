@@ -1,59 +1,23 @@
-<!--<div>-->
-  <!---->
-<!--</div>-->
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <div class="modal-title">
-      <div class="guitar-dept-display-flex-wrap  Grid-cell">
-        Course By Section
-      </div>
-      <div class="guitar-dept-display-flex-wrap  Grid-cell">
-        {{guitarCourseKey.schoolYear}}&nbsp;:&nbsp;{{guitarCourseKey.schoolSemester}}
-      </div>
-      <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header">
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourseKey.discipline}}
-        </div>
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}
-        </div>
-      </div>
-      </div>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div *ngFor="let courseBySections of findClassSectionsByKey( {
-      schoolSemester: guitarCourseKey.schoolSemester,
-      schoolYear: guitarCourseKey.schoolYear,
-      discipline: guitarCourseKey.discipline,
-      course: guitarCourse.class
+<div *ngFor="let courseBySections of findClassSectionsByKey( {
+      schoolSemester: semester,
+      schoolYear: year,
+      discipline: discipline,
+      course: course
     } )">
-      <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.CRN}}
-        </div>
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Sec}}
-        </div>
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Days}}
-        </div>
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Time}}
-        </div>
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">
-          {{courseBySections.pay.Location}}
-        </div>
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">
-          {{courseBySections.pay.Instructor}}
-        </div>
-      </div>
+  <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
+    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.CRN}}
+    </div>
+    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Sec}}
+    </div>
+    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Days}}
+    </div>
+    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Time}}
+    </div>
+    <div class="guitar-dept-display-flex-wrap  Grid-cell">
+      {{courseBySections.pay.Location}}
+    </div>
+    <div class="guitar-dept-display-flex-wrap  Grid-cell">
+      {{courseBySections.pay.Instructor}}
     </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
-  </div>
-</ng-template>
-
-<button class="btn btn-outline-primary mb-2 mr-2"
-        (click)="openBackDropCustomClass(content)">
-</button>
-
-
-
+</div>

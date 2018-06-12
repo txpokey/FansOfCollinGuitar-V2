@@ -1,21 +1,25 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {ClassSchedulePlannerComponent} from "../class-schedule-planner/class-schedule-planner.component";
 
 @Component({
   selector: 'course-schedule-entry',
   templateUrl: './course-schedule-entry.component.html',
-  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./course-schedule-entry.component.css']
 })
 export class CourseScheduleEntryComponent implements OnInit {
 
   @Input() guitarCourse: any;
   @Input() guitarCourseKey: any;
+  discipline: string;
+  semester: string;
+  year: number;
+  className: string ;
+  course: number ;
 
-  constructor(private planner: ClassSchedulePlannerComponent, private modalService: NgbModal) {}
+  constructor(private planner: ClassSchedulePlannerComponent) {}
 
   ngOnInit() {
+    this.processInputKey( this.guitarCourse , this.guitarCourseKey ) ;
   }
   // let guitarKey = {
   //   schoolSemester: obj.schoolSemester,
@@ -28,31 +32,13 @@ export class CourseScheduleEntryComponent implements OnInit {
     return foo ;
   }
 
-  closeResult: string;
-
-
-  openBackDropCustomClass(content) {
-    this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
-  }
-  //
-  // openBackDropCustomClass(guitarCourse,guitarCourseKey,content) {
-  //   this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
-  // }
-
-  openWindowCustomClass(content) {
-    this.modalService.open(content, { windowClass: 'dark-modal' });
+  private processInputKey( guitarCourse: any, guitarCourseKey : any ) : void {
+    this.discipline = guitarCourseKey.discipline ;
+    this.semester = guitarCourseKey.semester ;
+    this.year = guitarCourseKey.year ;
+    this.course = guitarCourse.class ;
+    this.className = guitarCourseKey.name ;
   }
 
-  openSm(content) {
-    this.modalService.open(content, { size: 'sm' });
-  }
-
-  openLg(content) {
-    this.modalService.open(content, { size: 'lg' });
-  }
-
-  openVerticallyCentered(content) {
-    this.modalService.open(content, { centered: true });
-  }
 
 }

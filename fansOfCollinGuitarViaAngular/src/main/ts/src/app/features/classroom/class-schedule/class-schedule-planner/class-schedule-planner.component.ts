@@ -4,6 +4,7 @@ import {FileAsSourceForJsonService} from "../../../../services/file-as-source-fo
 
 import {isUndefined} from "util";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +14,8 @@ import {isUndefined} from "util";
   styleUrls: ['./class-schedule-planner.component.css']
 })
 export class ClassSchedulePlannerComponent implements OnInit {
+  referenceDictionary : Map<string,string> = null ;
+
   musicDeptCatalog: IMusicDeptCatalogByTerm[];
   guitarProgramSchedule: IGuitarProgramCourseScheduleByTerm[];
   musicCatalogReportData: any = {};
@@ -26,6 +29,7 @@ export class ClassSchedulePlannerComponent implements OnInit {
     this.guitarProgramSchedule = this.service.getGuitarProgramCourseSchedule();
     this.computeGuitarProgramReportData();
     this.computeMusicCalalogReportData();
+    this.referenceDictionary = this.computeReferenceDictionaryMap() ;
     console.log("scheduleComponent is HERE!");
   }
 
@@ -42,6 +46,28 @@ export class ClassSchedulePlannerComponent implements OnInit {
     let ret = this.guitarSectionReportData.groupBy.get(this.hashKey(lookupKey));
     // let ret = ret0.payload;
     return ret;
+  }
+
+  private computeReferenceDictionaryMap(): Map<string,string> {
+    let map = new Map<string,string>() ;
+    map.set( 'schoolYear' , 'year' ) ;
+    map.set( 'schoolSemester' , 'semester' ) ;
+    map.set( 'discipline' , 'discipline' ) ;
+    map.set( 'Subj' , 'discipline' ) ;
+    map.set( 'Crse' , 'course' ) ;
+    map.set( 'course' , 'course' ) ;
+    map.set( 'class' , 'course' ) ;
+    map.set( 'name' , 'className' ) ;
+    map.set( 'Title' , 'className' ) ;
+    map.set( 'Sec' , 'section' ) ;
+    map.set( 'schoolTermLabel' , 'schoolTermLabel' ) ;
+    map.set( 'payload' , 'payload' ) ;
+    return map ;
+  }
+
+  assembleMusicCatalogElementInputKey( inputReceived: any ) : any {
+    let candidate = { semester: inputReceived.schoolTerm.schoolSemester , year: inputReceived.schoolTerm.schoolYear , discipline: inputReceived.discipline } ;
+    return candidate ;
   }
 
   private computeGuitarProgramReportData(): void {

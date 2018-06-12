@@ -1,33 +1,47 @@
 <div
   *ngFor="let guitarCourse of findClasses( { schoolSemester:  semester , schoolYear: year , discipline: discipline } ) "
   class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">
-  <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
-    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}</div>
-    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>
-    <course-schedule-entry [guitarCourse]="guitarCourse" [guitarCourseKey]="{ schoolSemester:  semester , schoolYear: year , discipline: discipline }"></course-schedule-entry>
+  <div >
+    <div (click)="openBackDropCustomClass(guitarCourse,content)"
+         class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
+      <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}</div>
+      <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>
+    </div>
+
   </div>
 </div>
-<!--<course-schedule-entry></course-schedule-entry>-->
 
-<!--(click)="openWindowCustomClass(content)">Modal with window custom class<...-->
 
-<!-- -=-=- -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <div class="modal-title">
+      <div class="guitar-dept-display-flex-wrap  Grid-cell">
+        Course By Section
+      </div>
+      <div class="guitar-dept-display-flex-wrap  Grid-cell">
+        {{year}}&nbsp;:&nbsp;{{semester}}
+      </div>
+      <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header">
+        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{discipline}}
+        </div>
+        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}
+        </div>
+      </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <course-schedule-entry [guitarCourse]="guitarCourse" [guitarCourseKey]="{ semester:  semester , year: year , discipline: discipline }"></course-schedule-entry>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
 
-<!--<div data-toggle="modal" data-target="#myModal-{{schoolTerm.schoolYear}}-{{schoolTerm.schoolSemester}}"-->
-<!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">-->
-<!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.gKeyAsObject.course}}</div>-->
-<!--&lt;!&ndash;<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>&ndash;&gt;-->
-<!--</div>-->
 
-<!-- -=-=- -->
+<!--<button class="btn btn-outline-primary mb-2 mr-2"-->
+        <!--(click)="openBackDropCustomClass(content)">-->
+<!--</button>-->
 
-<!--<div *ngFor="let guitarCourse of courses | filterByObject: { relevent:true }"-->
-<!--class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">-->
-<!--<div-->
-<!--ng-click="ctx.setCoursePick(schoolTermController,guitarCourse)"-->
-<!--data-toggle="modal" data-target="#myModal-{{requestedSchoolYear}}-{{requestedSchoolSemester}}"-->
-<!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">-->
-<!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}</div>-->
-<!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>-->
-<!--</div>-->
-<!--</div>-->
