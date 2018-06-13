@@ -13,7 +13,7 @@ export const GUITARLINKS : IGuitarLinks[] = [
     "payload": [
       {
         "label": "Music Department",
-        "url": "http://www.collin.edu/music/"
+        "url": "http://www.collin.edu/department/music/"
       },
       {
         "label": "Music Library",
@@ -21,7 +21,7 @@ export const GUITARLINKS : IGuitarLinks[] = [
       },
       {
         "label": "Music Department Calendar",
-        "url": "http://www.collin.edu/music/calendar.html"
+        "url": "http://www.collin.edu/department/music/Info_Pages/musicevents.html"
       },
       {
         "label": "Technical Jury Form",
