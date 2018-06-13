@@ -14,7 +14,8 @@ import {
   MUSIC_DEPT_CATALOG
 } from "../../features/classroom/class-schedule/GuitarClassSchedulePlanner";
 import {YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistsByChannelQuery";
-import {IYouTubeChannelQueryResponse} from "../../features/performances/ut/YouTubePlayListData";
+import {IYouTubeChannelQueryResponse, IYouTubePlaylist} from "../../features/performances/ut/YouTubePlayListData";
+import {YOU_TUBE_PLAYLISTS} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistQuery";
 
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
@@ -77,8 +78,9 @@ export class FileAsSourceForJsonService implements OnInit {
   getPerformancesByYearBySemester() {
     return this.privatePerformancesByYearBySemester(); // WORKS
   }
-
-
+  getPerformancesPlaylists() {
+    return this.privatePerformancePlaylists(); // INDEV
+  }
 
   private privateGetHeaderSetUpFromHttp(): Observable<HttpResponse<IHeaderConfig>> {
     let myAny: any = this._http.get<IHeaderConfig>(headerSetupUrl,
@@ -136,6 +138,13 @@ export class FileAsSourceForJsonService implements OnInit {
   private privatePerformancesByYearBySemester(): IYouTubeChannelQueryResponse {
     return YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE ;
   }
+
+  private privatePerformancePlaylists(): IYouTubePlaylist[] {
+    return YOU_TUBE_PLAYLISTS ;
+  }
+
+
+
   // saving this one for rapid prototyping
   // private privateGetFooterSetUpFromHttp0(): any[] {
   //   this.myAny = this._http.get(footerSetupUrl);
