@@ -28,8 +28,14 @@ export class CourseScheduleEntryComponent implements OnInit {
   //   course: pay.Crse
   // };
   findClassSectionsByKey( key: any ) : any[] {
-    let foo = this.planner.findClassesFromGuitarProgramScheduleBySchoolTermAsArray( key ) ;
-    return foo ;
+    let headersForDisplayColumns = [ { pay: this.provideHeadersForDisplayColumns() } ] ;
+    let contentArray = this.planner.findClassesFromGuitarProgramScheduleBySchoolTermAsArray( key ) ;
+    let candidate = [] ;
+    let nArray: any[] = null ;
+    candidate.push(...nArray); // CURIOUS
+    candidate.push(...headersForDisplayColumns);
+    candidate.push(...contentArray);
+    return candidate ;
   }
 
   private processInputKey( guitarCourse: any, guitarCourseKey : any ) : void {
@@ -40,5 +46,40 @@ export class CourseScheduleEntryComponent implements OnInit {
     this.className = guitarCourseKey.name ;
   }
 
+// <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
+//   <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.CRN}}
+// </div>
+// <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Sec}}
+// </div>
+// <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Days}}
+// </div>
+// <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Time}}
+// </div>
+// <div class="guitar-dept-display-flex-wrap  Grid-cell">
+//   {{courseBySections.pay.Location}}
+// </div>
+// <div class="guitar-dept-display-flex-wrap  Grid-cell">
+//   {{courseBySections.pay.Instructor}}
 
+  private provideHeadersForDisplayColumns() : any {
+    return HEADERS_FOR_DISPLAY_COLUMNS ;
+  }
 }
+ const HEADERS_FOR_DISPLAY_COLUMNS = {
+  "Select": "Select",
+  "CRN": "CRN",
+  "Subj": "Subject",
+  "Crse": "Course",
+  "Sec": "Section",
+  "Cred": 1,
+  "Title": "Title",
+  "Days": "Days",
+  "Time": "Time",
+  "Dates": "Calendar",
+  "Location": "Location",
+  "Cap": 20,
+  "Rem": -2,
+  "WLCap": 0,
+  "WLRem": "0",
+  "Instructor": "Instructor"
+} ;
