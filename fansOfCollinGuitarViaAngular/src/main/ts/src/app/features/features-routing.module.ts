@@ -6,14 +6,16 @@ import {LinksComponent} from "./lists/links/links.component";
 import {TextbooksComponent} from "./classroom/textbooks/textbooks.component";
 import {FacultyComponent} from "./classroom/faculty/faculty.component";
 import {ClassSchedulePlannerComponent} from "./classroom/class-schedule/class-schedule-planner/class-schedule-planner.component";
+import {PlayListsByChannelComponent} from "./performances/ut/play-lists-by-channel/play-lists-by-channel.component";
 
 const routes: Routes = [
+  { path: 'guitarCoursesBySchoolTerm', component: ClassSchedulePlannerComponent },
   { path: 'guitarEvents', component: EventsComponent },
   { path: 'guitarFaculty', component: FacultyComponent },
   { path: 'guitarLinks', component: LinksComponent },
   { path: 'guitarNews', component: NewsComponent },
-  { path: 'guitarCoursesBySchoolTerm', component: ClassSchedulePlannerComponent },
-  { path: 'guitarTextbooks', component: TextbooksComponent },
+  { path: 'guitarPerformances', component: PlayListsByChannelComponent },
+  { path: 'guitarTextbooks', component: TextbooksComponent }
 
 ];
 

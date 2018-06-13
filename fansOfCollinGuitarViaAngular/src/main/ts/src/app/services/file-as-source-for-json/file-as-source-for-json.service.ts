@@ -13,6 +13,8 @@ import {
   IGuitarProgramCourseScheduleByTerm, IMusicDeptCatalogByTerm,
   MUSIC_DEPT_CATALOG
 } from "../../features/classroom/class-schedule/GuitarClassSchedulePlanner";
+import {YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistsByChannelQuery";
+import {IYouTubeChannelQueryResponse} from "../../features/performances/ut/YouTubePlayListData";
 
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
@@ -58,21 +60,24 @@ export class FileAsSourceForJsonService implements OnInit {
     return this.privateGetFacultySetUpFromArray();  // WORKS
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
-
+  getGuitarProgramCourseSchedule() {
+    return this.privateGetGuitarProgramCourseScheduleSetUpFromArray(); // WORKS
+  }
 
   getLinksSetUp() {
     return this.privateGetLinksSetUpFromArray();  // WORKS
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
   getMusicDeptCatalog() {
-    return this.privateGetMusicDeptCatalogSetUpFromArray(); // INTEST
-  }
-  getGuitarProgramCourseSchedule() {
-    return this.privateGetGuitarProgramCourseScheduleSetUpFromArray(); // WORKS
+    return this.privateGetMusicDeptCatalogSetUpFromArray(); // WORKS
   }
   getNewsFeed() {
     return this.privateGetNewsFeedFromArray(); // WORKS
   }
+  getPerformancesByYearBySemester() {
+    return this.privatePerformancesByYearBySemester(); // INDEV
+  }
+
 
 
   private privateGetHeaderSetUpFromHttp(): Observable<HttpResponse<IHeaderConfig>> {
@@ -127,6 +132,10 @@ export class FileAsSourceForJsonService implements OnInit {
   private privateGetFooterSetUpFromArray() : IFooterConfig[] {
     return GUITARFOOTER;
   };
+
+  private privatePerformancesByYearBySemester(): IYouTubeChannelQueryResponse {
+    return YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE ;
+  }
   // saving this one for rapid prototyping
   // private privateGetFooterSetUpFromHttp0(): any[] {
   //   this.myAny = this._http.get(footerSetupUrl);

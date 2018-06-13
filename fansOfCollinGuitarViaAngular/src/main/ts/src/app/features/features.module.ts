@@ -11,6 +11,7 @@ import {LinksComponent} from './lists/links/links.component';
 import {TextbooksComponent} from './classroom/textbooks/textbooks.component';
 import {FacultyComponent} from './classroom/faculty/faculty.component';
 import {ClassScheduleModule} from "./classroom/class-schedule/class-schedule.module";
+import { PerformancesModule } from './performances/performances.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {ClassScheduleModule} from "./classroom/class-schedule/class-schedule.mod
     ServicesModule,
     PipesCommonModule,
     ClassScheduleModule,
+    PerformancesModule,
     FeaturesRoutingModule
 
   ],
