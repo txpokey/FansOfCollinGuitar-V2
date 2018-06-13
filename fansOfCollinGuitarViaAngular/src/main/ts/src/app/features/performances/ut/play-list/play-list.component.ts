@@ -7,6 +7,7 @@ import {
 } from "../YouTubePlayListData";
 import {FileAsSourceForJsonService} from "../../../../services/file-as-source-for-json/file-as-source-for-json.service";
 import {isUndefined} from "util";
+import set = Reflect.set;
 
 @Component({
   selector: 'ut-play-list',
@@ -25,6 +26,21 @@ export class PlayListComponent implements OnInit {
     this.playlistQuery = fbar ;
     let foo = this.computePlaylistGroupBy() ;
     this.playlistGroupBy = foo ;
+    let bar = this.sortPlaylistGroupBy() ;
+    this.playlistGroupBy = bar ;
+  }
+  private sortPlaylistGroupBy() : Map<string,Set<IYouTubePlayListItem>> {
+    let candidate: Map<string,Set<IYouTubePlayListItem>> = new Map() ;
+    let playlistGroupBy: Map<string,Set<IYouTubePlayListItem>> =  this.playlistGroupBy;
+    let allGroupByKeysIterator: Iterator<string> = playlistGroupBy.keys();
+    let allGroupByKeysAsArray = Array.from( playlistGroupBy.keys() ) ;
+    for( let key of allGroupByKeysAsArray ) {
+      let setDiscovered = playlistGroupBy.get(key) ;
+      let sortedArray = Array.from(setDiscovered).sort( (x,y) => { return x.snippet.title.localeCompare(y.snippet.title)}  );
+      let sortedSet = new Set( sortedArray ) ;
+      candidate.set(key,sortedSet) ;
+    }
+    return candidate;
   }
 
   private computePlaylistGroupBy() : Map<string,Set<IYouTubePlayListItem>> {
