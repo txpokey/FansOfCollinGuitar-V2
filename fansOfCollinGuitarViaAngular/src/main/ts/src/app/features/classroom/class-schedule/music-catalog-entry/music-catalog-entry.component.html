@@ -1,11 +1,11 @@
 <div
-  *ngFor="let guitarCourse of findClasses( { schoolSemester:  semester , schoolYear: year , discipline: discipline } ) "
-  class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">
+  *ngFor="let guitarCourse of findClasses( inputKey ) ">
   <div >
-    <div (click)="openBackDropCustomClass(guitarCourse,content)"
-         class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
-      <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}</div>
-      <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>
+    <div (click)="openBackDropCustomClass(guitarCourse,content)">
+      <div  class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-display-flex-row">
+        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}</div>
+        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>
+      </div>
     </div>
 
   </div>
@@ -39,9 +39,4 @@
     <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>
-
-
-<!--<button class="btn btn-outline-primary mb-2 mr-2"-->
-        <!--(click)="openBackDropCustomClass(content)">-->
-<!--</button>-->
 
