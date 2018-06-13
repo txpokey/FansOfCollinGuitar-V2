@@ -1,9 +1,9 @@
 <section id="guitar-program-courses-by-school-term-section">
   <div class="guitar-dept-display-flex-column">
     <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header">
-      {{channelQueryResponse.channelTitle}}
+      {{channelQueryResponseSorted.channelTitle}}
     </div>
-    <div *ngFor="let guitarPlaylist of channelQueryResponse.items"
+    <div *ngFor="let guitarPlaylist of channelQueryResponseSorted.items"
          class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">
       <div (click)="openBackDropCustomClass(guitarPlaylist,content)"
            class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
