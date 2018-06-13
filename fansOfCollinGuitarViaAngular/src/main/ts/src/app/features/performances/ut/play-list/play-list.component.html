@@ -1,3 +1,23 @@
 <p>
-  play-list works!
+  play-list works! {{guitarPlaylist}}
 </p>
+<div class="guitar-dept-display-flex-column">
+  <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-column-header">
+    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarPlaylist.snippet.title}}</div>
+  </div>
+</div>
+<!--<div class="guitar-dept-display-flex-column">-->
+  <!--<div ng-repeat="playlist in pick.controller.playlistQuery | filter: pick.filterBy"-->
+       <!--class="guitar-dept-display-flex-wrap guitar-dept-display-flex-column">-->
+    <!--<div ng-repeat="actualList in playlist.items"-->
+         <!--class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-display-flex-column">-->
+      <!--<a target="_blank"-->
+         <!--href="https://youtu.be/{{actualList.contentDetails.videoId}}" class="guitar-dept-display-flex-row">-->
+        <!--<div class="guitar-dept-display-flex-wrap  Grid-cell">{{actualList.snippet.title}}-->
+        <!--</div>-->
+        <!--<div class="guitar-dept-display-flex-wrap  Grid-cell">-->
+          <!--<img ng-src="{{actualList.snippet.thumbnails.default.url}}">-->
+        <!--</div>-->
+      <!--</a>-->
+    <!--</div>-->
+  <!--</div>-->

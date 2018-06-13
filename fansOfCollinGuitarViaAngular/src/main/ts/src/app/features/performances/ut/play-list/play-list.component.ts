@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {IYouTubeChannelQueryResponseDetails} from "../YouTubePlayListData";
 
 @Component({
   selector: 'ut-play-list',
@@ -9,6 +10,7 @@ export class PlayListComponent implements OnInit {
 
   constructor() { }
 
+  @Input() requestedPlaylist: IYouTubeChannelQueryResponseDetails ;
   ngOnInit() {
   }
 

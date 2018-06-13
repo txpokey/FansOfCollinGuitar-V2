@@ -75,7 +75,7 @@ export class FileAsSourceForJsonService implements OnInit {
     return this.privateGetNewsFeedFromArray(); // WORKS
   }
   getPerformancesByYearBySemester() {
-    return this.privatePerformancesByYearBySemester(); // INDEV
+    return this.privatePerformancesByYearBySemester(); // WORKS
   }
 
 
