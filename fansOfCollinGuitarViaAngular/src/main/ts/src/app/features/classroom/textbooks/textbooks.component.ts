@@ -3,6 +3,8 @@ import {IGuitarBooks} from "./GuitarBooks";
 import {FileAsSourceForJsonService} from "../../../services/file-as-source-for-json/file-as-source-for-json.service";
 import {TabStateComponent} from "../../../services/tab-state/tab-state.component";
 import {IncludeTemplateComponent} from "../../../services/include-template/include-template.component";
+import {HttpResponse} from "@angular/common/http";
+import {isUndefined} from "util";
 
 @Component({
   selector: 'guitar-books',
@@ -16,9 +18,17 @@ export class TextbooksComponent implements OnInit {
   constructor(public textbookTab: TabStateComponent, private service: FileAsSourceForJsonService ) { }
 
   ngOnInit() {
-    let myAny: any  = this.service.getBooksSetUp() ;
-    this.textbooks = myAny ;
-    console.log("textbooksComponent is HERE:> " + myAny );
+    let observe: any  = this.service.getBooksSetUp() ;
+    console.log(observe);
+    observe.forEach( ( dat: HttpResponse<IGuitarBooks> ) => {
+      this.textbooks = dat.body ;
+      console.log(dat);
+    });
+    console.log("textbooksComponent is HERE:> ");
   }
 
+  isDefined( underTest: any ) : boolean {
+    let candidate = isUndefined( underTest ) ;
+    return !candidate ;
+  }
 }

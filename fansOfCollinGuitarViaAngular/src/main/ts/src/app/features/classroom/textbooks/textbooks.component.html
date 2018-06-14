@@ -1,11 +1,11 @@
 <!--  guitar news container  -->
 <section id="guitar-dept-news-section" >
-
+<div *ngIf="isDefined(textbooks)">
   <div class="guitar-dept-news-media-content-title Grid-bordered-bottom">
-    {{textbooks.title}}
+    {{textbooks?.title}}
   </div>
   <div id="setup-news-content-blocks" class="guitar-dept-display-flex-row guitar-dept-display-flex-wrap guitar-dept-flex-space-around">
-    <div *ngFor="let guitarTextbookModel of (textbooks.payload  | filterByObject: { image: '!#0' }); index as index "
+    <div *ngFor="let guitarTextbookModel of (textbooks?.payload  | filterByObject: { image: '!#0' }); index as index "
          class="guitar-dept-display-flex-row">
       <div (click)="textbookTab.setTab(index)" id="setup-news-content-single-block"
            class="guitar-dept-display-flex-column">
@@ -22,4 +22,6 @@
       </include-template>
     </div>
   </div>
+</div>
+
 </section>

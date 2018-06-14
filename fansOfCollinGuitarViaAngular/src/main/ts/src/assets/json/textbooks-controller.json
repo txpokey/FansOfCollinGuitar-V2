@@ -17,7 +17,7 @@
       "edition": "Vol 1., 5th Edition",
       "ISBN": "#0",
       "image": "../assets/images/textbooks/vera.vol1.ed5.jpg",
-      "url": "../html/textbooks/veraMethod.vol1.html"
+      "url": "../assets/html/textbooks/veraMethod.vol1.html"
     },
     {
       "name": "The Beginning Guitar Method",
@@ -26,7 +26,7 @@
       "edition": "Vol. 2, 2nd Edition",
       "ISBN": "#0",
       "image": "../assets/images/textbooks/vera.vol2.ed2.jpg",
-      "url": "../html/textbooks/veraMethod.vol2.html"
+      "url": "../assets/html/textbooks/veraMethod.vol2.html"
     },
     {
       "name": "MUSI 1303 : Music Fundamentals",
@@ -35,7 +35,7 @@
       "edition": "Academic 2017-2018",
       "ISBN": "#0",
       "image": "../assets/images/textbooks/musicFundamentals--2017.jpg",
-      "url": "../html/textbooks/musicFundamentals.html"
+      "url": "../assets/html/textbooks/musicFundamentals.html"
     },
     {
       "name": "Music in Theory and Practice",
@@ -44,7 +44,7 @@
       "edition": "Vol. 1, 9th Edition",
       "ISBN": "9780078025150",
       "image": "../assets/images/textbooks/benward-saker.theory.textbook.jpg",
-      "url": "../html/textbooks/benward-saker.html"
+      "url": "../assets/html/textbooks/benward-saker.html"
     },
     {
       "name": "Music in Theory and Practice",
@@ -53,7 +53,7 @@
       "edition": "Vol. 1 Workbook, 9th Edition",
       "ISBN": "9780077493318",
       "image": "../assets/images/textbooks/benward-saker.theory.workbook.jpg",
-      "url": "../html/textbooks/benward-saker-workbook.html"
+      "url": "../assets/html/textbooks/benward-saker-workbook.html"
     },
     {
       "name": "Julio S. Sagreras Guitar Lessons",
@@ -62,7 +62,7 @@
       "edition": "Books 1-3",
       "ISBN": "9780786627233",
       "image": "../assets/images/textbooks/sagreras.jpg",
-      "url": "../html/textbooks/sagreras.html"
+      "url": "../assets/html/textbooks/sagreras.html"
     },
     {
       "name": "On Practicing",
@@ -71,7 +71,7 @@
       "edition": "1st Edition",
       "ISBN": "9780786658732",
       "image": "../assets/images/textbooks/RI-practice.jpg",
-      "url": "../html/textbooks/iznaola-practice.html"
+      "url": "../assets/html/textbooks/iznaola-practice.html"
     },
     {
       "name": "Pumping Nylon",
@@ -80,7 +80,7 @@
       "edition": "2nd Edition",
       "ISBN": "9781470631383",
       "image": "../assets/images/textbooks/pumpingNylon.jpg",
-      "url": "../html/textbooks/pumpingNylon.html"
+      "url": "../assets/html/textbooks/pumpingNylon.html"
     }
   ]
 }

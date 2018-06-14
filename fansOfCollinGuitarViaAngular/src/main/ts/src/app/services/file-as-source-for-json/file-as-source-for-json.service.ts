@@ -16,10 +16,48 @@ import {
 import {YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistsByChannelQuery";
 import {IYouTubeChannelQueryResponse, IYouTubePlaylist} from "../../features/performances/ut/YouTubePlayListData";
 import {YOU_TUBE_PLAYLISTS} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistQuery";
-
+import {isUndefined} from "util";
+import {observable} from "rxjs/internal-compatibility";
+import {b} from "@angular/core/src/render3";
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 const headerSetupUrl = "../../assets/json/header-controller.json";
+const booksSetupUrl  = "../../assets/json/textbooks-controller.json" ;
+export interface GuitarApiObserverContract {
+
+  isDefined( underTest: any ) : boolean ;
+
+  getObserver() : Observable<HttpResponse<any[]>> ;
+
+}
+class GuitarApiObserver implements GuitarApiObserverContract {
+
+  private observable : Observable<HttpResponse<any[]>> ;
+  private payload : any ;
+  constructor(private _http: HttpClient, private uri: string ) {
+    let candidate = this.supplyObserver( uri ) ;
+
+  }
+
+  isDefined( underTest: any ) : boolean {
+    let candidate = isUndefined( underTest ) ;
+    return !candidate ;
+  }
+  isReady() : boolean {
+    return this.isDefined( this.getPayload() ) ;
+  }
+  getObserver() : Observable<HttpResponse<any[]>> {
+    return this.observable ;
+  }
+  private getPayload() : any {
+    return this.payload ;
+  }
+  private supplyObserver( uri : string ) : Observable<HttpResponse<any[]>> {
+    let observe: Observable<HttpResponse<any[]>> = this._http.get<any>(uri ,
+      {observe: 'response', responseType: 'json'});
+    return observe;
+  }
+}
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +87,8 @@ export class FileAsSourceForJsonService implements OnInit {
     return this.privateGetFooterSetUpFromHttp();
   }
   getBooksSetUp() {
-    return this.privateGetBooksSetUpFromArray();  // WORKS
+    // return this.privateGetBooksSetUpFromArray();  // WORKS
+    return this.privateGetBooksSetUpFromHttp();  // DEV
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
 
@@ -79,7 +118,7 @@ export class FileAsSourceForJsonService implements OnInit {
     return this.privatePerformancesByYearBySemester(); // WORKS
   }
   getPerformancesPlaylists() {
-    return this.privatePerformancePlaylists(); // INDEV
+    return this.privatePerformancePlaylists(); // WORKS
   }
 
   private privateGetHeaderSetUpFromHttp(): Observable<HttpResponse<IHeaderConfig>> {
@@ -87,12 +126,20 @@ export class FileAsSourceForJsonService implements OnInit {
       {observe: 'response', responseType: 'json'});
     return myAny;
   }
-
-  private privateGetFooterSetUpFromHttp(): Observable<HttpResponse<IFooterConfig[]>> {
-    let myAny: any = this._http.get<IFooterConfig[]>(footerSetupUrl,
+  // IFooterConfig
+  private privateGetFooterSetUpFromHttp(): Observable<HttpResponse<any[]>> {
+    let myAny: any = this._http.get<any[]>(footerSetupUrl,
       {observe: 'response', responseType: 'json'});
+    console.log(myAny);
     return myAny;
   }
+
+  private privateGetBooksSetUpFromHttp(): Observable<HttpResponse<any>> {
+    let observe: Observable<HttpResponse<any[]>> = this._http.get<any>(booksSetupUrl,
+      {observe: 'response', responseType: 'json'});
+    return observe;
+  }
+
 
   // private handleError(err: HttpErrorResponse) {
   // }
