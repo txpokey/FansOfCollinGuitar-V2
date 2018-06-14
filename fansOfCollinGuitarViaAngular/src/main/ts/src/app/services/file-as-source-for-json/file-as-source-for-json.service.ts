@@ -21,7 +21,8 @@ import {isUndefined} from "util";
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 const headerSetupUrl = "../../assets/json/header-controller.json";
-const booksSetupUrl  = "../../assets/json/textbooks-controller.json" ;
+const booksSetupUri  = "/assets/json/textbooks-controller.json" ;
+
 export interface GuitarApiObserverPollingContract {
   isReady() : boolean ;
 }
@@ -98,13 +99,14 @@ export class FileAsSourceForJsonService implements OnInit {
     // return this.privateGetFooterSetUpFromArray();  // WORKS
     return this.privateGetFooterSetUpFromHttp();
   }
+
   getBooksSetUp() {
-    // return this.privateGetBooksSetUpFromArray();  // WORKS
-    return this.privateGetBooksSetUpFromHttp();  // WORKS
+    // return this.privateGetBooksSetUpFromArray();  // WORKS : not used
+    // return this.privateGetBooksSetUpFromHttp();  // WORKS : NOT used
   }
 
   getEventsSetUp() {
-    return this.privateGetEventsSetUpFromArray();  // WORKS
+    return this.privateGetEventsSetUpFromArray();  // WORKS : not used
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
   getFacultySetUp() {
@@ -146,7 +148,7 @@ export class FileAsSourceForJsonService implements OnInit {
   }
 
   private privateGetBooksSetUpFromHttp(): Observable<HttpResponse<any>> {
-    let observe: Observable<HttpResponse<any[]>> = this._http.get<any>(booksSetupUrl,
+    let observe: Observable<HttpResponse<any[]>> = this._http.get<any>(booksSetupUri,
       {observe: 'response', responseType: 'json'});
     return observe;
   }

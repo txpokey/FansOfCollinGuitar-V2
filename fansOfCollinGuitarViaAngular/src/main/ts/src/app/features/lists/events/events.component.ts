@@ -26,11 +26,11 @@ export class EventsComponent implements OnInit , GuitarApiObserverPollingContrac
     let spun:  boolean = agent.spinUp() ;
     console.log("textbooksComponent is HERE:> " + spun );
   }
-  ngOnInit0() {
-    let myAny: any  = this.service.getEventsSetUp() ;
-    this.guitarProgramEvents = myAny ;
-    console.log("eventsComponent is HERE:> " + myAny );
-  }
+  // ngOnInit0() {
+  //   let myAny: any  = this.service.getEventsSetUp() ;
+  //   this.guitarProgramEvents = myAny ;
+  //   console.log("eventsComponent is HERE:> " + myAny );
+  // }
 
   isReady(): boolean {
     let ret : boolean = false ;

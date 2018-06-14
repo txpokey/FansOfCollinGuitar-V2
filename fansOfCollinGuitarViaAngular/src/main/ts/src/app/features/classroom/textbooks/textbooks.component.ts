@@ -30,15 +30,15 @@ export class TextbooksComponent implements OnInit , GuitarApiObserverPollingCont
     let spun:  boolean = agent.spinUp() ;
     console.log("textbooksComponent is HERE:> " + spun );
   }
- ngOnInit0() {
-    let observe: any  = this.service.getBooksSetUp() ;
-    console.log(observe);
-    observe.forEach( ( dat: HttpResponse<IGuitarBooks> ) => {
-      this.textbooks = dat.body ;
-      console.log(dat);
-    });
-    console.log("textbooksComponent is HERE:> ");
-  }
+ // ngOnInit0() {
+ //    let observe: any  = this.service.getBooksSetUp() ;
+ //    console.log(observe);
+ //    observe.forEach( ( dat: HttpResponse<IGuitarBooks> ) => {
+ //      this.textbooks = dat.body ;
+ //      console.log(dat);
+ //    });
+ //    console.log("textbooksComponent is HERE:> ");
+ //  }
 
   isReady() : boolean {
     let ret : boolean = false ;
