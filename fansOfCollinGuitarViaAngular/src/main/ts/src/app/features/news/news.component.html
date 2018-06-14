@@ -1,23 +1,28 @@
 <!--  guitar news container  -->
 <section id="guitar-dept-news-section">
-  <div class="guitar-dept-news-media-content-title Grid-bordered-bottom">
-    {{guitarProgramNews.title}}
-  </div>
-  <div id="setup-news-content-blocks" class="guitar-dept-display-flex-row guitar-dept-display-flex-wrap guitar-dept-flex-space-around">
-    <div *ngFor="let guitarNewsModel of (guitarProgramNews.payload | filterByObject:  { url: '!#0' }); index as index"
-         class="guitar-dept-display-flex-row">
-      <div id="setup-news-content-single-block" class="guitar-dept-display-flex-column">
-        <div *ngIf="tabStates.showTab(index)"
-             [ngClass]="{'active':tabStates.isSet(index)}">
-          <img class="guitar-dept-media-news-image padded-above"
-               (click)="tabStates.setTab(index)" src="{{guitarNewsModel.image}}">
-          <div class="guitar-dept-news-media-label padded-right">{{guitarNewsModel.name}}</div>
-          <div class="guitar-dept-news-media-label padded-right">{{guitarNewsModel.date}}</div>
-        </div>
-      </div>
-      <include-template *ngIf="tabStates.isSet(index)" class="guitar-dept-display-flex-row"
-           [requestedUrl]="guitarNewsModel.url">
-      </include-template>
+  <div *ngIf="isReady()">
+
+    <div class="guitar-dept-news-media-content-title Grid-bordered-bottom">
+      {{guitarProgramNews.title}}
     </div>
+    <div id="setup-news-content-blocks" class="guitar-dept-display-flex-row guitar-dept-display-flex-wrap guitar-dept-flex-space-around">
+      <div *ngFor="let guitarNewsModel of (guitarProgramNews.payload | filterByObject:  { url: '!#0' }); index as index"
+           class="guitar-dept-display-flex-row">
+        <div id="setup-news-content-single-block" class="guitar-dept-display-flex-column">
+          <div *ngIf="tabStates.showTab(index)"
+               [ngClass]="{'active':tabStates.isSet(index)}">
+            <img class="guitar-dept-media-news-image padded-above"
+                 (click)="tabStates.setTab(index)" src="{{guitarNewsModel.image}}">
+            <div class="guitar-dept-news-media-label padded-right">{{guitarNewsModel.name}}</div>
+            <div class="guitar-dept-news-media-label padded-right">{{guitarNewsModel.date}}</div>
+          </div>
+        </div>
+        <include-template *ngIf="tabStates.isSet(index)" class="guitar-dept-display-flex-row"
+                          [requestedUrl]="guitarNewsModel.url">
+        </include-template>
+      </div>
+    </div>
+
   </div>
+
 </section>

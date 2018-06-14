@@ -118,14 +118,14 @@ export class FileAsSourceForJsonService implements OnInit {
   }
 
   getLinksSetUp() {
-    return this.privateGetLinksSetUpFromArray();  // WORKS
+    return this.privateGetLinksSetUpFromArray();  // WORKS : not used
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
   getMusicDeptCatalog() {
     return this.privateGetMusicDeptCatalogSetUpFromArray(); // WORKS
   }
   getNewsFeed() {
-    return this.privateGetNewsFeedFromArray(); // WORKS
+    return this.privateGetNewsFeedFromArray(); // WORKS : not used
   }
   getPerformancesByYearBySemester() {
     return this.privatePerformancesByYearBySemester(); // WORKS

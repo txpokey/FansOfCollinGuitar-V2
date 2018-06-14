@@ -19,7 +19,7 @@
       "where": "Spring Creek",
       "event": "6th Annual Collin College Guitar Festival",
       "image": "../assets/images/news/2018/spring/current/CCGF2018.jpg",
-      "url": "../html/news/2018/spring/current/guitarFestival-news.html"
+      "url": "../assets/html/news/2018/spring/current/guitarFestival-news.html"
     },
     {
       "test": true,
@@ -29,7 +29,7 @@
       "where": "internet",
       "event": "Using Collin College Guitar Studies Website",
       "image": "../assets/images/header/guitarStudies.light-logo.jpg",
-      "url": "../html/news/2018/spring/current/guitarWebsite-news.html"
+      "url": "../assets/html/news/2018/spring/current/guitarWebsite-news.html"
     }
   ]
 }
