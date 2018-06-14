@@ -110,7 +110,7 @@ export class FileAsSourceForJsonService implements OnInit {
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
   getFacultySetUp() {
-    return this.privateGetFacultySetUpFromArray();  // WORKS
+    return this.privateGetFacultySetUpFromArray();  // WORKS : not used
     // return this.privateGetEventsSetUpFromHttp(); // STUB
   }
   getGuitarProgramCourseSchedule() {
