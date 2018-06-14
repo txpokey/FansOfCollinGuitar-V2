@@ -7,26 +7,29 @@
         <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>
       </div>
     </div>
-
   </div>
 </div>
-
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <div class="modal-title">
-      <div class="guitar-dept-display-flex-wrap  Grid-cell">
+      <div class="guitar-dept-display-flex-column guitar-dept-display-flex-wrap Grid-cell">
         Course By Section
-      </div>
-      <div class="guitar-dept-display-flex-wrap  Grid-cell">
-        {{year}}&nbsp;:&nbsp;{{semester}}
-      </div>
-      <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header">
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{discipline}}
+        <div class="guitar-dept-display-flex-row guitar-dept-display-flex-wrap Grid-cell">
+
+          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{year}}</div>
+          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{semester}}</div>
+
         </div>
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}
+
+        <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header guitar-dept-display-flex-row">
+          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{discipline}}
+          </div>
+          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}
+          </div>
         </div>
       </div>
+
     </div>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>

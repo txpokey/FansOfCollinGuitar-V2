@@ -3,6 +3,7 @@ import {IGuitarProgramCourseScheduleByTerm, IMusicDeptCatalogByTerm} from "../Gu
 import {FileAsSourceForJsonService} from "../../../../services/file-as-source-for-json/file-as-source-for-json.service";
 
 import {isUndefined} from "util";
+import {NgbAccordionConfig} from "@ng-bootstrap/ng-bootstrap";
 
 
 @Injectable({
@@ -11,6 +12,7 @@ import {isUndefined} from "util";
 @Component({
   selector: 'class-schedule-planner',
   templateUrl: './class-schedule-planner.component.html',
+  providers: [NgbAccordionConfig],
   styleUrls: ['./class-schedule-planner.component.css']
 })
 export class ClassSchedulePlannerComponent implements OnInit {
@@ -21,7 +23,9 @@ export class ClassSchedulePlannerComponent implements OnInit {
   musicCatalogReportData: any = {};
   guitarSectionReportData: any = {};
 
-  constructor(private service: FileAsSourceForJsonService) {
+  constructor(private service: FileAsSourceForJsonService, config: NgbAccordionConfig) {
+    config.closeOthers = false;
+    config.type = 'transparent';
   }
 
   ngOnInit() {

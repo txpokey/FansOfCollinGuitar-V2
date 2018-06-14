@@ -1,38 +1,21 @@
+
 <section>
-  <ngb-accordion #acc="ngbAccordion">
-    <div class="guitar-dept-display-flex-column"
-         *ngFor="let schoolTerm of musicCatalogReportData.semestersByYearsFound">
-      <div class="guitar-dept-display-flex-column"
-           *ngFor="let musicDiscipline of schoolTerm.discipline; index as index">
-        <ngb-panel id="toggle-{{index}}" >
-          <ng-template ngbPanelTitle >
-            <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header " style="text-transform: capitalize;">
-              {{schoolTerm.schoolSemester}}&nbsp;{{schoolTerm.schoolYear}}&nbsp;:&nbsp; {{musicDiscipline}}
-            </div>
-          </ng-template>
-          <ng-template ngbPanelContent>
-            <music-catalog-entry
-              [inputKey]="assembleMusicCatalogElementInputKey( { schoolTerm: schoolTerm , discipline: musicDiscipline } )"></music-catalog-entry>
-          </ng-template>
-        </ngb-panel>
+  <div *ngFor="let schoolTerm of musicCatalogReportData.semestersByYearsFound">
+    <div *ngFor="let musicDiscipline of schoolTerm.discipline; index as index">
+      <p>
+        <a class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header"  data-toggle="collapse" href="#collapseExample{{index}}" role="button"
+           aria-expanded="false">
+          {{schoolTerm.schoolSemester}}&nbsp;{{schoolTerm.schoolYear}}&nbsp;:&nbsp; {{musicDiscipline}}
+        </a>
+      </p>
+      <div class="collapse" id="collapseExample{{index}}">
+        <div class="card card-body">
+          <music-catalog-entry
+            [inputKey]="assembleMusicCatalogElementInputKey( { schoolTerm: schoolTerm , discipline: musicDiscipline } )"></music-catalog-entry>
+        </div>
       </div>
+
     </div>
-  </ngb-accordion>
+
+  </div>
 </section>
-
-<!--<section>-->
-  <!--<div class="guitar-dept-display-flex-column"-->
-       <!--*ngFor="let schoolTerm of musicCatalogReportData.semestersByYearsFound">-->
-    <!--<div class="guitar-dept-display-flex-column"-->
-         <!--*ngFor="let musicDiscipline of schoolTerm.discipline; index as index">-->
-      <!--<div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header " style="text-transform: capitalize;">-->
-        <!--{{schoolTerm.schoolSemester}}&nbsp;{{schoolTerm.schoolYear}}&nbsp;:&nbsp; {{musicDiscipline}}-->
-      <!--</div>-->
-      <!--<music-catalog-entry [semester]="schoolTerm.schoolSemester"-->
-                           <!--[year]="schoolTerm.schoolYear" [discipline]="musicDiscipline"></music-catalog-entry>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</section>-->
-
-<!--=-=-=- -->
-

@@ -1,0 +1,12 @@
+.card-header,
+.fix-padding-problem {
+  /*$card-spacer-y: 0 0 ;*/
+  /*$card-spacer-x: 0 0 ;*/
+  padding: 0 0 0 0;
+}
+.guitar-dept-column-header {
+  background-color: #ffc107 !important;
+  background-color: wheat !important;
+  padding: 0 0 0 0;
+}
+
