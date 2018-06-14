@@ -27,7 +27,7 @@ export class FacultyComponent implements OnInit, GuitarApiObserverPollingContrac
     let agent : GuitarApiObserverContract  = new GuitarApiObserver( setupUri , clientStub ) ;
     this.lookupAgent = agent ;
     let spun:  boolean = agent.spinUp() ;
-    console.log("textbooksComponent is HERE:> " + spun );
+    console.log("spinup is HERE:> " + spun );
   }
 
   // ngOnInit0() {

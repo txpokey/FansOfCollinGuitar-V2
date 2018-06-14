@@ -24,7 +24,7 @@ export class EventsComponent implements OnInit , GuitarApiObserverPollingContrac
     let agent : GuitarApiObserverContract  = new GuitarApiObserver( eventsSetupUri , clientStub ) ;
     this.lookupAgent = agent ;
     let spun:  boolean = agent.spinUp() ;
-    console.log("textbooksComponent is HERE:> " + spun );
+    console.log("spinup is HERE:> " + spun );
   }
   // ngOnInit0() {
   //   let myAny: any  = this.service.getEventsSetUp() ;
