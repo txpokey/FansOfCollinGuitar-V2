@@ -10,35 +10,36 @@ import {GUITARBOOKS, IGuitarBooks} from "../../features/classroom/textbooks/Guit
 import {GUITARFACULTY, IGuitarFaculty} from "../../features/classroom/faculty/GuitarFaculty";
 import {
   GUITAR_PROGRAM_COURSE_SCHEDULE,
-  IGuitarProgramCourseScheduleByTerm, IMusicDeptCatalogByTerm,
+  IGuitarProgramCourseScheduleByTerm,
+  IMusicDeptCatalogByTerm,
   MUSIC_DEPT_CATALOG
 } from "../../features/classroom/class-schedule/GuitarClassSchedulePlanner";
 import {YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistsByChannelQuery";
 import {IYouTubeChannelQueryResponse, IYouTubePlaylist} from "../../features/performances/ut/YouTubePlayListData";
 import {YOU_TUBE_PLAYLISTS} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistQuery";
 import {isUndefined} from "util";
-import {observable} from "rxjs/internal-compatibility";
-import {b} from "@angular/core/src/render3";
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 const headerSetupUrl = "../../assets/json/header-controller.json";
 const booksSetupUrl  = "../../assets/json/textbooks-controller.json" ;
-export interface GuitarApiObserverContract {
+export interface GuitarApiObserverPollingContract {
+  isReady() : boolean ;
+}
+export interface GuitarApiObserverContract extends GuitarApiObserverPollingContract{
 
   isDefined( underTest: any ) : boolean ;
-
-  getObserver() : Observable<HttpResponse<any[]>> ;
+  spinUp() : boolean ;
+  getPayload() : any ;
 
 }
-class GuitarApiObserver implements GuitarApiObserverContract {
+export class GuitarApiObserver implements GuitarApiObserverContract {
 
   private observable : Observable<HttpResponse<any[]>> ;
   private payload : any ;
-  constructor(private _http: HttpClient, private uri: string ) {
-    let candidate = this.supplyObserver( uri ) ;
-
+  constructor(private uri: string , private clientStub : HttpClient) {
+    let candidate = this.supplyObserver( clientStub , uri ) ;
+    this.observable = candidate ;
   }
-
   isDefined( underTest: any ) : boolean {
     let candidate = isUndefined( underTest ) ;
     return !candidate ;
@@ -46,16 +47,23 @@ class GuitarApiObserver implements GuitarApiObserverContract {
   isReady() : boolean {
     return this.isDefined( this.getPayload() ) ;
   }
-  getObserver() : Observable<HttpResponse<any[]>> {
+  private getObserver() : Observable<HttpResponse<any[]>> {
     return this.observable ;
   }
-  private getPayload() : any {
+  getPayload() : any {
     return this.payload ;
   }
-  private supplyObserver( uri : string ) : Observable<HttpResponse<any[]>> {
-    let observe: Observable<HttpResponse<any[]>> = this._http.get<any>(uri ,
+  private supplyObserver( http: HttpClient , uri : string ) : Observable<HttpResponse<any[]>> {
+    let observe: Observable<HttpResponse<any[]>> = http.get<any>(uri ,
       {observe: 'response', responseType: 'json'});
     return observe;
+  }
+  spinUp() : boolean {
+    this.getObserver().forEach( ( dat: HttpResponse<any> ) => {
+      this.payload = dat.body ;
+      console.log("guitarObserver:spinUp> " + dat);
+    });
+    return this.isReady() ;
   }
 }
 
@@ -68,6 +76,10 @@ export class FileAsSourceForJsonService implements OnInit {
 
   ngOnInit(): void {
     console.log("FileAsSourceForJsonService is HERE: NEVER RUNS");
+  }
+
+  getHttpClient() : HttpClient {
+    return this._http ;
   }
 
   public hashKey( key?: any ) : string {
