@@ -9,7 +9,7 @@ import {TabStateComponent} from "../../../services/tab-state/tab-state.component
 import {IncludeTemplateComponent} from "../../../services/include-template/include-template.component";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 
-const booksSetupUri  = "/assets/json/textbooks-controller.json" ;
+const setupUri  = "/assets/json/textbooks-controller.json" ;
 
 @Component({
   selector: 'guitar-books',
@@ -25,7 +25,7 @@ export class TextbooksComponent implements OnInit , GuitarApiObserverPollingCont
 
   ngOnInit() {
     let clientStub  : HttpClient = this.service.getHttpClient() ;
-    let agent : GuitarApiObserverContract  = new GuitarApiObserver( booksSetupUri , clientStub ) ;
+    let agent : GuitarApiObserverContract  = new GuitarApiObserver( setupUri , clientStub ) ;
     this.lookupAgent = agent ;
     let spun:  boolean = agent.spinUp() ;
     console.log("spinup is HERE:> " + spun );
