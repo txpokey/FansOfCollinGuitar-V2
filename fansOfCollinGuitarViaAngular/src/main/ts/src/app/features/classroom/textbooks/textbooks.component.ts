@@ -28,7 +28,7 @@ export class TextbooksComponent implements OnInit , GuitarApiObserverPollingCont
     let agent : GuitarApiObserverContract  = new GuitarApiObserver( booksSetupUri , clientStub ) ;
     this.lookupAgent = agent ;
     let spun:  boolean = agent.spinUp() ;
-    console.log("textbooksComponent is HERE:> " + spun );
+    console.log("spinup is HERE:> " + spun );
   }
  // ngOnInit0() {
  //    let observe: any  = this.service.getBooksSetUp() ;
