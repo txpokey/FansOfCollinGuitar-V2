@@ -1,14 +1,16 @@
 <section id="guitar-dept-events-section">
-  <div class="guitar-dept-display-flex-column" >
-    <div class="guitar-dept-display-flex-wrap Grid-cell guitar-dept-column-header" >
-      {{guitarProgramEvents[0].name}}
-    </div>
-    <div *ngFor="let guitarProgramEvent of guitarProgramEvents"
-         class="Grid Grid-bordered guitar-dept-display-flex-row">
-      <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramEvent.date}}</div>
-      <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramEvent.time}}</div>
-      <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramEvent.where}}</div>
-      <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramEvent.event}}</div>
+  <div *ngIf="isReady()">
+    <div class="guitar-dept-display-flex-column" >
+      <div class="guitar-dept-display-flex-wrap Grid-cell guitar-dept-column-header" >
+        {{guitarProgramEvents[0].name}}
+      </div>
+      <div *ngFor="let guitarProgramEvent of guitarProgramEvents"
+           class="Grid Grid-bordered guitar-dept-display-flex-row">
+        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramEvent.date}}</div>
+        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramEvent.time}}</div>
+        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramEvent.where}}</div>
+        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarProgramEvent.event}}</div>
+      </div>
     </div>
   </div>
 </section>

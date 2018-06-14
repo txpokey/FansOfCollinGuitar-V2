@@ -32,10 +32,10 @@ export interface GuitarApiObserverContract extends GuitarApiObserverPollingContr
   getPayload() : any ;
 
 }
-export class GuitarApiObserver implements GuitarApiObserverContract {
+export class GuitarApiObserver<T> implements GuitarApiObserverContract {
 
-  private observable : Observable<HttpResponse<any[]>> ;
-  private payload : any ;
+  private observable : Observable<HttpResponse<T>> ;
+  private payload : T ;
   constructor(private uri: string , private clientStub : HttpClient) {
     let candidate = this.supplyObserver( clientStub , uri ) ;
     this.observable = candidate ;
@@ -47,14 +47,14 @@ export class GuitarApiObserver implements GuitarApiObserverContract {
   isReady() : boolean {
     return this.isDefined( this.getPayload() ) ;
   }
-  private getObserver() : Observable<HttpResponse<any[]>> {
+  private getObserver() : Observable<HttpResponse<T>> {
     return this.observable ;
   }
   getPayload() : any {
     return this.payload ;
   }
-  private supplyObserver( http: HttpClient , uri : string ) : Observable<HttpResponse<any[]>> {
-    let observe: Observable<HttpResponse<any[]>> = http.get<any>(uri ,
+  private supplyObserver( http: HttpClient , uri : string ) : Observable<HttpResponse<T>> {
+    let observe: Observable<HttpResponse<T>> = http.get<T>(uri ,
       {observe: 'response', responseType: 'json'});
     return observe;
   }
@@ -100,8 +100,7 @@ export class FileAsSourceForJsonService implements OnInit {
   }
   getBooksSetUp() {
     // return this.privateGetBooksSetUpFromArray();  // WORKS
-    return this.privateGetBooksSetUpFromHttp();  // DEV
-    // return this.privateGetEventsSetUpFromHttp(); // STUB
+    return this.privateGetBooksSetUpFromHttp();  // WORKS
   }
 
   getEventsSetUp() {
