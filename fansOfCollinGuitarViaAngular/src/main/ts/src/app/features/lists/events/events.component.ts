@@ -1,41 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {
-  FileAsSourceForJsonService, GuitarApiObserver, GuitarApiObserverContract,
+  FileAsSourceForJsonService,
+  GuitarApiComponentBaseClass,
   GuitarApiObserverPollingContract
 } from "../../../services/file-as-source-for-json/file-as-source-for-json.service";
 import {IGuitarEvent} from "./GuitarEvent";
-import {HttpClient} from "@angular/common/http";
 
-const eventsSetupUri  = "/assets/json/guitarEvents-controller.json" ;
+const setupUri  = "/assets/json/guitarEvents-controller.json" ;
 
 @Component({
   selector: 'guitar-events',
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.css']
 })
-export class EventsComponent implements OnInit , GuitarApiObserverPollingContract{
+export class EventsComponent extends GuitarApiComponentBaseClass<IGuitarEvent[]> implements GuitarApiObserverPollingContract {
 
   guitarProgramEvents: IGuitarEvent[] ;
-  constructor(private service: FileAsSourceForJsonService) {  }
-  lookupAgent : GuitarApiObserverContract ;
+  constructor( private service: FileAsSourceForJsonService ) { super( setupUri , service.getHttpClient() ) ;}
 
-  ngOnInit() {
-    let clientStub  : HttpClient = this.service.getHttpClient() ;
-    let agent : GuitarApiObserverContract  = new GuitarApiObserver( eventsSetupUri , clientStub ) ;
-    this.lookupAgent = agent ;
-    let spun:  boolean = agent.spinUp() ;
-    console.log("spinup is HERE:> " + spun );
-  }
-  // ngOnInit0() {
-  //   let myAny: any  = this.service.getEventsSetUp() ;
-  //   this.guitarProgramEvents = myAny ;
-  //   console.log("eventsComponent is HERE:> " + myAny );
-  // }
-
-  isReady(): boolean {
+  isReady() : boolean {
     let ret : boolean = false ;
-    if( this.lookupAgent.isReady() ) {
-      let candidate : any = this.lookupAgent.getPayload() ;
+    if(this.getNetworker().isReady() ) {
+      let candidate : any = this.getNetworker().getPayload() ;
       this.guitarProgramEvents = candidate ;
       ret = true ;
     }
