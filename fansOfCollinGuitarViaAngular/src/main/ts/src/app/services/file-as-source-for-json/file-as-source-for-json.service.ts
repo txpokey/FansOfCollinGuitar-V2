@@ -35,8 +35,8 @@ export interface GuitarApiObserverContract extends GuitarApiObserverPollingContr
 }
 
 export abstract class GuitarApiComponentBaseClass<T> implements OnInit {
-  protected lookupAgent : GuitarApiObserverContract ;
-  protected constructor(protected setupUri : string, private clientStub: HttpClient) { }
+  private lookupAgent : GuitarApiObserverContract ;
+  protected constructor(private setupUri : string, private clientStub: HttpClient) { }
   ngOnInit() {
     let clientStub  : HttpClient = this.getHttpClient() ;
     let agent : GuitarApiObserverContract  = new GuitarApiObserver<T>(this.setupUri , clientStub ) ;
@@ -89,13 +89,14 @@ export class GuitarApiObserver<T> implements GuitarApiObserverContract {
 @Injectable({
   providedIn: 'root'
 })
-export class FileAsSourceForJsonService implements OnInit {
+// export class FileAsSourceForJsonService implements OnInit {
+export class FileAsSourceForJsonService {
 
   constructor(private _http: HttpClient) { }
 
-  ngOnInit(): void {
-    console.log("FileAsSourceForJsonService is HERE: NEVER RUNS");
-  }
+  // ngOnInit(): void {
+  //   console.log("FileAsSourceForJsonService is HERE: NEVER RUNS");
+  // }
 
   getHttpClient() : HttpClient {
     return this._http ;
