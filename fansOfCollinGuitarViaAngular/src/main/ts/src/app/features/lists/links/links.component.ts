@@ -14,7 +14,7 @@ const setupUri  = "/assets/json/links-controller.json" ;
   styleUrls: ['./links.component.css']
 })
 export class LinksComponent extends GuitarApiComponentBaseClass<IGuitarLinks[]> implements GuitarApiObserverPollingContract {
-  
+
   guitarProgramLinks : IGuitarLinks[] ;
   constructor( private service: FileAsSourceForJsonService ) { super( setupUri , service.getHttpClient() ) ;}
 
