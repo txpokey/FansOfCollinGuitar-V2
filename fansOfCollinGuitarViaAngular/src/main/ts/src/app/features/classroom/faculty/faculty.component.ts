@@ -1,13 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {IGuitarFaculty} from "./GuitarFaculty";
 import {
-  FileAsSourceForJsonService, GuitarApiComponentBaseClass, GuitarApiObserver, GuitarApiObserverContract,
+  FileAsSourceForJsonService,
+  GuitarApiComponentBaseClass,
   GuitarApiObserverPollingContract
 } from "../../../services/file-as-source-for-json/file-as-source-for-json.service";
 import {TabStateComponent} from "../../../services/tab-state/tab-state.component";
 import {IncludeTemplateComponent} from "../../../services/include-template/include-template.component";
-import {HttpClient} from "@angular/common/http";
-import {IHeaderConfig} from "../../../layout/header/HeaderConfig";
 
 const setupUri  = "/assets/json/teacherBiography-controller.json" ;
 
@@ -31,13 +30,5 @@ export class FacultyComponent extends GuitarApiComponentBaseClass<IGuitarFaculty
     }
     return ret ;
   }
-
-  // ngOnInit() {
-  //   let clientStub  : HttpClient = this.service.getHttpClient() ;
-  //   let agent : GuitarApiObserverContract  = new GuitarApiObserver( setupUri , clientStub ) ;
-  //   this.lookupAgent = agent ;
-  //   let spun:  boolean = agent.spinUp() ;
-  //   console.log("spinup is HERE:> " + spun );
-  // }
 
 }
