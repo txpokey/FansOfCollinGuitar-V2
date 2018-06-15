@@ -34,9 +34,9 @@ export interface GuitarApiObserverContract extends GuitarApiObserverPollingContr
 
 }
 
-export class GuitarApiComponentBaseClass<T> implements OnInit {
+export abstract class GuitarApiComponentBaseClass<T> implements OnInit {
   protected lookupAgent : GuitarApiObserverContract ;
-  constructor(protected setupUri : string, private clientStub: HttpClient) { }
+  protected constructor(protected setupUri : string, private clientStub: HttpClient) { }
   ngOnInit() {
     let clientStub  : HttpClient = this.getHttpClient() ;
     let agent : GuitarApiObserverContract  = new GuitarApiObserver<T>(this.setupUri , clientStub ) ;
