@@ -15,7 +15,7 @@ const setupUri  = "/assets/json/header-controller.json" ;
   providers: [FileAsSourceForJsonService],
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent extends GuitarApiComponentBaseClass<IHeaderConfig> implements OnInit, GuitarApiObserverPollingContract {
+export class HeaderComponent extends GuitarApiComponentBaseClass<IHeaderConfig> implements GuitarApiObserverPollingContract {
 
   public carouselSlideDeck: number[] = carouselSlideDeck ;
   public targets;
@@ -23,19 +23,10 @@ export class HeaderComponent extends GuitarApiComponentBaseClass<IHeaderConfig> 
 
   constructor( private service: FileAsSourceForJsonService ) { super( setupUri , service.getHttpClient() ) ;}
 
-  // ngOnInit0() {
-  //   this.observe = this.service.getHeaderSetUp();
-  //   this.observe.forEach((dat: HttpResponse<IHeaderConfig>) => {
-  //     this.targets = dat.body.targets;
-  //     this.title = dat.body.title;
-  //   }) ;
-  //   console.log("carouselSlideDeck:header.onInit> " + carouselSlideDeck);
-  //   console.log("HeaderComponent is HERE");
-  // }
-  isReady() : boolean {
+   isReady() : boolean {
     let ret : boolean = false ;
-    if( this.lookupAgent.isReady() ) {
-      let candidate : any = this.lookupAgent.getPayload() ;
+    if(this.getNetworker().isReady() ) {
+      let candidate : any = this.getNetworker().getPayload() ;
       this.targets = candidate.targets;
       this.title = candidate.title;
       ret = true ;
