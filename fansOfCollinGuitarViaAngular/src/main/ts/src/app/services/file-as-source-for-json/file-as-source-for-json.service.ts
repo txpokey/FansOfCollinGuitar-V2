@@ -33,6 +33,24 @@ export interface GuitarApiObserverContract extends GuitarApiObserverPollingContr
   getPayload() : any ;
 
 }
+
+export class GuitarApiComponentBaseClass<T> implements OnInit {
+  protected lookupAgent : GuitarApiObserverContract ;
+  constructor(protected setupUri : string, private clientStub: HttpClient) { }
+  ngOnInit() {
+    let clientStub  : HttpClient = this.getHttpClient() ;
+    let agent : GuitarApiObserverContract  = new GuitarApiObserver<T>(this.setupUri , clientStub ) ;
+    this.lookupAgent = agent ;
+    let spun:  boolean = agent.spinUp() ;
+    console.log("spinup is HERE:> " + spun );
+  }
+  getNetworker() : GuitarApiObserverContract {
+    return this.lookupAgent ;
+  }
+  private getHttpClient() : HttpClient {
+    return this.clientStub;
+  }
+}
 export class GuitarApiObserver<T> implements GuitarApiObserverContract {
 
   private observable : Observable<HttpResponse<T>> ;
@@ -91,8 +109,8 @@ export class FileAsSourceForJsonService implements OnInit {
     return hashKey ;
   }
   getHeaderSetUp() {
-    // return this.privateGetHeaderSetUpFromArray();  // WORKS
-    return this.privateGetHeaderSetUpFromHttp(); // WORKS
+    // return this.privateGetHeaderSetUpFromArray();  //  WORKS : not used
+    return this.privateGetHeaderSetUpFromHttp(); //  WORKS : not used
   }
 
   getFooterSetUp() {
