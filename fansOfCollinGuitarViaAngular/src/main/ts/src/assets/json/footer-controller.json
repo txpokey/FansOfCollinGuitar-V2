@@ -34,11 +34,18 @@
         "url": "../html/news/misc/guitarHowTo-news.html"
       },
       {
+        "label": "github",
+        "icon" : "fa fa-github",
+        "logo" : "#0",
+        "url": "https://github.com/txpokey/FansOfCollinGuitar-V2"
+      },
+      {
         "label": "webmaster",
         "icon" : "fa fa-envelope-o",
         "logo" : "#0",
         "url": "mailto:tritonpi-collinguitarwebmaster0@yahoo.com"
       }
+
     ]
   },
   {
