@@ -6,12 +6,11 @@ import spock.lang.Specification
 
 class HeaderControllerTest extends Specification{
 
-    final String title = "Fan Club: Collin College Guitar Studies"
 
-    @Rule TestName name
+    @Rule TestName header
 
     def "ServiceMock"() {
-        println "entering '$name.methodName'"
+        println "entering '$header.methodName'"
         HeaderController hc = new HeaderController()
         def whatAmI = hc.serviceMock()
         expect:
@@ -28,4 +27,7 @@ class HeaderControllerTest extends Specification{
         "Kirk"   | 4
         "Scotty" | 6
     }
+
+    final String title = "Fan Club: Collin College Guitar Studies"
+
 }
