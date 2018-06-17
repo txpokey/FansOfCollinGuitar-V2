@@ -8,6 +8,7 @@ classes/
 *Db.properties
 *Db.script
 .DS_Store
+dist/
 .git/
 .gitKeep
 .gradle/
@@ -31,6 +32,7 @@ stacktrace.log
 .touchFile
 target/
 target-eclipse/
+tmp/
 web-app/plugins/
 web-app/WEB-INF/classes
 /*.zip
