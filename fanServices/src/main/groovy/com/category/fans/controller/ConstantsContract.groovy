@@ -6,6 +6,13 @@ interface ConstantsContract{
     String footerJsonLocation = "/home/mak/var/work/project/punisher/edu.collin/dev.collin/angularFanClub/fanServices/src/main/resources/assets/json/footer-controller.json"
 
 }
+
+interface ConstantsLocatingJsonContract{
+
+    String headerJsonLocation = "/home/mak/var/work/project/punisher/edu.collin/dev.collin/angularFanClub/fanServices/src/main/resources/assets/json/header-controller.json"
+    String footerJsonLocation = "/home/mak/var/work/project/punisher/edu.collin/dev.collin/angularFanClub/fanServices/src/main/resources/assets/json/footer-controller.json"
+
+}
 interface CrossOriginContract{
     String CROSS_SITE_ORIGIN = CROSS_SITE_ORIGIN_NG_SERVE
     String CROSS_SITE_ORIGIN_NG_SERVE = "http://localhost:4200"

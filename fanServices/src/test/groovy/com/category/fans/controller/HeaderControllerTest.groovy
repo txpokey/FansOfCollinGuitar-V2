@@ -4,7 +4,6 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.junit.runner.RunWith
 import org.springframework.http.MediaType
-import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests
 import org.springframework.test.context.web.WebAppConfiguration
@@ -17,12 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @Test
-@RunWith(SpringRunner.class)
-@WebAppConfiguration
-//@ContextConfiguration
-class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
+class HeaderControllerTest {
     public void smokeTestViaStandaloneSetup() {
-        assert applicationContext
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new HeaderController(constructHeaderTestData()))
                 .defaultRequest(get("/fans/header"))
                 .alwaysExpect(status().isOk())
@@ -49,6 +44,6 @@ class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
         [new HeaderDetail("myLabel" , "angular.io")]
     }
     final String titleTestData = "Fan Club: Collin College Guitar Studies"
-    private static Log log = LogFactory.getLog(HeaderControllerTestNgTest.class)
+    private static Log log = LogFactory.getLog(HeaderControllerTest.class)
 
 }

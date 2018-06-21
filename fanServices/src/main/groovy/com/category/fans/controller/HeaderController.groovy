@@ -1,6 +1,8 @@
 package com.category.fans.controller
 
-import groovy.json.JsonSlurper
+import com.category.fans.service.HeaderContentService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -15,18 +17,19 @@ interface IHeaderConfig   {
     IHeaderConfigDetail[] targets
 }
 
-
 @RestController
 @RequestMapping("/fans")
 class HeaderController implements CrossOriginContract {
-    final String headerJsonLocation = ConstantsContract.headerJsonLocation
-
-    final static String title = "default title"
     IHeaderConfig header
+
+    @Autowired
+    private @Qualifier("headerContentService")
+    HeaderContentService service
+//    HeaderContentService service = new HeaderContentService()
 
     @GetMapping("header")
     IHeaderConfig getHeader() {
-        header = getHeaderConfigFromAssets()
+        header = service.getContent()
     }
     IHeaderConfigDetail[] getHeaderDetails() {
         header?.targets
@@ -37,18 +40,6 @@ class HeaderController implements CrossOriginContract {
     HeaderController( IHeaderConfig header ) {
         this.header = header
     }
-    private String getDetailsFromAssetsAsJson() {
-        new File(headerJsonLocation).text
-    }
-    private IHeaderConfig getHeaderConfigFromAssets() {
-        final String fileContents = getDetailsFromAssetsAsJson()
-        final def asJson =  new JsonSlurper().parseText(fileContents)
-
-        final Map<String,String>[] detailsAsArrayOfMaps = asJson['targets']
-        def header = new Header(asJson['title'] as String)
-        def y = detailsAsArrayOfMaps.each {  Map<String,String> m -> header.add(new HeaderDetail(m)) }
-        return header
-    }
 
     String[] getRoutesNeededForCrossOriginRegistry() {
         return [ "/fans/header"]
@@ -57,8 +48,9 @@ class HeaderController implements CrossOriginContract {
 
 class Header implements IHeaderConfig{
     private static final IHeaderConfigDetail[] empty = []
+    private final static String defaultTitle = "default title"
 
-    String title = HeaderController.title
+    String title = defaultTitle
     IHeaderConfigDetail[] targets = empty
 
     Header() {}

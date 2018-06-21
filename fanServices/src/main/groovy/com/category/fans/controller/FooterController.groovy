@@ -21,7 +21,7 @@ interface IFooter{
 @RestController
 @RequestMapping("/fans")
 class FooterController implements CrossOriginContract {
-    final String footerJsonLocation = ConstantsContract.footerJsonLocation
+    final String footerJsonLocation = ConstantsLocatingJsonContract.footerJsonLocation
 
     final static String title = "default title"
     IFooter[] footer
