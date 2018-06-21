@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 interface IHeaderConfigDetail   {
-    String label ;
-    String url ;
+    String label
+    String url
 }
 
 interface IHeaderConfig   {
-    String title ;
-    IHeaderConfigDetail[] targets;
+    String title
+    IHeaderConfigDetail[] targets
 }
 
 
@@ -37,10 +37,10 @@ class HeaderController  {
     HeaderController( IHeaderConfig header ) {
         this.header = header
     }
-    String getDetailsFromAssetsAsJson() {
+    private String getDetailsFromAssetsAsJson() {
         new File(headerJsonLocation).text
     }
-    IHeaderConfig getHeaderConfigFromAssets() {
+    private IHeaderConfig getHeaderConfigFromAssets() {
         final String fileContents = getDetailsFromAssetsAsJson()
         final def asJson =  new JsonSlurper().parseText(fileContents)
 
@@ -56,15 +56,17 @@ class HeaderController  {
 }
 
 class Header implements IHeaderConfig{
-    final String title = HeaderController.title
-    IHeaderConfigDetail[] targets = []
+    private final IHeaderConfigDetail[] empty = []
+
+    String title = HeaderController.title
+    IHeaderConfigDetail[] targets = empty
 
     Header() {}
     Header(String title, IHeaderConfigDetail[] targets ) {
         this.title = title ; this.targets = targets
     }
     Header( String title ) {
-        this( title , [] )
+        this( title , empty )
     }
     void add( IHeaderConfigDetail detail ) {
         targets += detail
