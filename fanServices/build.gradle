@@ -21,7 +21,8 @@ apply plugin: 'io.spring.dependency-management'
 version 'unspecified'
 
 // Define the main class for the application
-mainClassName = 'App'
+mainClassName = 'javial.App'
+//mainClassName = 'com.category.fans.controller.HeaderController'
 
 bootJar {
     baseName = rootProject.name
@@ -35,7 +36,11 @@ dependencies {
     compile("org.springframework.boot:spring-boot-devtools")
 
     // Use the latest Groovy version for building this library
-    compile 'org.codehaus.groovy:groovy-all:2.4.15'
+// https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all
+//    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.0-alpha-1'
+    // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.15'
+
 
     // Use the awesome Spock testing and specification framework
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'

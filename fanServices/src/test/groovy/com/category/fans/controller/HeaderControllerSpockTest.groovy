@@ -11,13 +11,13 @@ class HeaderControllerSpockTest extends Specification{
 
     def "getHeader smoke test"() {
         when:
-            println "entering '$header.methodName'"
-         HeaderController hc = new HeaderController(constructHeaderTestData())
-            def whatAmI = hc.getHeader()
-            def whatAmIGroovy = hc.header
+        println "entering '$header.methodName'"
+        HeaderController hc = new HeaderController(constructHeaderTestData())
+        def whatAmI = hc.getHeader()
+        def whatAmIGroovy = hc.header
         then:
-            whatAmI != null
-            whatAmI == whatAmIGroovy
+        whatAmI != null
+        whatAmI == whatAmIGroovy
         with(whatAmI) {
             titleTestData == title
             null != targets

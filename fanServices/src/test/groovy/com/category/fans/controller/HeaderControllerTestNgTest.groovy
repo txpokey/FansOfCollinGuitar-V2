@@ -26,11 +26,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private WebApplicationContext wac // NOT NEEDED for standaloneSetup
-    @Autowired MockHttpServletRequest request // NOT NEEDED for standaloneSetup
+//    @Autowired MockHttpServletRequest request // NOT NEEDED for standaloneSetup
 
     public void smokeTestViaStandaloneSetup() {
         assert applicationContext
-        assert request
+//        assert request
         assert wac
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new HeaderController(constructHeaderTestData()))
                 .defaultRequest(get("/fans/header"))
@@ -42,6 +42,12 @@ class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
         assert WAT
         log.debug("applicationContext:> " + applicationContext.properties )
         log.debug("HERE")
+    }
+
+    public void fileReading() {
+        def headerStub = new HeaderController(constructHeaderTestData())
+        def fetchOutcome = headerStub.getDetailsFromAssetsAsJson()
+        assert fetchOutcome
     }
 
     IHeaderConfig constructHeaderTestData() {

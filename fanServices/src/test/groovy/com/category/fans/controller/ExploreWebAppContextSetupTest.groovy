@@ -3,11 +3,11 @@ package com.category.fans.controller
 import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.mock.web.MockHttpServletRequest
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests
 import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
@@ -17,15 +17,14 @@ import org.testng.annotations.Test
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests
 //org.springframework.boot.test.autoconfigure.web.servlet
 
 @Test
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
+@ContextConfiguration
 //@WebMvcTest(controllers = HeaderController.class, secure = false)
 //@SpringBootTest(classes = HeaderController.class)
-
 class ExploreWebAppContextSetupTest extends AbstractTestNGSpringContextTests{
 //class ExploreWebAppContextSetupTest {
 
@@ -45,7 +44,7 @@ class ExploreWebAppContextSetupTest extends AbstractTestNGSpringContextTests{
      */
     public void smokeTestViaWebAppContextSetup() {
         assert applicationContext
-        assert request
+//        assert request
         assert wac
 //        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build()
 //        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new HeaderController(constructHeaderTestData())).build()
