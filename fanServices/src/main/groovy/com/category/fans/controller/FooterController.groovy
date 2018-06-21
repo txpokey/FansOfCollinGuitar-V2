@@ -1,7 +1,6 @@
 package com.category.fans.controller
 
 import groovy.json.JsonSlurper
-import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -22,7 +21,7 @@ interface IFooter{
 @RestController
 @RequestMapping("/fans")
 class FooterController{
-    final String footerJsonLocation = Constants.footerJsonLocation
+    final String footerJsonLocation = ConstantsContract.footerJsonLocation
 
 
     final static String title = "default title"
@@ -30,7 +29,6 @@ class FooterController{
 
     FooterController() {}
 
-//    @CrossOrigin(origins = Constants.CROSS_SITE_ORIGIN)
     @GetMapping("footer")
     IFooter[] getFooter() {
         footer = getFooterArrayFromAssetsAsJson()
@@ -62,6 +60,9 @@ class FooterController{
         def footer = new Footer(label, runtime)
         def y = detailsAsArrayOfMaps.each { Map<String, String> m -> footer.add(new FooterDetail(m)) }
         return footer
+    }
+    static String[] getRoutesNeededForCrossOriginRegistry() {
+        return [ "/fans/footer"]
     }
 }
 

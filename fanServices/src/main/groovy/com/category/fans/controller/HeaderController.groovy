@@ -1,7 +1,6 @@
 package com.category.fans.controller
 
 import groovy.json.JsonSlurper
-import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -19,13 +18,12 @@ interface IHeaderConfig   {
 
 @RestController
 @RequestMapping("/fans")
-class HeaderController{
-    final String headerJsonLocation = Constants.headerJsonLocation
+class HeaderController  {
+    final String headerJsonLocation = ConstantsContract.headerJsonLocation
 
     final static String title = "default title"
     IHeaderConfig header
 
-//    @CrossOrigin(origins = Constants.CROSS_SITE_ORIGIN)
     @GetMapping("header")
     IHeaderConfig getHeader() {
         header = getHeaderConfigFromAssets()
@@ -50,6 +48,10 @@ class HeaderController{
         def header = new Header(asJson['title'] as String)
         def y = detailsAsArrayOfMaps.each {  Map<String,String> m -> header.add(new HeaderDetail(m)) }
         return header
+    }
+
+    static String[] getRoutesNeededForCrossOriginRegistry() {
+        return [ "/fans/header"]
     }
 }
 
