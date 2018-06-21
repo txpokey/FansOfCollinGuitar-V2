@@ -7,7 +7,8 @@ import {
 } from "../../services/file-as-source-for-json/file-as-source-for-json.service";
 
 const carouselSlideDeck = [0, 1, 2];
-const setupUri  = "/assets/json/header-controller.json" ;
+// const setupUri  = "/assets/json/header-controller.json" ;
+const setupUri  = "http://localhost:8080/fans/header" ;
 
 @Component({
   selector: 'guitar-header',

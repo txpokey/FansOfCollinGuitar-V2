@@ -1,6 +1,7 @@
 package com.category.fans.controller
 
 import groovy.json.JsonSlurper
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -25,6 +26,7 @@ class HeaderController{
     final static String title = "default title"
     IHeaderConfig header
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("header")
     IHeaderConfig getHeader() {
         header = getHeaderConfigFromAssets()
