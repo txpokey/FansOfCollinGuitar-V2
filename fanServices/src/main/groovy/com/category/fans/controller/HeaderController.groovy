@@ -18,7 +18,7 @@ interface IHeaderConfig   {
 
 @RestController
 @RequestMapping("/fans")
-class HeaderController  {
+class HeaderController implements CrossOriginContract {
     final String headerJsonLocation = ConstantsContract.headerJsonLocation
 
     final static String title = "default title"
@@ -50,13 +50,13 @@ class HeaderController  {
         return header
     }
 
-    static String[] getRoutesNeededForCrossOriginRegistry() {
+    String[] getRoutesNeededForCrossOriginRegistry() {
         return [ "/fans/header"]
     }
 }
 
 class Header implements IHeaderConfig{
-    private final IHeaderConfigDetail[] empty = []
+    private static final IHeaderConfigDetail[] empty = []
 
     String title = HeaderController.title
     IHeaderConfigDetail[] targets = empty

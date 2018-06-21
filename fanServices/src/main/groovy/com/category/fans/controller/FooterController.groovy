@@ -20,9 +20,8 @@ interface IFooter{
 
 @RestController
 @RequestMapping("/fans")
-class FooterController{
+class FooterController implements CrossOriginContract {
     final String footerJsonLocation = ConstantsContract.footerJsonLocation
-
 
     final static String title = "default title"
     IFooter[] footer
@@ -42,7 +41,7 @@ class FooterController{
         new File(footerJsonLocation).text
     }
 
-    IFooter[] getFooterArrayFromAssetsAsJson() {
+    private IFooter[] getFooterArrayFromAssetsAsJson() {
         final String fileContents = getFooterFromAssetsAsJson()
         final def fromJson = new JsonSlurper().parseText(fileContents)
 
@@ -53,7 +52,7 @@ class FooterController{
         return candidate
     }
 
-    IFooter getFooterArrayFromAssetsAsJson(Map<String, String> fromJson) {
+    private IFooter getFooterArrayFromAssetsAsJson(Map<String, String> fromJson) {
         final Map<String, String>[] detailsAsArrayOfMaps = fromJson['payload']
         final label = fromJson['label'] as String
         final runtime = fromJson['runtime'] as String[]
@@ -61,7 +60,7 @@ class FooterController{
         def y = detailsAsArrayOfMaps.each { Map<String, String> m -> footer.add(new FooterDetail(m)) }
         return footer
     }
-    static String[] getRoutesNeededForCrossOriginRegistry() {
+    String[] getRoutesNeededForCrossOriginRegistry() {
         return [ "/fans/footer"]
     }
 }
