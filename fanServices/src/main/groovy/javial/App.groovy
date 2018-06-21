@@ -1,7 +1,12 @@
 package javial
 
+import com.category.fans.controller.Constants
+import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Controller
 public class App{
@@ -20,5 +25,15 @@ public class App{
      */
     static void main(String[] args) {
         println new App().greeting
+    }
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/fans/header").allowedOrigins(Constants.CROSS_SITE_ORIGIN)
+                registry.addMapping("/fans/footer").allowedOrigins(Constants.CROSS_SITE_ORIGIN)
+            }
+        };
     }
 } 

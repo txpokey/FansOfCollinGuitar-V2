@@ -20,13 +20,12 @@ interface IHeaderConfig   {
 @RestController
 @RequestMapping("/fans")
 class HeaderController{
-    final String headerJsonLocation = "/home/mak/var/work/project/punisher/edu.collin/dev" +
-            ".collin/angularFanClub/fanServices/src/main/resources/assets/json/header-controller.json"
+    final String headerJsonLocation = Constants.headerJsonLocation
 
     final static String title = "default title"
     IHeaderConfig header
 
-    @CrossOrigin(origins = "http://localhost:4200")
+//    @CrossOrigin(origins = Constants.CROSS_SITE_ORIGIN)
     @GetMapping("header")
     IHeaderConfig getHeader() {
         header = getHeaderConfigFromAssets()

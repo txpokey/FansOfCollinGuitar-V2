@@ -7,7 +7,8 @@ import {
 } from "../../services/file-as-source-for-json/file-as-source-for-json.service";
 
 const EMPTY_URL = '#0' ;
-const setupUri  = "/assets/json/footer-controller.json" ;
+// const setupUri  = "/assets/json/footer-controller.json" ;
+const setupUri  = "http://localhost:8080/fans/footer" ;
 
 @Component({
   selector: 'guitar-footer',

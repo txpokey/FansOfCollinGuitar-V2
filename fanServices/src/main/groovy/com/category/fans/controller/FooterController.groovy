@@ -1,6 +1,7 @@
 package com.category.fans.controller
 
 import groovy.json.JsonSlurper
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -17,27 +18,19 @@ interface IFooter{
     String[] runtime
     IFooterDetail[] payload
 }
-//"label": "Guitar Studies Social Media Contacts",
-//"runtime" : [ "guitar-dept-display-flex-column", "guitar-dept-display-flex-nowrap"],
-//"payload": [
-//        {
-//            "label": "Faculty",
-//            "icon" : "fa fa-graduation-cap",
-//            "logo" : "#0",
-//            "url": "mailto:fvera@collin.edu"
-//        },
 
 @RestController
 @RequestMapping("/fans")
 class FooterController{
-    final String footerJsonLocation = "/home/mak/var/work/project/punisher/edu.collin/dev" +
-            ".collin/angularFanClub/fanServices/src/main/resources/assets/json/footer-controller.json"
+    final String footerJsonLocation = Constants.footerJsonLocation
+
 
     final static String title = "default title"
     IFooter[] footer
 
     FooterController() {}
 
+//    @CrossOrigin(origins = Constants.CROSS_SITE_ORIGIN)
     @GetMapping("footer")
     IFooter[] getFooter() {
         footer = getFooterArrayFromAssetsAsJson()
@@ -59,11 +52,6 @@ class FooterController{
         fromJson.each {
             arrayElement -> candidate += getFooterArrayFromAssetsAsJson(arrayElement)
         }
-//
-//        final Map<String,String>[] detailsAsArrayOfMaps = asJson['payload']
-//        def footer = new Footer(asJson['title'] as String)
-//        def y = detailsAsArrayOfMaps.each {  Map<String,String> m -> footer.add(new FooterDetail(m)) }
-//        return footer
         return candidate
     }
 
