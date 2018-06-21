@@ -1,6 +1,8 @@
 package com.category.fans.controller
 
-import groovy.json.JsonSlurper
+import com.category.fans.service.FooterContentService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -21,52 +23,31 @@ interface IFooter{
 @RestController
 @RequestMapping("/fans")
 class FooterController implements CrossOriginContract {
-    final String footerJsonLocation = ConstantsLocatingJsonContract.footerJsonLocation
-
-    final static String title = "default title"
     IFooter[] footer
+    @Autowired
+    private @Qualifier("footerContentService")
+    FooterContentService service
 
     FooterController() {}
 
     @GetMapping("footer")
     IFooter[] getFooter() {
-        footer = getFooterArrayFromAssetsAsJson()
+        footer = service.getContent()
     }
 
     FooterController(IFooter footer) {
         this.footer = footer
     }
 
-    String getFooterFromAssetsAsJson() {
-        new File(footerJsonLocation).text
-    }
-
-    private IFooter[] getFooterArrayFromAssetsAsJson() {
-        final String fileContents = getFooterFromAssetsAsJson()
-        final def fromJson = new JsonSlurper().parseText(fileContents)
-
-        IFooter[] candidate = []
-        fromJson.each {
-            arrayElement -> candidate += getFooterArrayFromAssetsAsJson(arrayElement)
-        }
-        return candidate
-    }
-
-    private IFooter getFooterArrayFromAssetsAsJson(Map<String, String> fromJson) {
-        final Map<String, String>[] detailsAsArrayOfMaps = fromJson['payload']
-        final label = fromJson['label'] as String
-        final runtime = fromJson['runtime'] as String[]
-        def footer = new Footer(label, runtime)
-        def y = detailsAsArrayOfMaps.each { Map<String, String> m -> footer.add(new FooterDetail(m)) }
-        return footer
-    }
     String[] getRoutesNeededForCrossOriginRegistry() {
         return [ "/fans/footer"]
     }
 }
 
 class Footer implements IFooter{
-    final String label = FooterController.title
+    private final static String defaultTitle = "default title"
+
+    String label = defaultTitle
     final String[] runtime
     IFooterDetail[] payload = []
 

@@ -1,24 +1,24 @@
 package com.category.fans.service
 
-import com.category.fans.controller.ConstantsLocatingJsonContract
 import com.category.fans.controller.Header
 import com.category.fans.controller.HeaderDetail
 import com.category.fans.controller.IHeaderConfig
 import groovy.json.JsonSlurper
 import org.springframework.stereotype.Service
 
+import static com.category.fans.controller.ConstantsLocatingJsonContract.headerJsonLocation as jsonLocation
+
 @Service(value = "headerContentService")
 class HeaderContentService{
-    final String headerJsonLocation = ConstantsLocatingJsonContract.headerJsonLocation
 
     HeaderContentService() {
-        assert headerJsonLocation
+        assert jsonLocation
     }
     IHeaderConfig getContent() {
         getHeaderConfigFromAssets()
     }
     private String getContentFromAssetsAsJson() {
-        new File(headerJsonLocation).text
+        new File(jsonLocation).text
     }
     private IHeaderConfig getHeaderConfigFromAssets() {
         final String fileContents = getContentFromAssetsAsJson()
