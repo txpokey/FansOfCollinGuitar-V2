@@ -23,24 +23,22 @@ class HeaderController implements CrossOriginContract {
     IHeaderConfig header
 
     @Autowired
-    private @Qualifier("headerContentService")
+    private  @Qualifier("headerContentService")
     HeaderContentService service
-//    HeaderContentService service = new HeaderContentService()
 
     @GetMapping("header")
-    IHeaderConfig getHeader() {
+    protected IHeaderConfig getHeader() {
         header = service.getContent()
     }
-    IHeaderConfigDetail[] getHeaderDetails() {
+    private IHeaderConfigDetail[] getHeaderDetails() {
         header?.targets
     }
-    String getHeaderTitle() {
+    private String getHeaderTitle() {
         header?.title
     }
     HeaderController( IHeaderConfig header ) {
         this.header = header
     }
-
     String[] getRoutesNeededForCrossOriginRegistry() {
         return [ "/fans/header"]
     }

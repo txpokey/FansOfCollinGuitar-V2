@@ -1,13 +1,14 @@
 package com.category.fans.controller
 
+import com.category.fans.config.HeaderControllerConfig
+import com.category.fans.service.HeaderContentService
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
-import org.junit.runner.RunWith
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests
-import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.testng.annotations.Test
@@ -17,13 +18,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @Test
-@RunWith(SpringRunner.class)
-@WebAppConfiguration
-//@ContextConfiguration
+@ContextConfiguration( classes = [HeaderControllerConfig.class])
 class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
+    @Autowired
+    private @Qualifier("headerContentService")
+    HeaderContentService serviceFromTestHarness
+
     public void smokeTestViaStandaloneSetup() {
         assert applicationContext
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new HeaderController(constructHeaderTestData()))
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(pizzaStuffing())
                 .defaultRequest(get("/fans/header"))
                 .alwaysExpect(status().isOk())
                 .alwaysExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -36,9 +39,18 @@ class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
     }
 
     public void fileReading() {
-        def headerStub = new HeaderController(constructHeaderTestData())
-        def fetchOutcome = headerStub.getDetailsFromAssetsAsJson()
+        def headerStub = pizzaStuffing()
+        def fetchOutcome = headerStub.getHeader()
         assert fetchOutcome
+    }
+
+    private HeaderController pizzaStuffing() {
+        def headerStub = new HeaderController(constructHeaderTestData()){
+            @Override
+            IHeaderConfig getHeader() {
+                serviceFromTestHarness.getContent()
+            }
+        }
     }
 
     IHeaderConfig constructHeaderTestData() {
@@ -52,3 +64,8 @@ class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
     private static Log log = LogFactory.getLog(HeaderControllerTestNgTest.class)
 
 }
+
+//=-=-=-
+//@Test
+//@RunWith(SpringRunner.class)
+//@WebAppConfiguration
