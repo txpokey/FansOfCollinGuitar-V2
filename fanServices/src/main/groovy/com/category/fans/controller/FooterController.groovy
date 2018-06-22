@@ -28,10 +28,12 @@ class FooterController implements CrossOriginContract {
     private @Qualifier("footerContentService")
     FooterContentService service
 
-    FooterController() {}
+    FooterController() {
+
+    }
 
     @GetMapping("footer")
-    IFooter[] getFooter() {
+    protected IFooter[] getFooter() {
         footer = service.getContent()
     }
 

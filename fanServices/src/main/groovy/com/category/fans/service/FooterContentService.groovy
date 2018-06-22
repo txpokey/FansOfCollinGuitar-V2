@@ -12,24 +12,24 @@ import static com.category.fans.controller.ConstantsLocatingJsonContract.footerJ
 class FooterContentService{
 
     IFooter[] getContent() {
-        getFooterArrayFromAssetsAsJson()
+        getFooterArrayByConvertingFromJson()
     }
     private String getFooterFromAssetsAsJson() {
         new File(jsonLocation).text
     }
 
-    private IFooter[] getFooterArrayFromAssetsAsJson() {
+    private IFooter[] getFooterArrayByConvertingFromJson() {
         final String fileContents = getFooterFromAssetsAsJson()
         final def fromJson = new JsonSlurper().parseText(fileContents)
 
         IFooter[] candidate = []
         fromJson.each {
-            arrayElement -> candidate += getFooterArrayFromAssetsAsJson(arrayElement)
+            arrayElement -> candidate += getFooterArrayByConvertingFromJson(arrayElement)
         }
         return candidate
     }
 
-    private IFooter getFooterArrayFromAssetsAsJson(Map<String, String> fromJson) {
+    private IFooter getFooterArrayByConvertingFromJson(Map<String, String> fromJson) {
         final Map<String, String>[] detailsAsArrayOfMaps = fromJson['payload']
         final label = fromJson['label'] as String
         final runtime = fromJson['runtime'] as String[]

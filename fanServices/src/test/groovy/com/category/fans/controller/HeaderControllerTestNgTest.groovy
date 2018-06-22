@@ -1,6 +1,6 @@
 package com.category.fans.controller
 
-import com.category.fans.config.HeaderControllerConfig
+import com.category.fans.config.FeaturesConfig
 import com.category.fans.service.HeaderContentService
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @Test
-@ContextConfiguration( classes = [HeaderControllerConfig.class])
+@ContextConfiguration( classes = [FeaturesConfig.class])
 class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private @Qualifier("headerContentService")

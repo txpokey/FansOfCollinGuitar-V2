@@ -1,22 +1,31 @@
-package com.category.fans.controller;
+package com.category.fans.controller
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.testng.annotations.Test;
+import com.category.fans.config.FeaturesConfig
+import com.category.fans.service.FooterContentService
+import org.apache.commons.logging.Log
+import org.apache.commons.logging.LogFactory
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.http.MediaType
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests
+import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import org.testng.annotations.Test
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.testng.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-public class FooterControllerTest {
+@Test
+@ContextConfiguration( classes = [FeaturesConfig.class])
+public class FooterControllerTest  extends AbstractTestNGSpringContextTests {
+    @Autowired
+    private @Qualifier("footerContentService")
+    FooterContentService serviceFromTestHarness
 
-    @Test
     public void testGetFooterArrayFromAssetsAsJson() {
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new FooterController())
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(pizzaStuffing())
                 .defaultRequest(get("/fans/footer"))
                 .alwaysExpect(status().isOk())
                 .alwaysExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -26,9 +35,18 @@ public class FooterControllerTest {
         assert WAT
         log.debug("HERE")
     }
-
-    @Test
-    public void testGetFooterArrayFromAssetsAsJson1() {
+    public void fileReading() {
+        def workAround = pizzaStuffing()
+        def fetchOutcome = workAround.getFooter()
+        assert fetchOutcome
+    }
+    private FooterController pizzaStuffing() {
+        def workAround = new FooterController(){
+            @Override
+            IFooter[] getFooter() {
+                serviceFromTestHarness.getContent()
+            }
+        }
     }
 
     private static Log log = LogFactory.getLog(FooterControllerTest.class)
