@@ -43,7 +43,10 @@ class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
         def fetchOutcome = headerStub.getHeader()
         assert fetchOutcome
     }
-
+    /**
+     * work around because test harness not injecting service into controller
+     * @return
+     */
     private HeaderController pizzaStuffing() {
         def headerStub = new HeaderController(constructHeaderTestData()){
             @Override

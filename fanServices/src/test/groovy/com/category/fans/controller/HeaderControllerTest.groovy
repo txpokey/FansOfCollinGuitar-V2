@@ -1,5 +1,6 @@
 package com.category.fans.controller
 
+import com.category.fans.service.HeaderContentService
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.junit.runner.RunWith
@@ -18,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Test
 class HeaderControllerTest {
     public void smokeTestViaStandaloneSetup() {
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new HeaderController(constructHeaderTestData()))
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(pizzaStuffing())
                 .defaultRequest(get("/fans/header"))
                 .alwaysExpect(status().isOk())
                 .alwaysExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -26,13 +27,12 @@ class HeaderControllerTest {
         assert mockMvc
         def WAT = mockMvc.perform(get("/fans/header"))
         assert WAT
-        log.debug("applicationContext:> " + applicationContext.properties )
         log.debug("HERE")
     }
 
     public void fileReading() {
-        def headerStub = new HeaderController(constructHeaderTestData())
-        def fetchOutcome = headerStub.getDetailsFromAssetsAsJson()
+        def headerStub = pizzaStuffing()
+        def fetchOutcome = headerStub.getHeader()
         assert fetchOutcome
     }
 
@@ -42,6 +42,19 @@ class HeaderControllerTest {
 
     IHeaderConfigDetail[] constructHeaderDetailsTestData() {
         [new HeaderDetail("myLabel" , "angular.io")]
+    }
+    /**
+     * work around because test harness not injecting service into controller
+     * @return
+     */
+    private HeaderController pizzaStuffing() {
+        final serviceFromTestHarness = new HeaderContentService()
+        def headerStub = new HeaderController(constructHeaderTestData()){
+            @Override
+            IHeaderConfig getHeader() {
+                serviceFromTestHarness.getContent()
+            }
+        }
     }
     final String titleTestData = "Fan Club: Collin College Guitar Studies"
     private static Log log = LogFactory.getLog(HeaderControllerTest.class)
