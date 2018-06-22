@@ -2,8 +2,6 @@ package com.category.fans.controller
 
 interface ConstantsContract{
 
-    String headerJsonLocation = "/home/mak/var/work/project/punisher/edu.collin/dev.collin/angularFanClub/fanServices/src/main/resources/assets/json/header-controller.json"
-    String footerJsonLocation = "/home/mak/var/work/project/punisher/edu.collin/dev.collin/angularFanClub/fanServices/src/main/resources/assets/json/footer-controller.json"
 
 }
 
