@@ -17,45 +17,45 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @Test
-class HeaderControllerTest {
-    public void smokeTestViaStandaloneSetup() {
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(pizzaStuffing())
-                .defaultRequest(get("/fans/header"))
-                .alwaysExpect(status().isOk())
-                .alwaysExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .build()
-        assert mockMvc
-        def WAT = mockMvc.perform(get("/fans/header"))
-        assert WAT
-        log.debug("HERE")
-    }
-
-    public void fileReading() {
-        def headerStub = pizzaStuffing()
-        def fetchOutcome = headerStub.getHeader()
-        assert fetchOutcome
-    }
-
-    IHeaderConfig constructHeaderTestData() {
-        new Header( titleTestData ,constructHeaderDetailsTestData())
-    }
-
-    IHeaderConfigDetail[] constructHeaderDetailsTestData() {
-        [new HeaderDetail("myLabel" , "angular.io")]
-    }
-    /**
-     * work around because test harness not injecting service into controller
-     * @return
-     */
-    private HeaderController pizzaStuffing() {
-        final serviceFromTestHarness = new HeaderContentService()
-        def headerStub = new HeaderController(constructHeaderTestData()){
-            @Override
-            IHeaderConfig getHeader() {
-                serviceFromTestHarness.getContent()
-            }
-        }
-    }
+class HeaderControllerTest {  // TODO : delete this test code altogether, noit correctly testNG set up
+//    public void smokeTestViaStandaloneSetup() {
+//        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(pizzaStuffing())
+//                .defaultRequest(get("/fans/header"))
+//                .alwaysExpect(status().isOk())
+//                .alwaysExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+//                .build()
+//        assert mockMvc
+//        def WAT = mockMvc.perform(get("/fans/header"))
+//        assert WAT
+//        log.debug("HERE")
+//    }
+//
+//    public void fileReading() {
+//        def headerStub = pizzaStuffing()
+//        def fetchOutcome = headerStub.getHeader()
+//        assert fetchOutcome
+//    }
+//
+//    IHeaderConfig constructHeaderTestData() {
+//        new Header( titleTestData ,constructHeaderDetailsTestData())
+//    }
+//
+//    IHeaderConfigDetail[] constructHeaderDetailsTestData() {
+//        [new HeaderDetail("myLabel" , "angular.io")]
+//    }
+//    /**
+//     * work around because test harness not injecting service into controller
+//     * @return
+//     */
+//    private HeaderController pizzaStuffing() {
+//        final serviceFromTestHarness = new HeaderContentService()
+//        def headerStub = new HeaderController(constructHeaderTestData()){
+//            @Override
+//            IHeaderConfig getHeader() {
+//                serviceFromTestHarness.getContent()
+//            }
+//        }
+//    }
     final String titleTestData = "Fan Club: Collin College Guitar Studies"
     private static Log log = LogFactory.getLog(HeaderControllerTest.class)
 

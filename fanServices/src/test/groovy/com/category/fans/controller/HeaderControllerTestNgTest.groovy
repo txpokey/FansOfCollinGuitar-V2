@@ -19,6 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Test
 @ContextConfiguration( classes = [FeaturesConfig.class])
+// TODO : fix test service injection with profile
 class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private @Qualifier("headerContentService")

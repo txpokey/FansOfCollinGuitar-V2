@@ -1,27 +1,28 @@
-//plugins {
-//    id 'groovy'
-//}
+
 buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
     }
 }
 
 plugins {
+    id 'org.springframework.boot' version '2.0.5.RELEASE'
 }
 
 apply plugin: 'groovy'
 apply plugin: 'application'
 apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
+//apply plugin: 'org.springframework.boot'
+//apply plugin: 'spring-boot'
+
 apply plugin: 'io.spring.dependency-management'
 version 'unspecified'
 
 // Define the main class for the application
-mainClassName = 'javial.App'
+//mainClassName = 'javial.App'
 //mainClassName = 'com.category.fans.controller.HeaderController'
 
 bootJar {
@@ -31,6 +32,9 @@ bootJar {
         from "./META-INF/resources"
     }
 }
+//bootRepackage {
+//    mainClass = 'demo.Application'
+//}
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-devtools")

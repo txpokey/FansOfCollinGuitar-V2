@@ -19,8 +19,8 @@ interface IHeaderConfig   {
 
 @RestController
 @RequestMapping("/fans")
-class HeaderController implements CrossOriginContract {
-    IHeaderConfig header
+class HeaderController implements CrossOriginContract { // TODO: get rid of non-default construtor
+//    private IHeaderConfig header
 
     @Autowired
     private  @Qualifier("headerContentService")
@@ -28,7 +28,7 @@ class HeaderController implements CrossOriginContract {
 
     @GetMapping("header")
     protected IHeaderConfig getHeader() {
-        header = service.getContent()
+        final def header = service.getContent()
     }
     private IHeaderConfigDetail[] getHeaderDetails() {
         header?.targets
@@ -36,9 +36,9 @@ class HeaderController implements CrossOriginContract {
     private String getHeaderTitle() {
         header?.title
     }
-    HeaderController( IHeaderConfig header ) {
-        this.header = header
-    }
+//    HeaderController( IHeaderConfig header ) {
+//        this.header = header
+//    }
     String[] getRoutesNeededForCrossOriginRegistry() {
         return [ "/fans/header"]
     }
