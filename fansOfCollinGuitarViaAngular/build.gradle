@@ -1,12 +1,7 @@
+
 buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
+    rootProject.buildscript
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE")
         classpath "com.moowork.gradle:gradle-node-plugin:0.12"
         classpath "de.richsource.gradle.plugins:typescript-gradle-plugin:1.8.0"
     }
@@ -17,16 +12,9 @@ plugins {
     id "de.richsource.gradle.plugins.typescript" version "1.8.0"
 }
 
-apply plugin: 'groovy'
-apply plugin: 'application'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.moowork.node'
 apply plugin: 'de.richsource.gradle.plugins.typescript'
 
-// Define the main class for the application
-mainClassName = 'App'
 import com.moowork.gradle.node.NodeExtension
 import com.moowork.gradle.node.variant.VariantBuilder
 
@@ -50,18 +38,4 @@ bootJar {
         from "./META-INF/resources"
     }
 }
-dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-devtools")
 
-    // Use the latest Groovy version for building this library
-    compile 'org.codehaus.groovy:groovy-all:2.4.15'
-
-    // Use the awesome Spock testing and specification framework
-    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
-}
-
-repositories {
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
-}
