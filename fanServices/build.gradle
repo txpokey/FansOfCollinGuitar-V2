@@ -35,6 +35,8 @@ bootJar {
 //bootRepackage {
 //    mainClass = 'demo.Application'
 //}
+ext['groovy.version'] = '2.5.2' // need for compile groovy to pick up groovy fix
+
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-devtools")
@@ -43,7 +45,7 @@ dependencies {
 // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all
 //    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.0-alpha-1'
     // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all
-    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.15'
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.5.2'
 
 
     // Use the awesome Spock testing and specification framework
