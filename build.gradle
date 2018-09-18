@@ -23,7 +23,7 @@ allprojects {
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
-    version 'unspecified'
+//    version 'unspecified'
 
     repositories {
         mavenCentral()
@@ -33,23 +33,18 @@ allprojects {
     dependencies {
         compile('org.codehaus.groovy:groovy-all')
         compile('org.codehaus.groovy:groovy-templates')
-//        compile('org.webjars:webjars-locator')
-        compile group: 'org.webjars', name: 'webjars-locator', version: '0.34'
-        compile('org.webjars:bootstrap')
         compile('org.springframework.boot:spring-boot-starter-web')
-        testCompile('org.springframework.boot:spring-boot-starter-test')
+        // -------------------------------------------
+        compile("org.webjars:angularjs:${angularJsVersion}")
+        compile("org.webjars:bootstrap:${latestReleaseProperty}")
+        compile("org.webjars:webjars-locator:${latestReleaseProperty}")
+        // -------------------------------------------
         runtime('org.springframework.boot:spring-boot-devtools')
-        //-=-=-
-        compile("org.webjars:angularjs:${angularJsVersion}")
-        compile("org.webjars:bootstrap:${bootstrapJsVersion}")
         compile('org.springframework.boot:spring-boot-starter-actuator')
-        runtime('com.h2database:h2')
-        // -------------------------------------------
-
-        // -------------------------------------------
-        compile("org.webjars:angularjs:${angularJsVersion}")
+        testCompile('org.springframework.boot:spring-boot-starter-test')
         testCompile("org.spockframework:spock-core:${spockVersion}")
         testCompile("org.testng:testng:${testNgVersion}")
+        runtime('com.h2database:h2')
     }
 }
 
