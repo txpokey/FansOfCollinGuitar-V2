@@ -1,29 +1,6 @@
-
 buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
-    }
+    rootProject.buildscript
 }
-
-plugins {
-    id 'org.springframework.boot' version '2.0.5.RELEASE'
-}
-
-apply plugin: 'groovy'
-apply plugin: 'application'
-apply plugin: 'idea'
-//apply plugin: 'org.springframework.boot'
-//apply plugin: 'spring-boot'
-
-apply plugin: 'io.spring.dependency-management'
-version 'unspecified'
-
-// Define the main class for the application
-//mainClassName = 'javial.App'
-//mainClassName = 'com.category.fans.controller.HeaderController'
 
 bootJar {
     baseName = rootProject.name
@@ -32,40 +9,11 @@ bootJar {
         from "./META-INF/resources"
     }
 }
-//bootRepackage {
-//    mainClass = 'demo.Application'
-//}
-ext['groovy.version'] = '2.5.2' // need for compile groovy to pick up groovy fix
 
-dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-devtools")
-
-    // Use the latest Groovy version for building this library
-// https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all
-//    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.0-alpha-1'
-    // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all
-    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.5.2'
-
-
-    // Use the awesome Spock testing and specification framework
-    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    // https://mvnrepository.com/artifact/org.testng/testng
-    testCompile group: 'org.testng', name: 'testng', version: '6.14.2'
-
-// https://mvnrepository.com/artifact/org.mockito/mockito-core
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.17.0'
-    // https://mvnrepository.com/artifact/org.springframework/spring-test
-    testCompile group: 'org.springframework', name: 'spring-test', version: '5.0.7.RELEASE'
-// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
-    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.0.3.RELEASE'
-
+springBoot {
+//    mainClassName = 'com.category.fans.App'
 }
-
-repositories {
-//    mavenCentral()
-
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+dependencies {
+    compile group: 'org.webjars', name: 'webjars-locator', version: '0.34'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.17.0'
 }
