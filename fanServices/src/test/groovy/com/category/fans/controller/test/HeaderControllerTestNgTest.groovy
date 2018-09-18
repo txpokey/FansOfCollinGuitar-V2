@@ -42,25 +42,25 @@ class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
         assert footerContentService
     }
 
+    void fileReading() {
+        readHeaderContent()
+        readFooterContent()
+    }
+
     void smokeTestViaStandaloneSetup() {
         assert applicationContext
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(pizzaStuffing())
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(headerController)
                 .defaultRequest(get("/fans/header"))
                 .alwaysExpect(status().isOk())
                 .alwaysExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .build()
         assert mockMvc
         def WAT = mockMvc.perform(get("/fans/header"))
-        assert WAT
+        assert WAT // TODO: need to confirm header content
         log.debug("applicationContext:> " + applicationContext.properties )
         log.debug("HERE")
     }
 
-    void fileReading() {
-        readHeaderContent()
-        readFooterContent()
-        readPizzaStuffing()
-    }
 
     private void readFooterContent() {
         def footerContent = footerContentService.getContent()
@@ -71,32 +71,6 @@ class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
         assert footerContent
     }
 
-    private void readPizzaStuffing() {
-        def headerStub = pizzaStuffing()
-        def fetchOutcome = headerStub.getHeader()
-        assert fetchOutcome
-    }
-    /**
-     * work around because test harness not injecting service into controller
-     * @return
-     */
-    private HeaderController pizzaStuffing() {
-//        def headerStub = new HeaderController(constructHeaderTestData()){
-        def headerStub = new HeaderController(){
-            @Override
-            IHeaderConfig getHeader() {
-                headerContentService.getContent()
-            }
-        }
-    }
-
-    IHeaderConfig constructHeaderTestData() {
-        new Header( titleTestData ,constructHeaderDetailsTestData())
-    }
-
-    IHeaderConfigDetail[] constructHeaderDetailsTestData() {
-        [new HeaderDetail("myLabel" , "angular.io")]
-    }
     final String titleTestData = "Fan Club: Collin College Guitar Studies"
     private static Log log = LogFactory.getLog(HeaderControllerTestNgTest.class)
 
