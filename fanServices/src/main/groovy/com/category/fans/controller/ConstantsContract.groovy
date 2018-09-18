@@ -13,12 +13,12 @@ interface ConstantsLocatingJsonContract{
 }
 interface CrossOriginContract{
     String CROSS_SITE_ORIGIN = CROSS_SITE_ORIGIN_NG_SERVE
-    String CROSS_SITE_ORIGIN_NG_SERVE = "http://localhost:4200"
+    String CROSS_SITE_ORIGIN_NG_SERVE = "http://localhost:4200"  // TODO: replace hardcoded URL
     String[] getRoutesNeededForCrossOriginRegistry()
 }
 class Constants implements CrossOriginContract {
 
-    String[] getRoutesNeededForCrossOriginRegistry() { // TODO : why cant this be static? 
+    String[] getRoutesNeededForCrossOriginRegistry() { // TODO : why cant this be static?
         final CrossOriginContract[] controllers = getControllersNeededForCrossOriginRegistry()
         String[] candidate = []
 
