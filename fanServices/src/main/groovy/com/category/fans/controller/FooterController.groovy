@@ -28,9 +28,7 @@ class FooterController implements CrossOriginContract {
     private @Qualifier("footerContentService")
     FooterContentService service
 
-    FooterController() {
-
-    }
+    FooterController() {}
 
     @GetMapping("footer")
     protected IFooter[] getFooter() {
@@ -49,11 +47,9 @@ class FooterController implements CrossOriginContract {
 class Footer implements IFooter{
     private final static String defaultTitle = "default title"
 
-    String label = defaultTitle
+    private String label = defaultTitle
     final String[] runtime
-    IFooterDetail[] payload = []
-
-    Footer() {}
+    IFooterDetail[] payload = [] // TODO : why cant this be private?
 
     Footer(String label, String[] runtime) {
         this.label = label; this.runtime = runtime
@@ -69,8 +65,6 @@ class FooterDetail implements IFooterDetail{
     String icon = "icon"
     String logo = "logo"
     String url = "url"
-
-    FooterDetail() {}
 
     FooterDetail(Map<String, String> m) {
         this.label = m.label

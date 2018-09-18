@@ -18,7 +18,7 @@ interface CrossOriginContract{
 }
 class Constants implements CrossOriginContract {
 
-    String[] getRoutesNeededForCrossOriginRegistry() {
+    String[] getRoutesNeededForCrossOriginRegistry() { // TODO : why cant this be static? 
         final CrossOriginContract[] controllers = getControllersNeededForCrossOriginRegistry()
         String[] candidate = []
 

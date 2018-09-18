@@ -44,10 +44,9 @@ class Header implements IHeaderConfig{
     private static final IHeaderConfigDetail[] empty = []
     private final static String defaultTitle = "default title"
 
-    String title = defaultTitle
-    IHeaderConfigDetail[] targets = empty
+    private String title = defaultTitle
+    IHeaderConfigDetail[] targets = empty // TODO : why cant this be private?
 
-    Header() {}
     Header(String title, IHeaderConfigDetail[] targets ) {
         this.title = title ; this.targets = targets
     }

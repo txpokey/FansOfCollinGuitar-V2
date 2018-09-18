@@ -9,26 +9,25 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
-// TODO : I should not need this to test the controller
 @Configuration
 class FeaturesConfig{
 
     @Bean(name = "headerContentService")
     HeaderContentService getHeaderService() {
         HeaderContentService service = new HeaderContentService()
-        return service
+        service
     }
 
     @Bean(name = "footerContentService")
     FooterContentService getFooterService() {
         FooterContentService service = new FooterContentService()
-        return service
+        service
     }
     @Bean
     WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(CorsRegistry registry) {
+            void addCorsMappings(CorsRegistry registry) {
                 final String[] routes = getRoutesNeededForCrossOriginRegistry()
                 final String origin = CrossOriginContract.CROSS_SITE_ORIGIN
                 routes.each { route -> registry.addMapping(route).allowedOrigins(origin) }
