@@ -1,6 +1,9 @@
-package com.category.fans.controller
+package com.category.fans.controller.test
 
 import com.category.fans.config.FeaturesConfig
+import com.category.fans.controller.*
+import com.category.fans.controller.test.config.ControllerTestConfig
+import com.category.fans.service.FooterContentService
 import com.category.fans.service.HeaderContentService
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
@@ -18,14 +21,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @Test
-@ContextConfiguration( classes = [FeaturesConfig.class])
-// TODO : fix test service injection with profile
+@ContextConfiguration( classes = [FeaturesConfig.class, ControllerTestConfig.class])
 class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private @Qualifier("headerContentService")
-    HeaderContentService serviceFromTestHarness
+    HeaderContentService headerContentService
 
-    public void smokeTestViaStandaloneSetup() {
+    @Autowired
+    private @Qualifier("footerContentService")
+    FooterContentService footerContentService
+
+    @Autowired
+    private @Qualifier("headerController")
+    HeaderController headerController
+
+    void sanityCheck() {
+        log.debug("LOGGER IS HERE")
+        assert headerContentService
+        assert headerController
+        assert footerContentService
+    }
+
+    void smokeTestViaStandaloneSetup() {
         assert applicationContext
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(pizzaStuffing())
                 .defaultRequest(get("/fans/header"))
@@ -39,7 +56,22 @@ class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
         log.debug("HERE")
     }
 
-    public void fileReading() {
+    void fileReading() {
+        readHeaderContent()
+        readFooterContent()
+        readPizzaStuffing()
+    }
+
+    private void readFooterContent() {
+        def footerContent = footerContentService.getContent()
+        assert footerContent
+    }
+   private void readHeaderContent() {
+        def footerContent = headerContentService.getContent()
+        assert footerContent
+    }
+
+    private void readPizzaStuffing() {
         def headerStub = pizzaStuffing()
         def fetchOutcome = headerStub.getHeader()
         assert fetchOutcome
@@ -49,10 +81,11 @@ class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
      * @return
      */
     private HeaderController pizzaStuffing() {
-        def headerStub = new HeaderController(constructHeaderTestData()){
+//        def headerStub = new HeaderController(constructHeaderTestData()){
+        def headerStub = new HeaderController(){
             @Override
             IHeaderConfig getHeader() {
-                serviceFromTestHarness.getContent()
+                headerContentService.getContent()
             }
         }
     }

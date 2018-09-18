@@ -3,11 +3,14 @@ package com.category.fans.service
 import com.category.fans.controller.Footer
 import com.category.fans.controller.FooterDetail
 import com.category.fans.controller.IFooter
+import com.category.fans.service.util.ServiceTool
 import groovy.json.JsonSlurper
+import groovy.util.logging.Slf4j
 import org.springframework.stereotype.Service
 
 import static com.category.fans.controller.ConstantsLocatingJsonContract.footerJsonLocation as jsonLocation
 
+@Slf4j
 @Service(value = "footerContentService")
 class FooterContentService{
 
@@ -15,7 +18,15 @@ class FooterContentService{
         getFooterArrayByConvertingFromJson()
     }
     private String getFooterFromAssetsAsJson() {
+        getFooterFromAssetsResourceAsJson()
+    }
+
+    private String getFooterFromAssetsFileAsJson() {
         new File(jsonLocation).text
+    }
+
+    private String getFooterFromAssetsResourceAsJson() {
+        ServiceTool.getContentFromClasspathResourceAsJson(jsonLocation)
     }
 
     private IFooter[] getFooterArrayByConvertingFromJson() {

@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 class HomeController {
 
     @RequestMapping(value = "/**/{[path:[^\\.]*}")
-    public String redirect() {
+    String redirect() {
         // Forward to home page so that route is preserved.
-        return "forward:/";
+        return "forward:/"
     }
 }
 

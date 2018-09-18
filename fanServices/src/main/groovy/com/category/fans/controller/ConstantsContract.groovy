@@ -7,8 +7,8 @@ interface ConstantsContract{
 
 interface ConstantsLocatingJsonContract{
 
-    String headerJsonLocation = "/home/mak/var/work/project/punisher/edu.collin/dev.collin/angularFanClub/fanServices/src/main/resources/assets/json/header-controller.json"
-    String footerJsonLocation = "/home/mak/var/work/project/punisher/edu.collin/dev.collin/angularFanClub/fanServices/src/main/resources/assets/json/footer-controller.json"
+    String headerJsonLocation = "/assets/json/header-controller.json"
+    String footerJsonLocation = "/assets/json/footer-controller.json"
 
 }
 interface CrossOriginContract{

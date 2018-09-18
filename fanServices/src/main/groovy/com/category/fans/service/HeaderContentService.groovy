@@ -3,6 +3,7 @@ package com.category.fans.service
 import com.category.fans.controller.Header
 import com.category.fans.controller.HeaderDetail
 import com.category.fans.controller.IHeaderConfig
+import com.category.fans.service.util.ServiceTool
 import groovy.json.JsonSlurper
 import org.springframework.stereotype.Service
 
@@ -18,8 +19,16 @@ class HeaderContentService{
         getHeaderConfigFromAssets()
     }
     private String getContentFromAssetsAsJson() {
+        getHeaderFromAssetsResourceAsJson()
+    }
+
+    private String getHeaderFromAssetsFileAsJson() {
         new File(jsonLocation).text
     }
+   private String getHeaderFromAssetsResourceAsJson() {
+        ServiceTool.getContentFromClasspathResourceAsJson(jsonLocation)
+    }
+
     private IHeaderConfig getHeaderConfigFromAssets() {
         final String fileContents = getContentFromAssetsAsJson()
         final def asJson =  new JsonSlurper().parseText(fileContents)
