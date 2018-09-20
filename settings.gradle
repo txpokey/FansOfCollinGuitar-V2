@@ -7,7 +7,7 @@
  * in the user guide at https://docs.gradle.org/4.7/userguide/multi_project_builds.html
  */
 
-include 'ngGradle'
+include 'ngGradlePlugin'
 include 'fanServices'
 include 'fansOfCollinGuitarViaAngular'
 
