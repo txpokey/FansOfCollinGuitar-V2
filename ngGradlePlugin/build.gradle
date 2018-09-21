@@ -3,7 +3,7 @@ buildscript {
 }
 
 bootJar {
-    baseName = rootProject.name
+    baseName = project.name
     version =  '0.1.0'
     into('META-INF/resources') {
         from "./META-INF/resources"
@@ -40,7 +40,7 @@ apply plugin: GreetingPlugin
 // Configure the extension
 greeting.message = "Hi from Gradle ${groovyVersion}"
 
-task stopTomcat(type:Exec) {
+task runAngularCliTest(type:Exec) {
 //    workingDir '../tomcat/bin'
     workingDir '.'
 
@@ -48,7 +48,8 @@ task stopTomcat(type:Exec) {
 //    commandLine 'cmd', '/c', 'stop.bat'
 
 //    //on linux
-    commandLine '/home/mak/ln/ng' , 'config' , '--help'
+//    commandLine '/home/mak/ln/ng' , 'config' , '--help'
+    commandLine 'ng' , 'config' , '--help'
 //    args 'help'
 
 //    commandLine 'ls' , '-t' , '-l'
