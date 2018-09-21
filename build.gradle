@@ -48,6 +48,7 @@ allprojects {
     }
 }
 
+apply from: "${rootProject.projectDir}/etc/gradle/apply/ngTasks.gradle", to: allprojects
 
 buildscript {
     ext {

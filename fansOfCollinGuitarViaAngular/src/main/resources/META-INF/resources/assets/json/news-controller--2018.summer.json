@@ -1,0 +1,25 @@
+{
+  "title": "Summer 2018 Highlights",
+  "payload": [
+    {
+      "test": false,
+      "name": "2018 Summer Guitar Events at Collin College",
+      "date": "Date",
+      "time": "Time",
+      "where": "Location/Room",
+      "event": "Events",
+      "image": "Photo",
+      "url": "#0"
+    },
+    {
+      "test": true,
+      "name": "Fan Club Website: Angular6 Release",
+      "date": "06/15/2018",
+      "time": "12am",
+      "where": "internet",
+      "event": "Using Collin College Guitar Studies Website",
+      "image": "https://angular.io/assets/images/logos/angular/logo-nav@2x.png",
+      "url": "../assets/html/news/2018/summer/current/guitarWebsite-news.html"
+    }
+  ]
+}

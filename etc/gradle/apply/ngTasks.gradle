@@ -1,0 +1,18 @@
+task ngBuild(type:Exec) {
+
+    workingDir './src/main/ts'
+    commandLine 'ng' , 'build', '--output-path', '../resources/META-INF/resources'
+
+}
+task ngSanityCheck(type:Exec) {
+
+    workingDir './src/main/ts'
+    commandLine 'ng' , 'config' , '--help'
+
+}
+task ngPwd(type:Exec) {
+
+    workingDir './src/main/ts'
+    commandLine 'pwd'
+
+}

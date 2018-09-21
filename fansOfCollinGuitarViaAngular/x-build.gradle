@@ -1,0 +1,42 @@
+
+buildscript {
+    rootProject.buildscript
+    dependencies {
+        classpath "com.moowork.gradle:gradle-node-plugin:0.12"
+        classpath "de.richsource.gradle.plugins:typescript-gradle-plugin:1.8.0"
+    }
+}
+
+plugins {
+    id "com.moowork.node" version "0.12"
+    id "de.richsource.gradle.plugins.typescript" version "1.8.0"
+}
+
+apply plugin: 'com.moowork.node'
+apply plugin: 'de.richsource.gradle.plugins.typescript'
+
+import com.moowork.gradle.node.NodeExtension
+import com.moowork.gradle.node.variant.VariantBuilder
+
+node {
+    download = true
+}
+
+String nodeExecutable() {
+    NodeExtension nodeExt = NodeExtension.get(project)
+    return new VariantBuilder(nodeExt).build().nodeExec
+}
+
+compileTypeScript {
+    compilerExecutable "${nodeExecutable()} node_modules/typescript/lib/tsc.js"
+    dependsOn "npmInstall"
+}
+bootJar {
+    baseName = project.name
+    version =  '0.1.0'
+    into('META-INF/resources') {
+        from "./src/main/resources/META-INF/resources"
+    }
+    exclude("**/resources/**")
+}
+
