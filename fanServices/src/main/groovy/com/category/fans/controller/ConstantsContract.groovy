@@ -1,14 +1,11 @@
 package com.category.fans.controller
 
-interface ConstantsContract{
-
-
-}
+interface ConstantsContract {}
 
 interface ConstantsLocatingJsonContract{
 
-    String headerJsonLocation = "/assets/json/header-controller.json"
-    String footerJsonLocation = "/assets/json/footer-controller.json"
+    String headerJsonLocation = "/META-INF/resources/assets/json/header-controller.json"
+    String footerJsonLocation = "/META-INF/resources/assets/json/footer-controller.json"
 
 }
 interface CrossOriginContract{
