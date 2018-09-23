@@ -1,16 +1,12 @@
 package com.category.fans.controller
 
 import groovy.util.logging.Slf4j
-import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.mock.web.MockHttpServletRequest
-import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests
-import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
@@ -19,27 +15,20 @@ import org.testng.annotations.Test
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 
-//org.springframework.boot.test.autoconfigure.web.servlet
 @Slf4j
 @Test
-//@RunWith(SpringRunner.class)
 @SpringBootTest
-
-//@WebAppConfiguration
-@ContextConfiguration
-//@SpringBootTest(classes = HeaderController.class)
 class ExploreWebAppContextSetupTest extends AbstractTestNGSpringContextTests{
-//class ExploreWebAppContextSetupTest {
 
-    private MockMvc mockMvc;
+    private MockMvc mockMvc
     @Autowired
     private WebApplicationContext wac // NOT NEEDED for standaloneSetup
     @Autowired MockHttpServletRequest request // NOT NEEDED for standaloneSetup
 //
     @BeforeMethod
     void before() {
-        MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).dispatchOptions(true).build();
+        MockitoAnnotations.initMocks(this)
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).dispatchOptions(true).build()
     }
 
     void sanityCheck() {
@@ -61,7 +50,7 @@ class ExploreWebAppContextSetupTest extends AbstractTestNGSpringContextTests{
 //        mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
 //                .defaultRequest(get("/fans/header").accept(MediaType.APPLICATION_JSON))
 //                .alwaysExpect(status().isOk())
-//                .alwaysExpect(content().contentType("application/json;charset=UTF-8"))
+//                .alwaysExpect(content().contentType("application/jsoncharset=UTF-8"))
 //                .build()
         def WAT = mockMvc.perform(get("/fans/header").contentType(MediaType.APPLICATION_JSON))
         log.debug("HERE")
@@ -70,7 +59,7 @@ class ExploreWebAppContextSetupTest extends AbstractTestNGSpringContextTests{
 //@Test
 //@WebAppConfiguration
 //class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
-//    private MockMvc mockMvc;
+//    private MockMvc mockMvc
 //
 //    private WebApplicationContext wac =  ContextLoader.getCurrentWebApplicationContext()
 //
@@ -83,7 +72,7 @@ class ExploreWebAppContextSetupTest extends AbstractTestNGSpringContextTests{
 //}
 
 //
-//    private MockMvc mockMvc;
+//    private MockMvc mockMvc
 //
 //    @Autowired
 //    private WebApplicationContext wac

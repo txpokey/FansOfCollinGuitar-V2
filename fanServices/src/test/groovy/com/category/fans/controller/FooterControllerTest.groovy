@@ -1,7 +1,6 @@
 package com.category.fans.controller
 
 import com.category.fans.config.FeaturesConfig
-import com.category.fans.config.YamlConfig
 import com.category.fans.service.FooterContentService
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
