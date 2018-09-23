@@ -25,4 +25,9 @@ class ServiceTool{
             log.warn("IOException", e)
         }
     }
+    static InputStream getContentFromClasspathResourceAsInputStream(@NonNull String location) {
+        ClassPathResource cpr = new ClassPathResource(location)
+        def candidate = cpr.getInputStream()
+        candidate
+    }
 }
