@@ -1,23 +1,28 @@
 package com.category.fans.service.youtube
 
-import com.category.fans.service.util.ServiceTool
-import com.google.api.client.auth.oauth2.Credential
+import ServiceTool
+import Credential
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow
-import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
-import com.google.api.client.http.HttpTransport
-import com.google.api.client.json.JsonFactory
-import com.google.api.client.json.jackson2.JacksonFactory
-import com.google.api.client.util.store.FileDataStoreFactory
-import com.google.api.services.youtube.YouTube
-import com.google.api.services.youtube.YouTubeScopes
-import com.google.api.services.youtube.model.PlaylistListResponse
-import groovy.util.logging.Slf4j
-import org.testng.annotations.Test
+import GoogleAuthorizationCodeFlow
+import GoogleClientSecrets
+import GoogleCredential
+import GoogleNetHttpTransport
+import HttpTransport
+import JsonFactory
+import JacksonFactory
+import FileDataStoreFactory
+import YouTube
+import YouTubeScopes
+import PlaylistListResponse
+import Slf4j
+import Test
 
+//    compile 'com.google.api-client:google-api-client:1.25.0'
+//    compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
+//    compile 'com.google.apis:google-api-services-youtube:v3-rev182-1.22.0'
+//    compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
+//    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.4.4'
 @Slf4j
 @Test
 class PlayListByChannelTestUsingNutzoGoogleCodeThatDoesntWork{
@@ -29,7 +34,7 @@ class PlayListByChannelTestUsingNutzoGoogleCodeThatDoesntWork{
         parameters.put("channelId", "UCYkk_DU_k1sWyOw_fy6Raug")
         parameters.put("maxResults", "25")
 
-        YouTube.Playlists.List playlistsListByChannelIdRequest = youtube.playlists().list(parameters.get("part").toString())
+        List playlistsListByChannelIdRequest = youtube.playlists().list(parameters.get("part").toString())
         if (parameters.containsKey("channelId") && parameters.get("channelId") != "") {
             playlistsListByChannelIdRequest.setChannelId(parameters.get("channelId").toString())
         }
@@ -39,7 +44,7 @@ class PlayListByChannelTestUsingNutzoGoogleCodeThatDoesntWork{
         }
 
         PlaylistListResponse response = playlistsListByChannelIdRequest.execute()
-        log.debug(response)
+        com.category.fans.service.youtube.PlayListByChannelTestUsingNutzoGoogleCodeThatDoesntWork.log.debug(response)
     }
     /**
      * Creates an authorized Credential object.
@@ -52,14 +57,14 @@ class PlayListByChannelTestUsingNutzoGoogleCodeThatDoesntWork{
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in0))
 
         // Build flow and trigger user authorization request.
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+        GoogleAuthorizationCodeFlow flow = new Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
                 .setDataStoreFactory(DATA_STORE_FACTORY)
                 .setAccessType("offline")
                 .build()
         Credential credential = new AuthorizationCodeInstalledApp(
                 flow, new LocalServerReceiver()).authorize("user")
-        log.debug(
+        com.category.fans.service.youtube.PlayListByChannelTestUsingNutzoGoogleCodeThatDoesntWork.log.debug(
                 "Credentials saved to " + DATA_STORE_DIR.getAbsolutePath())
         credential
     }
@@ -73,7 +78,7 @@ class PlayListByChannelTestUsingNutzoGoogleCodeThatDoesntWork{
     private static YouTube getYouTubeService() throws IOException {
 //        Credential credential = authorize()
         Credential credential = authorizeService()
-        def built = new YouTube.Builder(
+        def built = new Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build()

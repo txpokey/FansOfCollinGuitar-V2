@@ -1,8 +1,8 @@
 package com.category.fans.controller
 
-import org.junit.Rule
-import org.junit.rules.TestName
-import spock.lang.Specification
+import Rule
+import TestName
+import Specification
 
 class HeaderControllerSpockTest extends Specification {
 
@@ -19,11 +19,11 @@ class HeaderControllerSpockTest extends Specification {
         whatAmI != null
         whatAmI == whatAmIGroovy
         with(whatAmI) {
-            titleTestData == title
-            null != targets
-            1 == targets.size()
-            targets[0].label
-            targets[0].url
+            titleTestData == com.category.fans.controller.IHeaderConfig.title
+            null != com.category.fans.controller.IHeaderConfig.targets
+            1 == com.category.fans.controller.IHeaderConfig.targets.size()
+            com.category.fans.controller.IHeaderConfig.targets[0].label
+            com.category.fans.controller.IHeaderConfig.targets[0].url
         }
 
     }

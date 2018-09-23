@@ -1,6 +1,7 @@
 package com.category.fans.controller
 
 import com.category.fans.config.FeaturesConfig
+import com.category.fans.config.YamlConfig
 import com.category.fans.service.FooterContentService
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
@@ -19,12 +20,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Test
 @ContextConfiguration( classes = [FeaturesConfig.class])
-public class FooterControllerTest  extends AbstractTestNGSpringContextTests {
+class FooterControllerTest  extends AbstractTestNGSpringContextTests {
     @Autowired
     private @Qualifier("footerContentService")
     FooterContentService serviceFromTestHarness
 
-    public void testGetFooterArrayFromAssetsAsJson() {
+    void testGetFooterArrayFromAssetsAsJson() {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(pizzaStuffing())
                 .defaultRequest(get("/fans/footer"))
                 .alwaysExpect(status().isOk())
@@ -35,7 +36,7 @@ public class FooterControllerTest  extends AbstractTestNGSpringContextTests {
         assert WAT
         log.debug("HERE")
     }
-    public void fileReading() {
+    void fileReading() {
         def workAround = pizzaStuffing()
         def fetchOutcome = workAround.getFooter()
         assert fetchOutcome
@@ -47,6 +48,12 @@ public class FooterControllerTest  extends AbstractTestNGSpringContextTests {
                 serviceFromTestHarness.getContent()
             }
         }
+    }
+
+
+    void sanityCheck() {
+        assert serviceFromTestHarness
+        log.debug("HERE")
     }
 
     private static Log log = LogFactory.getLog(FooterControllerTest.class)

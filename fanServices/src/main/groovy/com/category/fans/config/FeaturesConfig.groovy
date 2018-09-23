@@ -38,4 +38,5 @@ class FeaturesConfig{
         final Constants constants = new Constants()
         final String[] routes = constants.getRoutesNeededForCrossOriginRegistry()
     }
+
 }
