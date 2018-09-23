@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: fanServices
+  profiles:
+    active: dev
+    include: crypto
+  h2:
+    console:
+      enabled: false
+      path: /h2
+name: dev2-YAML
+debug:
+  false
+
+logging:
+  level:
+    org.springframework.web: INFO
+    com.category.fans: DEBUG
+
+server:
+  port: 8080
+#  port: 0 # random port
