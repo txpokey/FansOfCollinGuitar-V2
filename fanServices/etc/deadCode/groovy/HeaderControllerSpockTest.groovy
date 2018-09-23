@@ -4,7 +4,7 @@ import org.junit.Rule
 import org.junit.rules.TestName
 import spock.lang.Specification
 
-class HeaderControllerSpockTest extends Specification{
+class HeaderControllerSpockTest extends Specification {
 
 
     @Rule TestName header
@@ -12,7 +12,7 @@ class HeaderControllerSpockTest extends Specification{
     def "getHeader smoke test"() {
         when:
         println "entering '$header.methodName'"
-        HeaderController hc = new HeaderController(constructHeaderTestData())
+        HeaderController hc = new HeaderController()
         def whatAmI = hc.getHeader()
         def whatAmIGroovy = hc.header
         then:
