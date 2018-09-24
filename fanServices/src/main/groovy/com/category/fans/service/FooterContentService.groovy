@@ -12,7 +12,7 @@ import static com.category.fans.controller.ConstantsLocatingJsonContract.footerJ
 
 @Slf4j
 @Service(value = "footerContentService")
-class FooterContentService{
+class FooterContentService {
 
     IFooter[] getContent() {
         getFooterArrayByConvertingFromJson()
