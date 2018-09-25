@@ -5,21 +5,16 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.lang.NonNull
 import org.springframework.stereotype.Service
 
-import javax.annotation.PostConstruct
-
 @Slf4j
 @Service("youTubeClient")
 class YouTubeClientService {
+    private final def apibase = "https://www.googleapis.com/youtube/v3/"
 
     @Value('${google.apikey:NOT_FOUND}')
     String apikey
     @Value('${google.channelId:NOT_FOUND}')
     String channelId
 
-    private URL playLists
-    private URL playListsItems
-
-//    private def Map<String,String> META_DATA = [:]
     private final def MAX_RESULTS = "&maxResults=50"
     private final def PARTS_REQUESTED = "part=snippet%2CcontentDetails"
 
@@ -48,7 +43,6 @@ class YouTubeClientService {
     }
     private def getYouTubeUrl(@NonNull def map) {
         final def API_KEY = "key=${apikey}"
-        final def apibase = "https://www.googleapis.com/youtube/v3/"
         final def apiUsed = apibase + "${map.apiUsed}?" + PARTS_REQUESTED + MAX_RESULTS
         final def apiPreImage = apiUsed + "&${map.payloadId}&${API_KEY}"
         apiPreImage

@@ -14,7 +14,6 @@ import org.testng.annotations.Test
 @Slf4j
 @Test
 @SpringBootTest
-//@ContextConfiguration( classes = [YamlConfig.class])
 class PlayListByChannelTest extends AbstractTestNGSpringContextTests{
     private final def testId = "PLvhkK1827NDxXl2sq-N7uNLpQxb2S01CC"
 
@@ -61,18 +60,7 @@ class PlayListByChannelTest extends AbstractTestNGSpringContextTests{
         candidate
     }
     private def parseContentFromPlaylistsByChannel(@NonNull def jsonStream) {
-        final def jsonSlurper = new JsonSlurper()
-        def candidate = jsonSlurper.parse(jsonStream)
-        def itemsList = candidate?.items
-        def videosPreImage = []
-        itemsList.each {
-            item ->
-                def id = item.id
-                def title = item.snippet.title
-                videosPreImage.add([id: id, title: title])
-                log.debug("")
-        }
-        videosPreImage
+        parseContentFromJsonStreamUsingClosure(jsonStream, playListCaptureClosure)
     }
 
 // -----------------------------------
@@ -82,19 +70,34 @@ class PlayListByChannelTest extends AbstractTestNGSpringContextTests{
         candidate
     }
     private def parseContentFromVideosByPlayList(@NonNull def jsonStream) {
+        parseContentFromJsonStreamUsingClosure(jsonStream, videoCaptureClosure)
+    }
+// -----------------------------------
+
+    private parseContentFromJsonStreamUsingClosure(@NonNull def jsonStream, @NonNull def processingClosure) {
         final def jsonSlurper = new JsonSlurper()
         def candidate = jsonSlurper.parse(jsonStream)
         def itemsList = candidate?.items
-        def videosImage = []
-        itemsList.each {
-            item ->
-                def id = item.contentDetails.videoId
-                def title = item.snippet.title
-                def description = item.snippet.description
-                videosImage.add( [id: id , title: title, description: description ])
-                log.debug("")
-        }
-        videosImage
+        def captured = []
+        itemsList.collect(captured, processingClosure)
+        captured
     }
+
+    final private def playListCaptureClosure = { item ->
+        def id = item.id
+        def title = item.snippet.title
+        def captured = [id: id, title: title]
+        captured
+    }
+
+    final private def videoCaptureClosure = { item ->
+        def id = item.contentDetails.videoId
+        def title = item.snippet.title
+        def description = item.snippet.description
+        def captured = [id: id , title: title, description: description ]
+        captured
+    }
+
+
 
 }
