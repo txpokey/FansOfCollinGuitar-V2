@@ -15,7 +15,8 @@ import org.testng.annotations.Test
 @Test
 @SpringBootTest
 //@ContextConfiguration( classes = [YamlConfig.class])
-class PlayListByChannelTest extends AbstractTestNGSpringContextTests {
+class PlayListByChannelTest extends AbstractTestNGSpringContextTests{
+    private final def testId = "PLvhkK1827NDxXl2sq-N7uNLpQxb2S01CC"
 
     @Value('${google.apikey:NOT_FOUND}')
     String apikey
@@ -31,33 +32,69 @@ class PlayListByChannelTest extends AbstractTestNGSpringContextTests {
         log.debug(apikey)
     }
 
-    void getContentFromPlaylistsTest(){
-        def candidate = getContentFromPlaylists()
+    void getContentPlaylistsByChannelTest() {
+        def candidate = getContentPlaylistsByChannel()
         assert candidate
         log.debug("playLists query content:> \n${candidate}")
     }
-    private def getContentFromPlaylists(){
-        def candidate = service.getContentFromPlaylists()
-    }
-    void parseContentFromPlaylistsTest() {
-        def jsonStream = getContentFromPlaylists()
-        def candidate = parseContentFromPlaylists(jsonStream)
+
+    void getContentVideosByPlaylistIdTest() {
+        def candidate = getContentVideosByPlaylistId(testId)
         assert candidate
-
+        log.debug("playLists query content:> \n${candidate}")
     }
 
-    private def parseContentFromPlaylists(@NonNull def jsonStream) {
+    void parseContentFromPlaylistsByChannelTest() {
+        def jsonStream = getContentPlaylistsByChannel()
+        def candidate = parseContentFromPlaylistsByChannel(jsonStream)
+        assert candidate
+    }
+
+    void parseContentFromVideosByPlayListTest() {
+        def jsonStream = getContentVideosByPlaylistId(testId)
+        def candidate = parseContentFromVideosByPlayList(jsonStream)
+        assert candidate
+    }
+// -----------------------------------
+    private def getContentPlaylistsByChannel() {
+        def candidate = service.getContentPlaylistsByChannel()
+        candidate
+    }
+    private def parseContentFromPlaylistsByChannel(@NonNull def jsonStream) {
         final def jsonSlurper = new JsonSlurper()
         def candidate = jsonSlurper.parse(jsonStream)
         def itemsList = candidate?.items
-        def videos = []
+        def videosPreImage = []
         itemsList.each {
             item ->
                 def id = item.id
                 def title = item.snippet.title
-                videos.add( [id: id , title: title])
-            log.debug("")
+                videosPreImage.add([id: id, title: title])
+                log.debug("")
         }
-        videos
+        videosPreImage
     }
+
+// -----------------------------------
+
+    private def getContentVideosByPlaylistId(@NonNull def playListId){
+        def candidate = service.getContentVideosByPlaylistId(playListId)
+        candidate
+    }
+    private def parseContentFromVideosByPlayList(@NonNull def jsonStream) {
+        final def jsonSlurper = new JsonSlurper()
+        def candidate = jsonSlurper.parse(jsonStream)
+        def itemsList = candidate?.items
+        def videosImage = []
+        itemsList.each {
+            item ->
+                def id = item.contentDetails.videoId
+                def title = item.snippet.title
+                def description = item.snippet.description
+                videosImage.add( [id: id , title: title, description: description ])
+                log.debug("")
+        }
+        videosImage
+    }
+
 }
