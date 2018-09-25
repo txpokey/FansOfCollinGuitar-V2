@@ -1,13 +1,11 @@
 package com.category.fans.service.youtube
 
 import com.category.fans.service.YouTubeClientService
-import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.lang.NonNull
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests
 import org.testng.annotations.Test
 
@@ -32,72 +30,52 @@ class PlayListByChannelTest extends AbstractTestNGSpringContextTests{
     }
 
     void getContentPlaylistsByChannelTest() {
-        def candidate = getContentPlaylistsByChannel()
+        def candidate = service.getContentPlaylistsByChannel()
         assert candidate
         log.debug("playLists query content:> \n${candidate}")
     }
 
     void getContentVideosByPlaylistIdTest() {
-        def candidate = getContentVideosByPlaylistId(testId)
+        def candidate = service.getContentVideosByPlaylistId(testId)
         assert candidate
         log.debug("playLists query content:> \n${candidate}")
     }
 
     void parseContentFromPlaylistsByChannelTest() {
-        def jsonStream = getContentPlaylistsByChannel()
-        def candidate = parseContentFromPlaylistsByChannel(jsonStream)
+        def jsonStream = service.getContentPlaylistsByChannel()
+        def candidate = service.parseContentFromPlaylistsByChannel(jsonStream)
         assert candidate
     }
 
     void parseContentFromVideosByPlayListTest() {
-        def jsonStream = getContentVideosByPlaylistId(testId)
-        def candidate = parseContentFromVideosByPlayList(jsonStream)
+        def jsonStream = service.getContentVideosByPlaylistId(testId)
+        def candidate = service.parseContentFromVideosByPlayList(jsonStream)
         assert candidate
     }
-// -----------------------------------
-    private def getContentPlaylistsByChannel() {
-        def candidate = service.getContentPlaylistsByChannel()
-        candidate
-    }
-    private def parseContentFromPlaylistsByChannel(@NonNull def jsonStream) {
-        parseContentFromJsonStreamUsingClosure(jsonStream, playListCaptureClosure)
-    }
 
-// -----------------------------------
+// --------------------
 
-    private def getContentVideosByPlaylistId(@NonNull def playListId){
-        def candidate = service.getContentVideosByPlaylistId(playListId)
-        candidate
-    }
-    private def parseContentFromVideosByPlayList(@NonNull def jsonStream) {
-        parseContentFromJsonStreamUsingClosure(jsonStream, videoCaptureClosure)
-    }
-// -----------------------------------
-
-    private parseContentFromJsonStreamUsingClosure(@NonNull def jsonStream, @NonNull def processingClosure) {
-        final def jsonSlurper = new JsonSlurper()
-        def candidate = jsonSlurper.parse(jsonStream)
-        def itemsList = candidate?.items
+    void walkEntireChannelByPlaylistByAllMemberPlayListVideosTest() {
+        def jsonStream = service.getContentPlaylistsByChannel()
+        def playLists = service.parseContentFromPlaylistsByChannel(jsonStream)
         def captured = []
-        itemsList.collect(captured, processingClosure)
+        playLists.collect( captured , capturePlayListItemsClosure )
         captured
     }
 
-    final private def playListCaptureClosure = { item ->
-        def id = item.id
-        def title = item.snippet.title
-        def captured = [id: id, title: title]
+    private def capturePlayListItemsClosure = { playListMap ->
+        def playListId = playListMap.playListId
+        def jsonStream = service.getContentVideosByPlaylistId(playListId)
+        def videoMaps = service.parseContentFromVideosByPlayList(jsonStream)
+        def captured = []
+        videoMaps.collect( captured ) { videoMap ->
+            def aggregatorMap = [:]
+            aggregatorMap << playListMap
+            aggregatorMap << videoMap
+            aggregatorMap
+        }
         captured
     }
-
-    final private def videoCaptureClosure = { item ->
-        def id = item.contentDetails.videoId
-        def title = item.snippet.title
-        def description = item.snippet.description
-        def captured = [id: id , title: title, description: description ]
-        captured
-    }
-
 
 
 }

@@ -1,5 +1,6 @@
 package com.category.fans.service
 
+import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.lang.NonNull
@@ -10,9 +11,9 @@ import org.springframework.stereotype.Service
 class YouTubeClientService {
     private final def apibase = "https://www.googleapis.com/youtube/v3/"
 
-    @Value('${google.apikey:NOT_FOUND}')
+    @Value('${google.apikey:NOT_FOUND}') // coming from crypto yml
     String apikey
-    @Value('${google.channelId:NOT_FOUND}')
+    @Value('${google.channelId:NOT_FOUND}') // coming from crypto yml
     String channelId
 
     private final def MAX_RESULTS = "&maxResults=50"
@@ -29,6 +30,7 @@ class YouTubeClientService {
         def apiPreImage = getYouTubeUrlForPlaylistItemByPlayListId( playListId )
         def apiURL = new URL(apiPreImage)
         def candidate = apiURL.getContent()
+        candidate
     }
 // --------------------------------------
     private def getYouTubeUrlForPlaylistsByChannelId(@NonNull def channelId ) {
@@ -47,4 +49,43 @@ class YouTubeClientService {
         final def apiPreImage = apiUsed + "&${map.payloadId}&${API_KEY}"
         apiPreImage
     }
+
+// -----------------------------------
+
+    def parseContentFromPlaylistsByChannel(@NonNull def jsonStream) {
+        parseContentFromJsonStreamUsingClosure(jsonStream, playListCaptureClosure)
+    }
+
+// -----------------------------------
+    def parseContentFromVideosByPlayList(@NonNull def jsonStream) {
+        parseContentFromJsonStreamUsingClosure(jsonStream, videoCaptureClosure)
+    }
+// -----------------------------------
+
+    private parseContentFromJsonStreamUsingClosure(@NonNull def jsonStream, @NonNull def processingClosure) {
+        final def jsonSlurper = new JsonSlurper()
+        def candidate = jsonSlurper.parse(jsonStream)
+        def itemsList = candidate?.items
+        def captured = []
+        itemsList.collect(captured, processingClosure)
+        captured
+    }
+
+    final private def playListCaptureClosure = { item ->
+        def playListId = item.id
+        def title = item.snippet.title
+        def description = item.snippet.description
+        def captured = [playListId: playListId, playListTitle: title, playListDescription: description]
+        captured
+    }
+
+    final private def videoCaptureClosure = { item ->
+        def playlistId = item.snippet.playlistId
+        def videoId = item.contentDetails.videoId
+        def title = item.snippet.title
+        def description = item.snippet.description
+        def captured = [playListId: playlistId, videoId: videoId , videoTitle: title, videoDescription: description ]
+        captured
+    }
+
 }
