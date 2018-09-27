@@ -92,10 +92,17 @@ export class PlayListsByChannelComponent extends GuitarApiComponentBaseClass<IYo
 class PlayListsByChannelComponentUtil {
     static sortPlaylistGroupBy(clonee: IYouTubePlaylistsByChannelQueryResponse[]): IYouTubePlaylistsByChannelQueryResponse[] {
         let candidate: IYouTubePlaylistsByChannelQueryResponse[] = [];
-        clonee.forEach(member => candidate.push(member));
+        clonee.forEach(
+(member:IYouTubePlaylistsByChannelQueryResponse) => {
+                if ( ! member.playListTitle.match(/websiteHelp/ ) ) {
+                    candidate.push(member)
+                }
+            }
+        );
         let sortedArray = Array.from(candidate).sort((x, y) => {
             return -(x.playListTitle.localeCompare(y.playListTitle))
         });
+        console.log("playListsByChannelUtil:sortedArray>" + sortedArray) ;
         return sortedArray;
     }
 }

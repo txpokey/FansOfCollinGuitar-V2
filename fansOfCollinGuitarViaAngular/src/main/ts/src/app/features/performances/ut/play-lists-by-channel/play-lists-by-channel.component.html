@@ -4,9 +4,8 @@
         <div class="guitar-dept-display-flex-column">
             <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header">
                 Student Performances
-                <!--SORTED_{{channelQueryResponseSorted[0].channelTitle}}_SORTED-->
             </div>
-            <div *ngFor="let guitarPlaylist of channelQueryResponse"
+            <div *ngFor="let guitarPlaylist of channelQueryResponseSorted"
                  class="guitar-dept-display-flex-wrap  guitar-dept-display-flex-row">
                 <div (click)="openBackDropCustomClass(guitarPlaylist,content)"
                      class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
