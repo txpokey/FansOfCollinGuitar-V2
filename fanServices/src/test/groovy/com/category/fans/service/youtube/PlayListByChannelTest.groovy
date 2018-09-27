@@ -42,9 +42,7 @@ class PlayListByChannelTest extends AbstractTestNGSpringContextTests{
     }
 
     void parseContentFromPlaylistsByChannelTest() {
-        def jsonStream = service.getContentPlaylistsByChannel()
-        def candidate = service.parseContentFromPlaylistsByChannel(jsonStream)
-        assert candidate
+        service.parseContentFromPlaylistsByChannel()
     }
 
     void parseContentFromVideosByPlayListTest() {
@@ -53,29 +51,35 @@ class PlayListByChannelTest extends AbstractTestNGSpringContextTests{
         assert candidate
     }
 
-// --------------------
 
     void walkEntireChannelByPlaylistByAllMemberPlayListVideosTest() {
-        def jsonStream = service.getContentPlaylistsByChannel()
-        def playLists = service.parseContentFromPlaylistsByChannel(jsonStream)
-        def captured = []
-        playLists.collect( captured , capturePlayListItemsClosure )
-        captured
+        def captured = service.walkEntireChannelByPlaylistByAllMemberPlayListVideos()
+        assert captured
     }
 
-    private def capturePlayListItemsClosure = { playListMap ->
-        def playListId = playListMap.playListId
-        def jsonStream = service.getContentVideosByPlaylistId(playListId)
-        def videoMaps = service.parseContentFromVideosByPlayList(jsonStream)
-        def captured = []
-        videoMaps.collect( captured ) { videoMap ->
-            def aggregatorMap = [:]
-            aggregatorMap << playListMap
-            aggregatorMap << videoMap
-            aggregatorMap
-        }
-        captured
-    }
+// --------------------
+
+//    private def walkEntireChannelByPlaylistByAllMemberPlayListVideos() {
+//        def jsonStream = service.getContentPlaylistsByChannel()
+//        def playLists = service.parseContentFromPlaylistsByChannel(jsonStream)
+//        def captured = []
+//        playLists.collect( captured , capturePlayListItemsClosure )
+//        captured
+//    }
+//
+//    private def capturePlayListItemsClosure = { playListMap ->
+//        def playListId = playListMap.playListId
+//        def jsonStream = service.getContentVideosByPlaylistId(playListId)
+//        def videoMaps = service.parseContentFromVideosByPlayList(jsonStream)
+//        def captured = []
+//        videoMaps.collect( captured ) { videoMap ->
+//            def aggregatorMap = [:]
+//            aggregatorMap << playListMap
+//            aggregatorMap << videoMap
+//            aggregatorMap
+//        }
+//        captured
+//    }
 
 
 }

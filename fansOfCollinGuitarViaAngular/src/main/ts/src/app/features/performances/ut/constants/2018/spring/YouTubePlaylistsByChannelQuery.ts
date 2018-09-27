@@ -1,4 +1,4 @@
-import {IYouTubeChannelQueryResponse} from "../../../YouTubePlayListData";
+import {IYouTubeChannelQueryResponse} from "../../../YouTubePlayListClientServiceContracts";
 
 export const YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE : IYouTubeChannelQueryResponse = {
   "channelTitle": "Student Performances",

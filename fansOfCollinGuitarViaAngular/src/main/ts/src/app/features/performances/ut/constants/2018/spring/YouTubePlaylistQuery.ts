@@ -1,4 +1,4 @@
-import {IYouTubePlaylist} from "../../../YouTubePlayListData";
+import {IYouTubePlaylist} from "../../../YouTubePlayListClientServiceContracts";
 
 export const YOU_TUBE_PLAYLISTS : IYouTubePlaylist[] = [
   {

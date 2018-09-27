@@ -9,19 +9,22 @@ import {GUITARLINKS, IGuitarLinks} from "../../features/lists/links/GuitarLinks"
 import {GUITARBOOKS, IGuitarBooks} from "../../features/classroom/textbooks/GuitarBooks";
 import {GUITARFACULTY, IGuitarFaculty} from "../../features/classroom/faculty/GuitarFaculty";
 import {
-  GUITAR_PROGRAM_COURSE_SCHEDULE,
-  IGuitarProgramCourseScheduleByTerm,
-  IMusicDeptCatalogByTerm,
-  MUSIC_DEPT_CATALOG
+    GUITAR_PROGRAM_COURSE_SCHEDULE,
+    IGuitarProgramCourseScheduleByTerm,
+    IMusicDeptCatalogByTerm,
+    MUSIC_DEPT_CATALOG
 } from "../../features/classroom/class-schedule/GuitarClassSchedulePlanner";
 import {YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistsByChannelQuery";
-import {IYouTubeChannelQueryResponse, IYouTubePlaylist} from "../../features/performances/ut/YouTubePlayListData";
+import {IYouTubePlaylistsByChannelQueryResponse} from "../../features/performances/ut/YouTubePlayListClientServiceContracts";
 import {YOU_TUBE_PLAYLISTS} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistQuery";
 import {isUndefined} from "util";
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 const headerSetupUrl = "../../assets/json/header-controller.json";
 const booksSetupUri  = "/assets/json/textbooks-controller.json" ;
+// const playListsByChannelUri  = "/fans/video/playListsByChannel" ;
+const playListsByChannelUri  = "http://localhost:8080/fans/video/playListsByChannel" ;
+const videosByPlaylistUri  = "/fans/video/videosByPlaylist" ;
 
 export interface GuitarApiObserverPollingContract {
   isReady() : boolean ;
@@ -42,7 +45,7 @@ export abstract class GuitarApiComponentBaseClass<T> implements OnInit {
     let agent : GuitarApiObserverContract  = new GuitarApiObserver<T>(this.setupUri , clientStub ) ;
     this.lookupAgent = agent ;
     let spun:  boolean = agent.spinUp() ;
-    console.log("spinup is HERE:> " + spun );
+    console.log("ngOnInit: spinup is HERE:uri> " + this.setupUri + "\nspinup is HERE:spun> " + spun );
   }
   getNetworker() : GuitarApiObserverContract {
     return this.lookupAgent ;
@@ -58,6 +61,7 @@ export class GuitarApiObserver<T> implements GuitarApiObserverContract {
   constructor(private uri: string , private clientStub : HttpClient) {
     let candidate = this.supplyObserver( clientStub , uri ) ;
     this.observable = candidate ;
+    this.uri = uri ;
   }
   isDefined( underTest: any ) : boolean {
     let candidate = isUndefined( underTest ) ;
@@ -80,9 +84,13 @@ export class GuitarApiObserver<T> implements GuitarApiObserverContract {
   spinUp() : boolean {
     this.getObserver().forEach( ( dat: HttpResponse<any> ) => {
       this.payload = dat.body ;
-      console.log("guitarObserver:spinUp> " + dat);
+      console.log("guitarObserver:spinUp:url> " + this.uri + "\nguitarObserver:spinUp:payload> " + dat);
+      console.log("guitarObserver:spinUp:url> " + this.uri + "\nguitarObserver:spinUp:isReady()> " + this.isReady() );
+
     });
-    return this.isReady() ;
+      console.log("guitarObserver:spinUp:url> " + this.uri + "\nguitarObserver:spinUp:isReady()> " + this.isReady() );
+
+      return this.isReady() ;
   }
 }
 
@@ -147,7 +155,8 @@ export class FileAsSourceForJsonService {
     return this.privateGetNewsFeedFromArray(); // WORKS : not used
   }
   getPerformancesByYearBySemester() {
-    return this.privatePerformancesByYearBySemester(); // WORKS
+    // return this.privatePerformancesByYearBySemester(); // legacy: WORKS
+    return this.privatePerformancesByYearBySemesterFromHttp(); // INTEST
   }
   getPerformancesPlaylists() {
     return this.privatePerformancePlaylists(); // WORKS
@@ -167,7 +176,7 @@ export class FileAsSourceForJsonService {
   }
 
   private privateGetBooksSetUpFromHttp(): Observable<HttpResponse<any>> {
-    let observe: Observable<HttpResponse<any[]>> = this._http.get<any>(booksSetupUri,
+    let observe: Observable<HttpResponse<any[]>> = this._http.get<any>(playListsByChannelUri,
       {observe: 'response', responseType: 'json'});
     return observe;
   }
@@ -214,12 +223,27 @@ export class FileAsSourceForJsonService {
     return GUITARFOOTER;
   };
 
-  private privatePerformancesByYearBySemester(): IYouTubeChannelQueryResponse {
-    return YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE ;
-  }
+  // private privatePerformancesByYearBySemester(): IYouTubeChannelQueryResponse {
+  //   return YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE ;
+  // }
 
-  private privatePerformancePlaylists(): IYouTubePlaylist[] {
-    return YOU_TUBE_PLAYLISTS ;
+    private privatePerformancesByYearBySemesterFromHttp(): Observable<HttpResponse<Array<IYouTubePlaylistsByChannelQueryResponse>>> {
+        let myAny: any = this._http.get<Array<IYouTubePlaylistsByChannelQueryResponse>>(playListsByChannelUri,
+            {observe: 'response', responseType: 'json'});
+        return myAny;
+    }
+    private privatePerformancesByYearBySemesterFromHttp1(): Observable<HttpResponse<any[]>> {
+        let myAny: any = this._http.get<any[]>(playListsByChannelUri,
+            {observe: 'response', responseType: 'json'});
+        return myAny;
+    }
+
+  // private privatePerformancePlaylists(): IYouTubePlaylist[] {
+  //   return YOU_TUBE_PLAYLISTS ;
+  // }
+    private privatePerformancePlaylists(): any[] {
+  //   return YOU_TUBE_PLAYLISTS ;
+        return null ;
   }
 
 

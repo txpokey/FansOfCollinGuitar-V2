@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {
-  IYouTubeChannelQueryResponseDetails,
-  IYouTubePlaylist,
-  IYouTubePlayListItem,
-  IYouTubePlayListItemSnippet
-} from "../YouTubePlayListData";
+
 import {FileAsSourceForJsonService} from "../../../../services/file-as-source-for-json/file-as-source-for-json.service";
 import {isUndefined} from "util";
-import set = Reflect.set;
+import {
+    IYouTubeChannelQueryResponseDetails,
+    IYouTubePlaylist,
+    IYouTubePlayListItem, IYouTubePlayListItemSnippet
+} from "../YouTubePlayListClientServiceContracts";
+
 
 @Component({
   selector: 'ut-play-list',
