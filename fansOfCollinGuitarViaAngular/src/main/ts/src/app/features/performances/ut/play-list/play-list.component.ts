@@ -31,12 +31,12 @@ export class PlayListComponent extends GuitarApiComponentBaseClass<IYouTubeVideo
     @Input() requestedPlaylist: IYouTubePlaylistsByChannelQueryResponse;
 
     playlistQuery: IYouTubeVideosByPlaylistQueryResponse[] = null;
-    playlistGroupBy: Map<string, Set<IYouTubeVideosByPlaylistQueryResponse>> = null;
+    // playlistGroupBy: Map<string, Set<IYouTubeVideosByPlaylistQueryResponse>> = null;
     guitarPlaylist: IYouTubeVideosByPlaylistQueryResponse[] = null;
 
     constructor(private service: FileAsSourceForJsonService, private modalService: NgbModal) {
         super(setupUri, service.getHttpClient());
-        console.log("playListConstructor:requestedPlayList:> " + this.requestedPlaylist) ;
+        // console.log("playListConstructor:requestedPlayList:> " + this.requestedPlaylist) ;
     }
     ngOnInit() {
         let clientStub  : HttpClient = super.getHttpClient() ;
@@ -54,7 +54,8 @@ export class PlayListComponent extends GuitarApiComponentBaseClass<IYouTubeVideo
         if (this.getNetworker().isReady()) {
             let candidate: any = this.getNetworker().getPayload();
             this.playlistQuery = candidate;
-            this.playlistGroupBy = PlayListsComponentUtil.computePlaylistGroupBy(candidate);
+            // this.playlistGroupBy = PlayListsComponentUtil.computePlaylistGroupBy(candidate);
+            this.guitarPlaylist = PlayListsComponentUtil.sortPlaylistDiscovered(candidate);
             ret = true;
         }
         return ret;
@@ -88,20 +89,21 @@ class PlayListsComponentUtil {
         return candidate;
     }
 
-    static sortPlaylistGroupBy(clonee: IYouTubeVideosByPlaylistQueryResponse[]): IYouTubeVideosByPlaylistQueryResponse[] {
+    static sortPlaylistDiscovered(clonee: IYouTubeVideosByPlaylistQueryResponse[]): IYouTubeVideosByPlaylistQueryResponse[] {
         let candidate: IYouTubeVideosByPlaylistQueryResponse[] = [];
         clonee.forEach(
             (member: IYouTubeVideosByPlaylistQueryResponse) => {
-                if (!member.playListTitle.match(/websiteHelp/)) {
-                    candidate.push(member)
-                }
+                // if (!member.videoTitle.match(/websiteHelp/)) {
+                //     candidate.push(member)
+                // }
+                candidate.push(member)
             }
         );
         let sortedArray = Array.from(candidate).sort((x, y) => {
-            return -(x.playListTitle.localeCompare(y.playListTitle))
+            return -(x.videoTitle.localeCompare(y.videoTitle))
         });
         console.log("IYouTubeVideosByPlaylistQueryResponse:sortedArray>" + sortedArray);
-        return candidate ; // TODO : null
+        return candidate ;
     }
 }
 
