@@ -14,14 +14,17 @@ import {
     IMusicDeptCatalogByTerm,
     MUSIC_DEPT_CATALOG
 } from "../../features/classroom/class-schedule/GuitarClassSchedulePlanner";
-import {YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistsByChannelQuery";
-import {IYouTubePlaylistsByChannelQueryResponse} from "../../features/performances/ut/YouTubePlayListClientServiceContracts";
-import {YOU_TUBE_PLAYLISTS} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistQuery";
 import {isUndefined} from "util";
+import {YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistsByChannelQuery";
+import {
+    IYouTubeChannelQueryResponse,
+    IYouTubePlaylist,
+    YOU_TUBE_PLAYLISTS
+} from "../../features/performances/ut/constants/2018/spring/YouTubePlaylistQuery";
 
 const footerSetupUrl = "../../assets/json/footer-controller.json";
 const headerSetupUrl = "../../assets/json/header-controller.json";
-const booksSetupUri  = "/assets/json/textbooks-controller.json" ;
+// const booksSetupUri  = "/assets/json/textbooks-controller.json" ;
 // const playListsByChannelUri  = "/fans/video/playListsByChannel" ;
 // const videosByPlaylistUri  = "/fans/video/playListsByChannel" ;
 const playListsByChannelUri  = "http://localhost:8080/fans/video/playListsByChannel" ;
@@ -101,14 +104,9 @@ export class GuitarApiObserver<T> implements GuitarApiObserverContract {
 @Injectable({
   providedIn: 'root'
 })
-// export class FileAsSourceForJsonService implements OnInit {
 export class FileAsSourceForJsonService {
 
   constructor(private _http: HttpClient) { }
-
-  // ngOnInit(): void {
-  //   console.log("FileAsSourceForJsonService is HERE: NEVER RUNS");
-  // }
 
   getHttpClient() : HttpClient {
     return this._http ;
@@ -131,7 +129,7 @@ export class FileAsSourceForJsonService {
     return this.privateGetFooterSetUpFromHttp();
   }
 
-  getBooksSetUp() {
+  getBooksSetUp() {  // DEAD CODE
     // return this.privateGetBooksSetUpFromArray();  // WORKS : not used
     // return this.privateGetBooksSetUpFromHttp();  // WORKS : NOT used
   }
@@ -159,11 +157,10 @@ export class FileAsSourceForJsonService {
     return this.privateGetNewsFeedFromArray(); // WORKS : not used
   }
   getPerformancesByYearBySemester() {
-    // return this.privatePerformancesByYearBySemester(); // legacy: WORKS
-    return this.privatePerformancesByYearBySemesterFromHttp(); // INTEST
+    return this.privatePerformancesByYearBySemester(); // legacy: WORKS : DEAD CODE
   }
   getPerformancesPlaylists() {
-    return this.privatePerformancePlaylists(); // WORKS
+    return this.privatePerformancePlaylists();  // legacy: WORKS : DEAD CODE
   }
 
   private privateGetHeaderSetUpFromHttp(): Observable<HttpResponse<IHeaderConfig>> {
@@ -185,15 +182,6 @@ export class FileAsSourceForJsonService {
     return observe;
   }
 
-
-  // private handleError(err: HttpErrorResponse) {
-  // }
-
-  // private privateGetEventsSetUpFromHttp(): Observable<HttpResponse<IFooterConfig[]>> {
-  //   let myAny: any = this._http.get<IFooterConfig[]>(footerSetupUrl,
-  //     {observe: 'response', responseType: 'json'});
-  //   return myAny;
-  // }
   private privateGetBooksSetUpFromArray(): IGuitarBooks {
     return GUITARBOOKS ;
   }
@@ -227,36 +215,14 @@ export class FileAsSourceForJsonService {
     return GUITARFOOTER;
   };
 
-  // private privatePerformancesByYearBySemester(): IYouTubeChannelQueryResponse {
-  //   return YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE ;
-  // }
-
-    private privatePerformancesByYearBySemesterFromHttp(): Observable<HttpResponse<Array<IYouTubePlaylistsByChannelQueryResponse>>> {
-        let myAny: any = this._http.get<Array<IYouTubePlaylistsByChannelQueryResponse>>(playListsByChannelUri,
-            {observe: 'response', responseType: 'json'});
-        return myAny;
-    }
-    private privatePerformancesByYearBySemesterFromHttp1(): Observable<HttpResponse<any[]>> {
-        let myAny: any = this._http.get<any[]>(playListsByChannelUri,
-            {observe: 'response', responseType: 'json'});
-        return myAny;
-    }
-
-  // private privatePerformancePlaylists(): IYouTubePlaylist[] {
-  //   return YOU_TUBE_PLAYLISTS ;
-  // }
-    private privatePerformancePlaylists(): any[] {
-  //   return YOU_TUBE_PLAYLISTS ;
-        return null ;
+  // ========================= DEAD CODE =======================================
+  private privatePerformancesByYearBySemester(): IYouTubeChannelQueryResponse {
+    return YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE ;
   }
 
+  private privatePerformancePlaylists(): IYouTubePlaylist[] {
+    return YOU_TUBE_PLAYLISTS ;
+  }
 
-
-  // saving this one for rapid prototyping
-  // private privateGetFooterSetUpFromHttp0(): any[] {
-  //   this.myAny = this._http.get(footerSetupUrl);
-  //   return this.myAny;
-  //   // return;
-  // }
 }
 

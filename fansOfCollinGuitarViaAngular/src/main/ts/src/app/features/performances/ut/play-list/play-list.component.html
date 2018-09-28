@@ -1,4 +1,4 @@
-<div *ngIf="isPlayListReady()">
+<div *ngIf="isReady()">
 
     <div class="guitar-dept-display-flex-column">
         <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-column-header">
@@ -6,7 +6,6 @@
         </div>
     </div>
     <div class="guitar-dept-display-flex-column">
-        <!--<div *ngFor="let playlistVideoMember of playlistGroupBy.get(requestedPlaylist.playListId)"-->
         <div *ngFor="let playlistVideoMember of guitarPlaylist"
              class="guitar-dept-display-flex-wrap guitar-dept-display-flex-column">
             <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-display-flex-column">
