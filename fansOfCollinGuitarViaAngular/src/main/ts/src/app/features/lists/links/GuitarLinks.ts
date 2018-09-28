@@ -7,13 +7,13 @@ export interface IGuitarLinks   {
   payload: IGuitarLinksDetails[] ;
 }
 
-export const GUITARLINKS : IGuitarLinks[] = [
+export const GUITARLINKS : IGuitarLinks[] = [  // DEAD CODE
   {
     "label": "Internal Links",
     "payload": [
       {
         "label": "Music Department",
-        "url": "http://www.collin.edu/department/music/"
+        "url": "http://www.collin.edu/department/music/index.html"
       },
       {
         "label": "Music Library",
