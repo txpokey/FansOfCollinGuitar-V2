@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @Slf4j
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 class PerformanceVideoController implements CrossOriginContract {
     @Override
     String[] getRoutesNeededForCrossOriginRegistry() {
-        [ "/fans/video/playListsByChannel" , "/fans/video/videosByPlaylist" ]
+        [ "/fans/video/playListsByChannel" , "/fans/video/videosByPlaylist" , "/fans/video/videosByPlaylist/all" ]
     }
     @Autowired
     private @Qualifier("youTubeClient")
@@ -25,8 +26,16 @@ class PerformanceVideoController implements CrossOriginContract {
         final def playListsByChannel = service.parseContentFromPlaylistsByChannel()
         playListsByChannel
     }
-    @GetMapping("videosByPlaylist")
+    @GetMapping("videosByPlaylist/all")
     protected def getVideosByPlaylist() {
-        final def header = service.walkEntireChannelByPlaylistByAllMemberPlayListVideos()
+        final def all = service.walkEntireChannelByPlaylistByAllMemberPlayListVideos()
+    }
+
+    @GetMapping("videosByPlaylist")
+    protected def getVideosByPlaylist(@RequestParam Map<String, String> allRequestParams) {
+        final def playListId = allRequestParams.get("playListId")
+        final def jsonStream = service.getContentVideosByPlaylistId(playListId)
+        final def videos = service.parseContentFromVideosByPlayList(jsonStream)
+        videos
     }
 }

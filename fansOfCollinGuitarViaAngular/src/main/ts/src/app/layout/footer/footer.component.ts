@@ -17,7 +17,7 @@ const setupUri  = "http://localhost:8080/fans/footer" ;
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent extends GuitarApiComponentBaseClass<IFooterConfig[]> implements GuitarApiObserverPollingContract {
-  private guitarProgramFooter : IFooterConfig[] ;
+  public guitarProgramFooter : IFooterConfig[] ;
   constructor( private service: FileAsSourceForJsonService ) { super( setupUri , service.getHttpClient() ) ;}
 
   isReady() : boolean {

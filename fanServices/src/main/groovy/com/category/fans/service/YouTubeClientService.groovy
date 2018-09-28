@@ -102,7 +102,9 @@ class YouTubeClientService{
         def videoId = item.contentDetails.videoId
         def title = item.snippet.title
         def description = item.snippet.description
-        def captured = [playListId: playlistId, videoId: videoId, videoTitle: title, videoDescription: description]
+        def thumbnailUrl = item.snippet.thumbnails.medium.url
+        def captured = [playListId: playlistId, videoId: videoId, videoTitle: title, videoDescription: description,
+                        videoThumbnailUrl: thumbnailUrl]
         captured
     }
 

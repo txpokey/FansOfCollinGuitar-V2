@@ -1,20 +1,25 @@
-<div class="guitar-dept-display-flex-column">
-  <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-column-header">
-    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{requestedPlaylist.snippet.title}}</div>
-  </div>
-</div>
-<div class="guitar-dept-display-flex-column">
-  <div *ngFor="let playlistVideoMember of playlistGroupBy.get(requestedPlaylist.id)"
-       class="guitar-dept-display-flex-wrap guitar-dept-display-flex-column">
-    <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-display-flex-column">
-      <a target="_blank"
-         href="https://youtu.be/{{playlistVideoMember.contentDetails.videoId}}" class="guitar-dept-display-flex-row">
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{playlistVideoMember.snippet.title}}
+<div *ngIf="isPlayListReady()">
+
+    <div class="guitar-dept-display-flex-column">
+        <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-column-header">
+            <div class="guitar-dept-display-flex-wrap  Grid-cell">{{requestedPlaylist.playListTitle}}</div>
         </div>
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">
-          <img src="{{playlistVideoMember.snippet.thumbnails.default.url}}">
-        </div>
-      </a>
     </div>
-  </div>
+    <div class="guitar-dept-display-flex-column">
+        <div *ngFor="let playlistVideoMember of playlistGroupBy.get(requestedPlaylist.playListId)"
+             class="guitar-dept-display-flex-wrap guitar-dept-display-flex-column">
+            <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-display-flex-column">
+                <a target="_blank"
+                   href="https://youtu.be/{{playlistVideoMember.videoId}}" class="guitar-dept-display-flex-row">
+                    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{playlistVideoMember.videoTitle}}
+                    </div>
+                    <div class="guitar-dept-display-flex-wrap  Grid-cell">
+                        <img src="{{playlistVideoMember.videoThumbnailUrl}}">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
 </div>
+

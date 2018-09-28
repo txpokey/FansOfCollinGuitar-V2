@@ -23,8 +23,9 @@ const footerSetupUrl = "../../assets/json/footer-controller.json";
 const headerSetupUrl = "../../assets/json/header-controller.json";
 const booksSetupUri  = "/assets/json/textbooks-controller.json" ;
 // const playListsByChannelUri  = "/fans/video/playListsByChannel" ;
+// const videosByPlaylistUri  = "/fans/video/playListsByChannel" ;
 const playListsByChannelUri  = "http://localhost:8080/fans/video/playListsByChannel" ;
-const videosByPlaylistUri  = "/fans/video/videosByPlaylist" ;
+const videosByPlaylistUri  = "http://localhost:8080/fans/video/videosByPlaylist" ;
 
 export interface GuitarApiObserverPollingContract {
   isReady() : boolean ;
@@ -38,19 +39,23 @@ export interface GuitarApiObserverContract extends GuitarApiObserverPollingContr
 }
 
 export abstract class GuitarApiComponentBaseClass<T> implements OnInit {
-  private lookupAgent : GuitarApiObserverContract ;
+  protected lookupAgent : GuitarApiObserverContract ;
   protected constructor(private setupUri : string, private clientStub: HttpClient) { }
   ngOnInit() {
     let clientStub  : HttpClient = this.getHttpClient() ;
     let agent : GuitarApiObserverContract  = new GuitarApiObserver<T>(this.setupUri , clientStub ) ;
-    this.lookupAgent = agent ;
+    this.setNetworker(agent) ;
     let spun:  boolean = agent.spinUp() ;
     console.log("ngOnInit: spinup is HERE:uri> " + this.setupUri + "\nspinup is HERE:spun> " + spun );
   }
   getNetworker() : GuitarApiObserverContract {
     return this.lookupAgent ;
   }
-  private getHttpClient() : HttpClient {
+  protected setNetworker(agent: GuitarApiObserverContract) : void {
+    this.lookupAgent = agent ;
+  }
+
+  getHttpClient() : HttpClient {
     return this.clientStub;
   }
 }
@@ -86,7 +91,6 @@ export class GuitarApiObserver<T> implements GuitarApiObserverContract {
       this.payload = dat.body ;
       console.log("guitarObserver:spinUp:url> " + this.uri + "\nguitarObserver:spinUp:payload> " + dat);
       console.log("guitarObserver:spinUp:url> " + this.uri + "\nguitarObserver:spinUp:isReady()> " + this.isReady() );
-
     });
       console.log("guitarObserver:spinUp:url> " + this.uri + "\nguitarObserver:spinUp:isReady()> " + this.isReady() );
 
