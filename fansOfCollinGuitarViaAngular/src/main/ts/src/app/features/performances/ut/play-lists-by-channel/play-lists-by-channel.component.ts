@@ -10,7 +10,7 @@ import {
 } from "../YouTubePlayListClientServiceContracts";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
-const playListsByChannelUri = "http://localhost:8080/fans/video/playListsByChannel";
+const playListsByChannelUri = "http://localhost:8081/fans/video/playListsByChannel";
 const EMPTY_URL = '#0';
 const setupUri = playListsByChannelUri;
 

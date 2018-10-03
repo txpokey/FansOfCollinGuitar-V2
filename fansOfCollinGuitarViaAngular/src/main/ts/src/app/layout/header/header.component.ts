@@ -8,7 +8,7 @@ import {
 
 const carouselSlideDeck = [0, 1, 2];
 // const setupUri  = "/assets/json/header-controller.json" ;
-const setupUri  = "http://localhost:8080/fans/header" ;
+const setupUri  = "http://localhost:8081/fans/header" ;
 
 @Component({
   selector: 'guitar-header',

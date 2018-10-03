@@ -3909,7 +3909,7 @@ var GUITARLINKS = [
         "payload": [
             {
                 "label": "Music Department",
-                "url": "http://www.collin.edu/department/music/"
+                "url": "http://www.collin.edu/department/music/index.html"
             },
             {
                 "label": "Music Library",
@@ -4263,6 +4263,12 @@ var PerformancesModule = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YOU_TUBE_PLAYLISTS", function() { return YOU_TUBE_PLAYLISTS; });
+//
+//
+//
+// def captured = [playListId: playlistId, videoId: videoId, videoTitle: title, videoDescription: description]
+// def captured = [playListId: playListId, playListTitle: title, playListDescription: description]
+;
 var YOU_TUBE_PLAYLISTS = [
     {
         "kind": "youtube#playlistItemListResponse",
@@ -15162,7 +15168,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"guitar-dept-display-flex-column\">\n  <div class=\"guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-column-header\">\n    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{requestedPlaylist.snippet.title}}</div>\n  </div>\n</div>\n<div class=\"guitar-dept-display-flex-column\">\n  <div *ngFor=\"let playlistVideoMember of playlistGroupBy.get(requestedPlaylist.id)\"\n       class=\"guitar-dept-display-flex-wrap guitar-dept-display-flex-column\">\n    <div class=\"guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-display-flex-column\">\n      <a target=\"_blank\"\n         href=\"https://youtu.be/{{playlistVideoMember.contentDetails.videoId}}\" class=\"guitar-dept-display-flex-row\">\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{playlistVideoMember.snippet.title}}\n        </div>\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">\n          <img src=\"{{playlistVideoMember.snippet.thumbnails.default.url}}\">\n        </div>\n      </a>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"isReady()\">\n\n    <div class=\"guitar-dept-display-flex-column\">\n        <div class=\"guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-column-header\">\n            <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{requestedPlaylist.playListTitle}}</div>\n        </div>\n    </div>\n    <div class=\"guitar-dept-display-flex-column\">\n        <div *ngFor=\"let playlistVideoMember of guitarPlaylist\"\n             class=\"guitar-dept-display-flex-wrap guitar-dept-display-flex-column\">\n            <div class=\"guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-display-flex-column\">\n                <a target=\"_blank\"\n                   href=\"https://youtu.be/{{playlistVideoMember.videoId}}\" class=\"guitar-dept-display-flex-row\">\n                    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{playlistVideoMember.videoTitle}}\n                    </div>\n                    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">\n                        <img src=\"{{playlistVideoMember.videoThumbnailUrl}}\">\n                    </div>\n                </a>\n            </div>\n        </div>\n    </div>\n\n</div>\n\n"
 
 /***/ }),
 
@@ -15178,8 +15184,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlayListComponent", function() { return PlayListComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../services/file-as-source-for-json/file-as-source-for-json.service */ "./src/app/services/file-as-source-for-json/file-as-source-for-json.service.ts");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15192,52 +15207,51 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var PlayListComponent = /** @class */ (function () {
-    function PlayListComponent(service) {
-        this.service = service;
-        this.playlistQuery = null;
-        this.playlistGroupBy = null;
+// ------
+var playListsUri = "http://localhost:8081/fans/video/videosByPlaylist";
+var EMPTY_URL = '#0';
+var setupUri = playListsUri;
+var PlayListComponent = /** @class */ (function (_super) {
+    __extends(PlayListComponent, _super);
+    function PlayListComponent(service, modalService) {
+        var _this = _super.call(this, setupUri, service.getHttpClient()) || this;
+        _this.service = service;
+        _this.modalService = modalService;
+        _this.playlistQuery = null;
+        _this.guitarPlaylist = null;
+        _this.hasIcon = function (candidateLink) {
+            return EMPTY_URL !== candidateLink.icon;
+        };
+        _this.hasLogo = function (candidateLink) {
+            return EMPTY_URL !== candidateLink.logo;
+        };
+        return _this;
     }
+    /**
+     * requestedPlaylist is not in scope during constructor, so need to override ngOnInit() so that we can
+     * pass in that variable as a GET parameter on the http clien request set up in the abstract base class
+     */
     PlayListComponent.prototype.ngOnInit = function () {
-        var fbar = this.service.getPerformancesPlaylists();
-        this.playlistQuery = fbar;
-        var foo = this.computePlaylistGroupBy();
-        this.playlistGroupBy = foo;
-        var bar = this.sortPlaylistGroupBy();
-        this.playlistGroupBy = bar;
+        var clientStub = _super.prototype.getHttpClient.call(this);
+        var specialUrl = setupUri + "?playListId=" + this.requestedPlaylist.playListId;
+        var agent = new _services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["GuitarApiObserver"](specialUrl, clientStub);
+        _super.prototype.setNetworker.call(this, agent);
+        var spun = agent.spinUp();
+        console.log("ngOnInit: spinup is HERE:uri> " + specialUrl + "\nspinup is HERE:spun> " + spun);
     };
-    PlayListComponent.prototype.sortPlaylistGroupBy = function () {
-        var candidate = new Map();
-        var playlistGroupBy = this.playlistGroupBy;
-        var allGroupByKeysIterator = playlistGroupBy.keys();
-        var allGroupByKeysAsArray = Array.from(playlistGroupBy.keys());
-        for (var _i = 0, allGroupByKeysAsArray_1 = allGroupByKeysAsArray; _i < allGroupByKeysAsArray_1.length; _i++) {
-            var key = allGroupByKeysAsArray_1[_i];
-            var setDiscovered = playlistGroupBy.get(key);
-            var sortedArray = Array.from(setDiscovered).sort(function (x, y) { return x.snippet.title.localeCompare(y.snippet.title); });
-            var sortedSet = new Set(sortedArray);
-            candidate.set(key, sortedSet);
+    PlayListComponent.prototype.isReady = function () {
+        var ret = false;
+        if (this.getNetworker().isReady()) {
+            var candidate = this.getNetworker().getPayload();
+            this.playlistQuery = candidate;
+            this.guitarPlaylist = PlayListsComponentUtil.sortPlaylistDiscovered(candidate);
+            ret = true;
         }
-        return candidate;
+        return ret;
     };
-    PlayListComponent.prototype.computePlaylistGroupBy = function () {
-        var candidate = new Map();
-        var allPlaylistsInChannel = this.playlistQuery;
-        for (var _i = 0, allPlaylistsInChannel_1 = allPlaylistsInChannel; _i < allPlaylistsInChannel_1.length; _i++) {
-            var playlist = allPlaylistsInChannel_1[_i];
-            var itemsArray = playlist.items;
-            for (var _a = 0, itemsArray_1 = itemsArray; _a < itemsArray_1.length; _a++) {
-                var playlistItem = itemsArray_1[_a];
-                var snippet = playlistItem.snippet;
-                var playlistItemPlaylistId = snippet.playlistId;
-                var setDiscovered = candidate.get(playlistItemPlaylistId);
-                var sideEffectOfAddingPlaylistMemberVideo = Object(util__WEBPACK_IMPORTED_MODULE_2__["isUndefined"])(setDiscovered) ? (setDiscovered = new Set().add(playlistItem)) : setDiscovered.add(playlistItem);
-                candidate.set(playlistItemPlaylistId, setDiscovered);
-                // console.log(playlist) ;
-            }
-            // console.log(playlist) ;
-        }
-        return candidate;
+    PlayListComponent.prototype.openBackDropCustomClass = function (guitarPlaylist, content) {
+        this.guitarPlaylist = guitarPlaylist;
+        this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -15249,11 +15263,40 @@ var PlayListComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./play-list.component.html */ "./src/app/features/performances/ut/play-list/play-list.component.html"),
             styles: [__webpack_require__(/*! ./play-list.component.css */ "./src/app/features/performances/ut/play-list/play-list.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["FileAsSourceForJsonService"]])
+        __metadata("design:paramtypes", [_services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["FileAsSourceForJsonService"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"]])
     ], PlayListComponent);
     return PlayListComponent;
-}());
+}(_services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["GuitarApiComponentBaseClass"]));
 
+var PlayListsComponentUtil = /** @class */ (function () {
+    function PlayListsComponentUtil() {
+    }
+    // static computePlaylistGroupBy(allPlaylistsInChannel: IYouTubeVideosByPlaylistQueryResponse[]): Map<string, Set<IYouTubeVideosByPlaylistQueryResponse>> {
+    //
+    //     let candidate: Map<string, Set<IYouTubeVideosByPlaylistQueryResponse>> = new Map();
+    //     for (let playlist of allPlaylistsInChannel) {
+    //             let playlistItemPlaylistId = playlist.playListId;
+    //             let setDiscovered = candidate.get(playlistItemPlaylistId);
+    //             let sideEffectOfAddingPlaylistMemberVideo = isUndefined(setDiscovered) ? (setDiscovered = new Set().add(playlist)) : setDiscovered.add(playlist);
+    //             candidate.set(playlistItemPlaylistId, setDiscovered);
+    //         // }
+    //         // console.log(playlist) ;
+    //     }
+    //     return candidate;
+    // }
+    PlayListsComponentUtil.sortPlaylistDiscovered = function (clonee) {
+        var candidate = [];
+        clonee.forEach(function (member) {
+            candidate.push(member);
+        });
+        var sortedArray = Array.from(candidate).sort(function (x, y) {
+            return -(x.videoTitle.localeCompare(y.videoTitle));
+        });
+        console.log("IYouTubeVideosByPlaylistQueryResponse:sortedArray>" + sortedArray);
+        return candidate;
+    };
+    return PlayListsComponentUtil;
+}());
 
 
 /***/ }),
@@ -15276,7 +15319,7 @@ module.exports = "\n.dark-modal .modal-content {\n  background-color: #292b2c;\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section id=\"guitar-program-courses-by-school-term-section\">\n  <div class=\"guitar-dept-display-flex-column\">\n    <div class=\"guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header\">\n      {{channelQueryResponseSorted.channelTitle}}\n    </div>\n    <div *ngFor=\"let guitarPlaylist of channelQueryResponseSorted.items\"\n         class=\"guitar-dept-display-flex-wrap  guitar-dept-display-flex-row\">\n      <div (click)=\"openBackDropCustomClass(guitarPlaylist,content)\"\n           class=\"guitar-dept-display-flex-wrap Grid-bordered Grid-cell\">\n        <img src=\"{{guitarPlaylist.snippet.thumbnails.medium.url}}\" alt=\"{{guitarPlaylist.snippet.title}}\">\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarPlaylist.snippet.title}}</div>\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarPlaylist.snippet.description}}</div>\n      </div>\n    </div>\n  </div>\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n    <div class=\"modal-header\">\n      <div class=\"modal-title\">\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">\n          Playlist Contents\n        </div>\n      </div>\n      <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n    </div>\n    <div class=\"modal-body\">\n      <ut-play-list [requestedPlaylist]=\"guitarPlaylist\"></ut-play-list>\n    </div>\n    <div class=\"modal-footer\">\n      <button type=\"button\" class=\"btn btn-light\" (click)=\"c('Close click')\">Close</button>\n    </div>\n  </ng-template>\n</section>\n\n"
+module.exports = "<section id=\"guitar-program-courses-by-school-term-section\">\n    <div *ngIf=\"isReady()\">\n\n        <div class=\"guitar-dept-display-flex-column\">\n            <div class=\"guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header\">\n                Student Performances\n            </div>\n            <div *ngFor=\"let guitarPlaylist of channelQueryResponseSorted\"\n                 class=\"guitar-dept-display-flex-wrap  guitar-dept-display-flex-row\">\n                <div (click)=\"openBackDropCustomClass(guitarPlaylist,content)\"\n                     class=\"guitar-dept-display-flex-wrap Grid-bordered Grid-cell\">\n                    <img src=\"{{guitarPlaylist.thumbnailUrl}}\" alt=\"{{guitarPlaylist.playListTitle}}\">\n                    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarPlaylist.playListTitle}}</div>\n                    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarPlaylist.playListDescription}}</div>\n                </div>\n            </div>\n        </div>\n        <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n            <div class=\"modal-header\">\n                <div class=\"modal-title\">\n                    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">\n                        Playlist Contents\n                    </div>\n                </div>\n                <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <ut-play-list [requestedPlaylist]=\"guitarPlaylist\"></ut-play-list>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-light\" (click)=\"c('Close click')\">Close</button>\n            </div>\n        </ng-template>\n\n    </div>\n\n</section>\n\n"
 
 /***/ }),
 
@@ -15293,6 +15336,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../services/file-as-source-for-json/file-as-source-for-json.service */ "./src/app/services/file-as-source-for-json/file-as-source-for-json.service.ts");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15305,19 +15358,35 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var PlayListsByChannelComponent = /** @class */ (function () {
+var playListsByChannelUri = "http://localhost:8081/fans/video/playListsByChannel";
+var EMPTY_URL = '#0';
+var setupUri = playListsByChannelUri;
+var PlayListsByChannelComponent = /** @class */ (function (_super) {
+    __extends(PlayListsByChannelComponent, _super);
     function PlayListsByChannelComponent(service, modalService) {
-        this.service = service;
-        this.modalService = modalService;
-        this.channelQueryResponse = null;
-        this.channelQueryResponseSorted = null;
-        this.guitarPlaylist = null;
+        var _this = _super.call(this, setupUri, service.getHttpClient()) || this;
+        _this.service = service;
+        _this.modalService = modalService;
+        _this.channelQueryResponse = null;
+        _this.channelQueryResponseSorted = null;
+        _this.guitarPlaylist = null;
+        _this.hasIcon = function (candidateLink) {
+            return EMPTY_URL !== candidateLink.icon;
+        };
+        _this.hasLogo = function (candidateLink) {
+            return EMPTY_URL !== candidateLink.logo;
+        };
+        return _this;
     }
-    PlayListsByChannelComponent.prototype.ngOnInit = function () {
-        var foo = this.service.getPerformancesByYearBySemester();
-        this.channelQueryResponse = foo;
-        var sortedClone = new MySortedClone(foo);
-        this.channelQueryResponseSorted = sortedClone;
+    PlayListsByChannelComponent.prototype.isReady = function () {
+        var ret = false;
+        if (this.getNetworker().isReady()) {
+            var candidate = this.getNetworker().getPayload();
+            this.channelQueryResponse = candidate;
+            this.channelQueryResponseSorted = PlayListsByChannelComponentUtil.sortPlaylistGroupBy(candidate);
+            ret = true;
+        }
+        return ret;
     };
     PlayListsByChannelComponent.prototype.openBackDropCustomClass = function (guitarPlaylist, content) {
         this.guitarPlaylist = guitarPlaylist;
@@ -15332,23 +15401,25 @@ var PlayListsByChannelComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["FileAsSourceForJsonService"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"]])
     ], PlayListsByChannelComponent);
     return PlayListsByChannelComponent;
-}());
+}(_services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["GuitarApiComponentBaseClass"]));
 
-var MySortedClone = /** @class */ (function () {
-    function MySortedClone(clonee) {
-        this.channelTitle = clonee.channelTitle;
-        this.kind = clonee.kind;
-        this.etag = clonee.etag;
-        this.pageInfo = clonee.pageInfo;
-        this.items = this.sortPlaylistGroupBy(clonee.items);
+var PlayListsByChannelComponentUtil = /** @class */ (function () {
+    function PlayListsByChannelComponentUtil() {
     }
-    MySortedClone.prototype.sortPlaylistGroupBy = function (clonee) {
+    PlayListsByChannelComponentUtil.sortPlaylistGroupBy = function (clonee) {
         var candidate = [];
-        clonee.forEach(function (member) { return candidate.push(member); });
-        var sortedArray = Array.from(candidate).sort(function (x, y) { return -(x.snippet.title.localeCompare(y.snippet.title)); });
+        clonee.forEach(function (member) {
+            if (!member.playListTitle.match(/websiteHelp/)) {
+                candidate.push(member);
+            }
+        });
+        var sortedArray = Array.from(candidate).sort(function (x, y) {
+            return -(x.playListTitle.localeCompare(y.playListTitle));
+        });
+        console.log("playListsByChannelUtil:sortedArray>" + sortedArray);
         return sortedArray;
     };
-    return MySortedClone;
+    return PlayListsByChannelComponentUtil;
 }());
 
 
@@ -15568,7 +15639,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var EMPTY_URL = '#0';
 // const setupUri  = "/assets/json/footer-controller.json" ;
-var setupUri = "http://localhost:8080/fans/footer";
+var setupUri = "http://localhost:8081/fans/footer";
 var FooterComponent = /** @class */ (function (_super) {
     __extends(FooterComponent, _super);
     function FooterComponent(service) {
@@ -15712,7 +15783,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var carouselSlideDeck = [0, 1, 2];
 // const setupUri  = "/assets/json/header-controller.json" ;
-var setupUri = "http://localhost:8080/fans/header";
+var setupUri = "http://localhost:8081/fans/header";
 var HeaderComponent = /** @class */ (function (_super) {
     __extends(HeaderComponent, _super);
     function HeaderComponent(service) {
@@ -15985,10 +16056,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _features_classroom_textbooks_GuitarBooks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../features/classroom/textbooks/GuitarBooks */ "./src/app/features/classroom/textbooks/GuitarBooks.ts");
 /* harmony import */ var _features_classroom_faculty_GuitarFaculty__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../features/classroom/faculty/GuitarFaculty */ "./src/app/features/classroom/faculty/GuitarFaculty.ts");
 /* harmony import */ var _features_classroom_class_schedule_GuitarClassSchedulePlanner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../features/classroom/class-schedule/GuitarClassSchedulePlanner */ "./src/app/features/classroom/class-schedule/GuitarClassSchedulePlanner.ts");
-/* harmony import */ var _features_performances_ut_constants_2018_spring_YouTubePlaylistsByChannelQuery__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../features/performances/ut/constants/2018/spring/YouTubePlaylistsByChannelQuery */ "./src/app/features/performances/ut/constants/2018/spring/YouTubePlaylistsByChannelQuery.ts");
-/* harmony import */ var _features_performances_ut_constants_2018_spring_YouTubePlaylistQuery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../features/performances/ut/constants/2018/spring/YouTubePlaylistQuery */ "./src/app/features/performances/ut/constants/2018/spring/YouTubePlaylistQuery.ts");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _features_performances_ut_constants_2018_spring_YouTubePlaylistsByChannelQuery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../features/performances/ut/constants/2018/spring/YouTubePlaylistsByChannelQuery */ "./src/app/features/performances/ut/constants/2018/spring/YouTubePlaylistsByChannelQuery.ts");
+/* harmony import */ var _features_performances_ut_constants_2018_spring_YouTubePlaylistQuery__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../features/performances/ut/constants/2018/spring/YouTubePlaylistQuery */ "./src/app/features/performances/ut/constants/2018/spring/YouTubePlaylistQuery.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -16013,7 +16084,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var footerSetupUrl = "../../assets/json/footer-controller.json";
 var headerSetupUrl = "../../assets/json/header-controller.json";
-var booksSetupUri = "/assets/json/textbooks-controller.json";
+// const booksSetupUri  = "/assets/json/textbooks-controller.json" ;
+// const playListsByChannelUri  = "/fans/video/playListsByChannel" ;
+// const videosByPlaylistUri  = "/fans/video/playListsByChannel" ;
+var playListsByChannelUri = "http://localhost:8080/fans/video/playListsByChannel";
+var videosByPlaylistUri = "http://localhost:8080/fans/video/videosByPlaylist";
 var GuitarApiComponentBaseClass = /** @class */ (function () {
     function GuitarApiComponentBaseClass(setupUri, clientStub) {
         this.setupUri = setupUri;
@@ -16022,12 +16097,15 @@ var GuitarApiComponentBaseClass = /** @class */ (function () {
     GuitarApiComponentBaseClass.prototype.ngOnInit = function () {
         var clientStub = this.getHttpClient();
         var agent = new GuitarApiObserver(this.setupUri, clientStub);
-        this.lookupAgent = agent;
+        this.setNetworker(agent);
         var spun = agent.spinUp();
-        console.log("spinup is HERE:> " + spun);
+        console.log("ngOnInit: spinup is HERE:uri> " + this.setupUri + "\nspinup is HERE:spun> " + spun);
     };
     GuitarApiComponentBaseClass.prototype.getNetworker = function () {
         return this.lookupAgent;
+    };
+    GuitarApiComponentBaseClass.prototype.setNetworker = function (agent) {
+        this.lookupAgent = agent;
     };
     GuitarApiComponentBaseClass.prototype.getHttpClient = function () {
         return this.clientStub;
@@ -16041,9 +16119,10 @@ var GuitarApiObserver = /** @class */ (function () {
         this.clientStub = clientStub;
         var candidate = this.supplyObserver(clientStub, uri);
         this.observable = candidate;
+        this.uri = uri;
     }
     GuitarApiObserver.prototype.isDefined = function (underTest) {
-        var candidate = Object(util__WEBPACK_IMPORTED_MODULE_12__["isUndefined"])(underTest);
+        var candidate = Object(util__WEBPACK_IMPORTED_MODULE_10__["isUndefined"])(underTest);
         return !candidate;
     };
     GuitarApiObserver.prototype.isReady = function () {
@@ -16063,8 +16142,10 @@ var GuitarApiObserver = /** @class */ (function () {
         var _this = this;
         this.getObserver().forEach(function (dat) {
             _this.payload = dat.body;
-            console.log("guitarObserver:spinUp> " + dat);
+            console.log("guitarObserver:spinUp:url> " + _this.uri + "\nguitarObserver:spinUp:payload> " + dat);
+            console.log("guitarObserver:spinUp:url> " + _this.uri + "\nguitarObserver:spinUp:isReady()> " + _this.isReady());
         });
+        console.log("guitarObserver:spinUp:url> " + this.uri + "\nguitarObserver:spinUp:isReady()> " + this.isReady());
         return this.isReady();
     };
     return GuitarApiObserver;
@@ -16074,9 +16155,6 @@ var FileAsSourceForJsonService = /** @class */ (function () {
     function FileAsSourceForJsonService(_http) {
         this._http = _http;
     }
-    // ngOnInit(): void {
-    //   console.log("FileAsSourceForJsonService is HERE: NEVER RUNS");
-    // }
     FileAsSourceForJsonService.prototype.getHttpClient = function () {
         return this._http;
     };
@@ -16121,10 +16199,10 @@ var FileAsSourceForJsonService = /** @class */ (function () {
         return this.privateGetNewsFeedFromArray(); // WORKS : not used
     };
     FileAsSourceForJsonService.prototype.getPerformancesByYearBySemester = function () {
-        return this.privatePerformancesByYearBySemester(); // WORKS
+        return this.privatePerformancesByYearBySemester(); // legacy: WORKS : DEAD CODE
     };
     FileAsSourceForJsonService.prototype.getPerformancesPlaylists = function () {
-        return this.privatePerformancePlaylists(); // WORKS
+        return this.privatePerformancePlaylists(); // legacy: WORKS : DEAD CODE
     };
     FileAsSourceForJsonService.prototype.privateGetHeaderSetUpFromHttp = function () {
         var myAny = this._http.get(headerSetupUrl, { observe: 'response', responseType: 'json' });
@@ -16137,16 +16215,9 @@ var FileAsSourceForJsonService = /** @class */ (function () {
         return myAny;
     };
     FileAsSourceForJsonService.prototype.privateGetBooksSetUpFromHttp = function () {
-        var observe = this._http.get(booksSetupUri, { observe: 'response', responseType: 'json' });
+        var observe = this._http.get(playListsByChannelUri, { observe: 'response', responseType: 'json' });
         return observe;
     };
-    // private handleError(err: HttpErrorResponse) {
-    // }
-    // private privateGetEventsSetUpFromHttp(): Observable<HttpResponse<IFooterConfig[]>> {
-    //   let myAny: any = this._http.get<IFooterConfig[]>(footerSetupUrl,
-    //     {observe: 'response', responseType: 'json'});
-    //   return myAny;
-    // }
     FileAsSourceForJsonService.prototype.privateGetBooksSetUpFromArray = function () {
         return _features_classroom_textbooks_GuitarBooks__WEBPACK_IMPORTED_MODULE_7__["GUITARBOOKS"];
     };
@@ -16175,18 +16246,17 @@ var FileAsSourceForJsonService = /** @class */ (function () {
         return _layout_footer_FooterConfig__WEBPACK_IMPORTED_MODULE_2__["GUITARFOOTER"];
     };
     ;
+    // ========================= DEAD CODE =======================================
     FileAsSourceForJsonService.prototype.privatePerformancesByYearBySemester = function () {
-        return _features_performances_ut_constants_2018_spring_YouTubePlaylistsByChannelQuery__WEBPACK_IMPORTED_MODULE_10__["YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE"];
+        return _features_performances_ut_constants_2018_spring_YouTubePlaylistsByChannelQuery__WEBPACK_IMPORTED_MODULE_11__["YOU_TUBE_PLAYLISTS_BY_CHANNEL_RESPONSE"];
     };
     FileAsSourceForJsonService.prototype.privatePerformancePlaylists = function () {
-        return _features_performances_ut_constants_2018_spring_YouTubePlaylistQuery__WEBPACK_IMPORTED_MODULE_11__["YOU_TUBE_PLAYLISTS"];
+        return _features_performances_ut_constants_2018_spring_YouTubePlaylistQuery__WEBPACK_IMPORTED_MODULE_12__["YOU_TUBE_PLAYLISTS"];
     };
     FileAsSourceForJsonService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
-        })
-        // export class FileAsSourceForJsonService implements OnInit {
-        ,
+        }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], FileAsSourceForJsonService);
     return FileAsSourceForJsonService;

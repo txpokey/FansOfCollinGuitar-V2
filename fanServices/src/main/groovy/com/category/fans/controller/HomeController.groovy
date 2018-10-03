@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class HomeController {
 
-    @RequestMapping(value = "/**/{[path:[^\\.]*}")
+//    @RequestMapping(value = "/**/{[path:[^\\.]*}")
+    @RequestMapping(value = "/[^api]*/{[path:[^\\.]*}")
     String redirect() {
         // Forward to home page so that route is preserved.
         return "forward:/"

@@ -24,6 +24,7 @@ class YamlConfigTest extends AbstractTestNGSpringContextTests {
     void sanityCheck() {
         assert myConfig
         assert apikey
+        assert 'NOT_FOUND' != apikey
         log.debug("DEBUG HERE")
     }
 }

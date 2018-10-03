@@ -1,6 +1,9 @@
 spring:
   application:
     name: fanServices
+  data:
+    rest:
+      base-path: /api
   profiles:
     active: dev
     include: crypto
@@ -18,5 +21,8 @@ logging:
     com.category.fans: DEBUG
 
 server:
-  port: 8080
+  port: 8081
 #  port: 0 # random port
+
+
+#spring.data.rest.basePath=/api

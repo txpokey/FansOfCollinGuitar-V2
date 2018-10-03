@@ -8,7 +8,7 @@ import {
 
 const EMPTY_URL = '#0' ;
 // const setupUri  = "/assets/json/footer-controller.json" ;
-const setupUri  = "http://localhost:8080/fans/footer" ;
+const setupUri  = "http://localhost:8081/fans/footer" ;
 
 @Component({
   selector: 'guitar-footer',

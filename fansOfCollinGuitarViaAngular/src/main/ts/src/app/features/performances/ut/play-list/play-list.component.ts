@@ -16,7 +16,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {HttpClient} from "@angular/common/http";
 
 // ------
-const playListsUri = "http://localhost:8080/fans/video/videosByPlaylist";
+const playListsUri = "http://localhost:8081/fans/video/videosByPlaylist";
 const EMPTY_URL = '#0';
 const setupUri = playListsUri;
 
