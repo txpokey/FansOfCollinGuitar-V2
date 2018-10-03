@@ -6,7 +6,9 @@ export interface IYouTubePlaylistsByChannelQueryResponse {
     channelTitle: string,
     playListDescription: string
     thumbnailUrl: string
-}export interface IYouTubeVideosByPlaylistQueryResponse extends IYouTubePlaylistsByChannelQueryResponse {
+}
+
+export interface IYouTubeVideosByPlaylistQueryResponse extends IYouTubePlaylistsByChannelQueryResponse {
     // def captured = [playListId: playlistId, videoId: videoId, videoTitle: title, videoDescription: description]
 
     playListId: string,
