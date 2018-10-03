@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties
+/**
+ * @deprecated non working : start of proof of concept
+ */
 class YamlConfig {
 
     private String name
