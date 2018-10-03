@@ -4,13 +4,11 @@ import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests
 import org.testng.annotations.Test
 
 import javax.persistence.EntityManager
-import javax.persistence.PersistenceContext;
-
-import static org.testng.Assert.*;
+import javax.persistence.PersistenceContext
 
 @Slf4j
 @Test
