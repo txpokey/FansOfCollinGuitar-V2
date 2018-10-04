@@ -6,7 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CollegeEventRepository extends JpaRepository<CollegeEvent,Long>{
-//    @PersistenceContext
-//    private EntityManager entityManager;
 
 }
