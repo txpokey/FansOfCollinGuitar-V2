@@ -31,6 +31,7 @@ class FeaturesConfig{
                 final String[] routes = getRoutesNeededForCrossOriginRegistry()
                 final String origin = CrossOriginContract.CROSS_SITE_ORIGIN
                 routes.each { route -> registry.addMapping(route).allowedOrigins(origin) }
+                routes
             }
         };
     }

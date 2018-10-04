@@ -16,7 +16,7 @@ class CollegeEvent{
     String name
     String date
     String time
-    String venue
+    String room
     String event
 }
 //    "name": "2018 Spring Guitar Events at Collin College",

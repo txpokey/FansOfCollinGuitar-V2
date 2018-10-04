@@ -26,17 +26,23 @@ class BootstrapDataService {
         true
     }
     final static def a = [
-        [ name : "name" ,
-          date : "date" ,
-          time : "time" ,
-          event : "event" ,
-          venue : "venue"
+        [ name : "2018 Spring Guitar Events at Collin College" ,
+          date : "Date" ,
+          time : "Time" ,
+          room : "Location/Room" ,
+          event : "Events"
+        ] ,
+        [ name : "Guitar Get Together" ,
+          date : "1/19/2018" ,
+          time : "1-3pm" ,
+          room : "C104 Spring Creek" ,
+          event : "Guitar Get Together"
         ] ,
         [ name : "name" ,
           date : "date" ,
           time : "time" ,
-          event : "event" ,
-          venue : "venue"
+          room : "room" ,
+          event : "event"
         ] ,
     ]
 }

@@ -25,10 +25,12 @@ class Constants implements CrossOriginContract {
         return candidate
     }
     private CrossOriginContract[] getControllersNeededForCrossOriginRegistry() {
+        final HomeController homeController = new HomeController()
         final HeaderController headerController = new HeaderController()
         final FooterController footerController = new FooterController()
         final PerformanceVideoController videoController = new PerformanceVideoController()
         final candidate = [
+                homeController ,
                 headerController ,
                 footerController ,
                 videoController
