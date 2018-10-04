@@ -18,14 +18,25 @@ class BootstrapDataService {
     private CollegeEventRepository eventRepository
 
     boolean spinUp() {
-        def event0 = new CollegeEvent()
-        event0.name = "name"
-        event0.date = "date"
-        event0.time = "time"
-        event0.event = "event"
-        event0.venue = "venue"
-        def m = eventRepository.saveAndFlush(event0)
-        assert m.id
+        a.each { mapIn ->
+            def event0 = new CollegeEvent(mapIn)
+            def m0 = eventRepository.saveAndFlush(event0)
+            assert m0.id
+        }
         true
     }
+    final static def a = [
+        [ name : "name" ,
+          date : "date" ,
+          time : "time" ,
+          event : "event" ,
+          venue : "venue"
+        ] ,
+        [ name : "name" ,
+          date : "date" ,
+          time : "time" ,
+          event : "event" ,
+          venue : "venue"
+        ] ,
+    ]
 }
