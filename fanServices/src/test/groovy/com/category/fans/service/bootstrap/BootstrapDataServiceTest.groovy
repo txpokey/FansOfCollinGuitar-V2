@@ -1,4 +1,4 @@
-package com.category.fans.service.util
+package com.category.fans.service.bootstrap
 
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired

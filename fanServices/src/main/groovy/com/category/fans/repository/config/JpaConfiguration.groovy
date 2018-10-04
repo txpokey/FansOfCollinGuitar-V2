@@ -1,6 +1,6 @@
 package com.category.fans.repository.config
 
-import com.category.fans.service.util.BootstrapDataService
+import com.category.fans.service.bootstrap.BootstrapDataService
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;

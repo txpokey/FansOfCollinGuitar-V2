@@ -6,7 +6,7 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapt
 import org.springframework.stereotype.Component
 
 @Component
- class SpringDataRestCustomization extends RepositoryRestConfigurerAdapter {
+ class CorsForSpringDataRestPaths extends RepositoryRestConfigurerAdapter {
     private final String origin = CrossOriginContract.CROSS_SITE_ORIGIN
 
     @Override
