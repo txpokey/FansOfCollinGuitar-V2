@@ -3693,112 +3693,112 @@ var GUITAREVENTS = [
         "name": "2018 Spring Guitar Events at Collin College",
         "date": "Date",
         "time": "Time",
-        "where": "Location/Room",
+        "room": "Location/Room",
         "event": "Events"
     },
     {
         "name": "Guitar Get Together",
         "date": "1/19/2018",
         "time": "1-3pm",
-        "where": "C104 Spring Creek",
+        "room": "C104 Spring Creek",
         "event": "Guitar Get Together"
     },
     {
         "name": "Guitar Get Together",
         "date": "2/2/2018",
         "time": "1-3pm",
-        "where": "C104 Spring Creek",
+        "room": "C104 Spring Creek",
         "event": "Guitar Get Together"
     },
     {
         "name": "6th Annual Collin College Guitar Festival",
         "date": "2/9/2018-2/11/2018 (Fri-Sun)",
         "time": "4:30pm (Fri) -- 3pm (Sun)",
-        "where": "Conference Center Spring Creek",
+        "room": "Conference Center Spring Creek",
         "event": "Collin College Guitar Festival"
     },
     {
         "name": "6th Annual Collin College Guitar Festival",
         "date": "2/9/2018",
         "time": "7pm",
-        "where": "Conference Center Spring Creek",
+        "room": "Conference Center Spring Creek",
         "event": "Faculty Concert: Kithara Duo (Collin College Guitar Festival)"
     },
     {
         "name": "6th Annual Collin College Guitar Festival",
         "date": "2/10/2018",
         "time": "3pm",
-        "where": "C104 Spring Creek",
+        "room": "C104 Spring Creek",
         "event": "Alumni Guitar Recital (Collin College Guitar Festival)"
     },
     {
         "name": "6th Annual Collin College Guitar Festival",
         "date": "2/10/2018",
         "time": "7pm",
-        "where": "Conference Center Spring Creek",
+        "room": "Conference Center Spring Creek",
         "event": "Faculty Concert: Quattro Palos (Collin College Guitar Festival)"
     },
     {
         "name": "6th Annual Collin College Guitar Festival",
         "date": "2/11/2018",
         "time": "3pm",
-        "where": "Conference Center Spring Creek",
+        "room": "Conference Center Spring Creek",
         "event": "Student Concert (Collin College Guitar Festival)"
     },
     {
         "name": "Guitar Get Together",
         "date": "2/23/2018",
         "time": "1-3pm",
-        "where": "C104 Spring Creek",
+        "room": "C104 Spring Creek",
         "event": "Guitar Get Together"
     },
     {
         "name": "Guitar Get Together",
         "date": "3/9/2018",
         "time": "1-3pm",
-        "where": "C104 Spring Creek",
+        "room": "C104 Spring Creek",
         "event": "Guitar Get Together"
     },
     {
         "name": "Guitar Get Together",
         "date": "3/23/2018",
         "time": "1-3pm",
-        "where": "C104 Spring Creek",
+        "room": "C104 Spring Creek",
         "event": "Guitar Get Together"
     },
     {
         "name": "Guitar Get Together",
         "date": "4/6/2018",
         "time": "1-3pm",
-        "where": "C104 Spring Creek",
+        "room": "C104 Spring Creek",
         "event": "Guitar Get Together"
     },
     {
         "name": "Guitar Artist Showcase",
         "date": "4/10/2018",
         "time": "7pm",
-        "where": "The ARTS Gallery Spring Creek",
+        "room": "The ARTS Gallery Spring Creek",
         "event": "Guitar Artist Showcase"
     },
     {
         "name": "Guitar Ensembles Concert",
         "date": "4/17/2018",
         "time": "7pm",
-        "where": "JAT Spring Creek",
+        "room": "JAT Spring Creek",
         "event": "Guitar Ensembles Concert"
     },
     {
         "name": "Guitar Get Together",
         "date": "4/27/2018",
         "time": "1-3pm",
-        "where": "C104 Spring Creek",
+        "room": "C104 Spring Creek",
         "event": "Guitar Get Together"
     },
     {
         "name": "Solo Guitar Concert",
         "date": "5/1/2018",
         "time": "7pm",
-        "where": "The ARTS Gallery Spring Creek",
+        "room": "The ARTS Gallery Spring Creek",
         "event": "Solo Guitar Concert"
     }
 ];
@@ -3824,7 +3824,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section id=\"guitar-dept-events-section\">\n  <div *ngIf=\"isReady()\">\n    <div class=\"guitar-dept-display-flex-column\" >\n      <div class=\"guitar-dept-display-flex-wrap Grid-cell guitar-dept-column-header\" >\n        {{guitarProgramEvents[0].name}}\n      </div>\n      <div *ngFor=\"let guitarProgramEvent of guitarProgramEvents\"\n           class=\"Grid Grid-bordered guitar-dept-display-flex-row\">\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarProgramEvent.date}}</div>\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarProgramEvent.time}}</div>\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarProgramEvent.where}}</div>\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarProgramEvent.event}}</div>\n      </div>\n    </div>\n  </div>\n</section>\n"
+module.exports = "<section id=\"guitar-dept-events-section\">\n  <div *ngIf=\"isReady()\">\n    <div class=\"guitar-dept-display-flex-column\" >\n      <div class=\"guitar-dept-display-flex-wrap Grid-cell guitar-dept-column-header\" >\n        {{guitarProgramEvents[0].name}}\n      </div>\n      <div *ngFor=\"let guitarProgramEvent of guitarProgramEvents\"\n           class=\"Grid Grid-bordered guitar-dept-display-flex-row\">\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarProgramEvent.date}}</div>\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarProgramEvent.time}}</div>\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarProgramEvent.room}}</div>\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarProgramEvent.event}}</div>\n      </div>\n    </div>\n  </div>\n</section>\n"
 
 /***/ }),
 
@@ -3840,6 +3840,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventsComponent", function() { return EventsComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/file-as-source-for-json/file-as-source-for-json.service */ "./src/app/services/file-as-source-for-json/file-as-source-for-json.service.ts");
+/* harmony import */ var _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/constants/ConstantsContract */ "./src/app/services/constants/ConstantsContract.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3861,7 +3862,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-var setupUri = "/assets/json/guitarEvents-controller.json";
+
+// const setupUri  = "/assets/json/guitarEvents-controller.json" ;
+var setupUri = _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_2__["ConstantsContract"].SpringbootBaseUrl + "/api/collegeEvents";
 var EventsComponent = /** @class */ (function (_super) {
     __extends(EventsComponent, _super);
     function EventsComponent(service) {
@@ -3873,7 +3876,7 @@ var EventsComponent = /** @class */ (function (_super) {
         var ret = false;
         if (this.getNetworker().isReady()) {
             var candidate = this.getNetworker().getPayload();
-            this.guitarProgramEvents = candidate;
+            this.guitarProgramEvents = candidate._embedded.collegeEvents;
             ret = true;
         }
         return ret;

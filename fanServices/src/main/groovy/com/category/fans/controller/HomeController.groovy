@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class HomeController implements CrossOriginContract {
 
-//    @RequestMapping(value = "/**/{[path:[^\\.]*}")
-    @RequestMapping(value = "/[^api]*/{[path:[^\\.]*}")
+//    @RequestMapping(value = "/**/{[path:[^\\.]*}")  // original
+    @RequestMapping(value = "/guitar*")
     String redirect() {
         // Forward to home page so that route is preserved.
         return "forward:/"
