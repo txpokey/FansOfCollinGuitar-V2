@@ -1,14 +1,10 @@
 package com.category.fans.service.bootstrap
 
-import com.category.fans.service.bootstrap.repository.CollegeEventsBootstrap
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
 
-import javax.annotation.PostConstruct
 import java.time.format.DateTimeFormatter
 
 interface BootstrapContract {
@@ -17,18 +13,19 @@ interface BootstrapContract {
 }
 
 @Slf4j
-@Repository
+//@Repository
 @Service("bootstrapTool")
 class BootstrapDataService implements BootstrapContract {
 
     @Autowired
     @Qualifier("collegeEventsBootstrap")
-    CollegeEventsBootstrap collegeEventsBootstrap
+    BootstrapContract collegeEventsBootstrap
+    @Autowired
+    @Qualifier("guitarCoursesBootstrap")
+    BootstrapContract guitarCoursesBootstrap
 
-//    private final def bootstrapingList = [ collegeEventsBootstrap ]
-//    @PostConstruct
     boolean spinUp() {
-        final def bootstrapingList = [ collegeEventsBootstrap ]
+        final def bootstrapingList = [ collegeEventsBootstrap, guitarCoursesBootstrap ]
 
         bootstrapingList.each { member ->
             def result = member.spinUp()
@@ -39,5 +36,3 @@ class BootstrapDataService implements BootstrapContract {
 
 
 }
-
-//].sort {a,b-> a.date <=> b.date }

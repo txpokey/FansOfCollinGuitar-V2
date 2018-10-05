@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration
 class ControllerTestConfig{
 
     @Bean("headerController")
-    def getHeaderController() {
+    HeaderController getHeaderController() {
         new HeaderController()
     }
 }

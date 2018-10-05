@@ -6,6 +6,8 @@ interface ConstantsLocatingJsonContract{
 
     String headerJsonLocation = "/META-INF/resources/assets/json/header-controller.json"
     String footerJsonLocation = "/META-INF/resources/assets/json/footer-controller.json"
+    String classScheduleJsonLocation =
+            "/META-INF/resources/assets/json/courseWareByRepository/2018/fall/edu.collin.schedule.json"
 
 }
 interface CrossOriginContract{
