@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface GuitarCourseScheduleRepository extends JpaRepository<GuitarCourseSchedule,Long>{
 
+    List<GuitarCourseSchedule> findByPublish( String truth )
+    List<GuitarCourseSchedule> findByYearAndSubject( String year, String subject )
+    List<GuitarCourseSchedule> findByYearAndSubjectAllIgnoreCase( String year, String subject )
 }

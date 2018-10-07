@@ -12,24 +12,24 @@ class GuitarCourseSchedule{
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id
 
-    String Year
-    String Term
+    String year
+    String term
     String publish
-    String Status
-    String CRN
-    String Subject
-    String Course
-    String Section
-    String Credits
-    String Title
-    String Days
-    String Time
-    String Dates
-    String Location
-    String MaxSize
-    String SeatsOpen
-    String MaxWaiting
-    String WaitingOpen
-    String Instructor
+    String status
+    String crn
+    String subject
+    String course
+    String section
+    String credits
+    String title
+    String days
+    String time
+    String dates
+    String location
+    String maxSize
+    String seatsOpen
+    String maxWaiting
+    String waitingOpen
+    String instructor
 
 }

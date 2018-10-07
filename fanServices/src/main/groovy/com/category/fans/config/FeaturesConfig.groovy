@@ -3,6 +3,7 @@ package com.category.fans.config
 import com.category.fans.controller.Constants
 import com.category.fans.controller.CrossOriginContract
 import com.category.fans.service.FooterContentService
+import com.category.fans.service.GuitarCourseScheduleContentService
 import com.category.fans.service.HeaderContentService
 import com.category.fans.service.bootstrap.repository.CollegeEventsBootstrap
 import org.springframework.context.annotation.Bean
@@ -24,5 +25,10 @@ class FeaturesConfig{
         FooterContentService service = new FooterContentService()
         service
     }
+//    @Bean(name = "guitarCourseScheduleService")
+//    GuitarCourseScheduleContentService getGuitarCourseScheduleContentService() {
+//        GuitarCourseScheduleContentService service = new GuitarCourseScheduleContentService()
+//        service
+//    }
 
 }

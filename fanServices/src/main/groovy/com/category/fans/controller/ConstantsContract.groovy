@@ -30,11 +30,13 @@ class Constants implements CrossOriginContract {
         final HomeController homeController = new HomeController()
         final HeaderController headerController = new HeaderController()
         final FooterController footerController = new FooterController()
+        final GuitarCourseScheduleController guitarCourseScheduleController = new GuitarCourseScheduleController()
         final PerformanceVideoController videoController = new PerformanceVideoController()
         final candidate = [
                 homeController ,
                 headerController ,
                 footerController ,
+                guitarCourseScheduleController ,
                 videoController
         ]
     }

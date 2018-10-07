@@ -12,7 +12,7 @@ import org.testng.annotations.Test
 @Slf4j
 @Test
 @SpringBootTest
-class PlayListByChannelTest extends AbstractTestNGSpringContextTests{
+class YouTubeClientServiceTest extends AbstractTestNGSpringContextTests{
     private final def testId = "PLvhkK1827NDxXl2sq-N7uNLpQxb2S01CC"
 
     @Value('${google.apikey:NOT_FOUND}')

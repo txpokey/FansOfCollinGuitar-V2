@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @Slf4j
 @Test
-@SpringBootTest
+@SpringBootTest // TODO : flush out controller MVC tests
 class ExploreWebAppContextSetupTest extends AbstractTestNGSpringContextTests{
 
     private MockMvc mockMvc

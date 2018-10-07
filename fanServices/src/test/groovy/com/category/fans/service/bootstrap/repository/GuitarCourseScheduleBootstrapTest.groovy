@@ -7,8 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests
 import org.testng.annotations.Test
 
-@Test
 @Slf4j
+@Test
 @SpringBootTest
 class GuitarCourseScheduleBootstrapTest extends AbstractTestNGSpringContextTests {
 
@@ -16,10 +16,15 @@ class GuitarCourseScheduleBootstrapTest extends AbstractTestNGSpringContextTests
     @Qualifier("guitarCoursesBootstrap")
     GuitarCourseScheduleBootstrap bootstrap
 
+    void sanityCheck() {
+        assert bootstrap
+    }
+
     void testSpinUp() {
         assert bootstrap
         def result = bootstrap.spinUp()
         assert result
         log.debug("HERE")
     }
+
 }

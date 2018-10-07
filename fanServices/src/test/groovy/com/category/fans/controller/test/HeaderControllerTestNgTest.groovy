@@ -1,16 +1,11 @@
 package com.category.fans.controller.test
 
-import com.category.fans.config.FeaturesConfig
-import com.category.fans.controller.*
-import com.category.fans.controller.test.config.ControllerTestConfig
-import com.category.fans.service.FooterContentService
-import com.category.fans.service.HeaderContentService
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
+import com.category.fans.controller.HeaderController
+import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
@@ -20,16 +15,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
+@Slf4j
 @Test
-@ContextConfiguration( classes = [FeaturesConfig.class, ControllerTestConfig.class])
+@SpringBootTest
 class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
-    @Autowired
-    private @Qualifier("headerContentService")
-    HeaderContentService headerContentService
-
-    @Autowired
-    private @Qualifier("footerContentService")
-    FooterContentService footerContentService
 
     @Autowired
     private @Qualifier("headerController")
@@ -37,14 +26,7 @@ class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
 
     void sanityCheck() {
         log.debug("LOGGER IS HERE")
-        assert headerContentService
         assert headerController
-        assert footerContentService
-    }
-
-    void fileReading() {
-        readHeaderContent()
-        readFooterContent()
     }
 
     void smokeTestViaStandaloneSetup() {
@@ -62,21 +44,7 @@ class HeaderControllerTestNgTest extends AbstractTestNGSpringContextTests {
     }
 
 
-    private void readFooterContent() {
-        def footerContent = footerContentService.getContent()
-        assert footerContent
-    }
-   private void readHeaderContent() {
-        def footerContent = headerContentService.getContent()
-        assert footerContent
-    }
-
     final String titleTestData = "Fan Club: Collin College Guitar Studies"
-    private static Log log = LogFactory.getLog(HeaderControllerTestNgTest.class)
+//    private static Log log = LogFactory.getLog(HeaderControllerTestNgTest.class)
 
 }
-
-//=-=-=-
-//@Test
-//@RunWith(SpringRunner.class)
-//@WebAppConfiguration
