@@ -21,9 +21,13 @@ class GuitarCourseScheduleServiceTest extends AbstractTestNGSpringContextTests {
         assert service
     }
 
-    void exploreUsingService() {
+    void confirmGetContent() {
         assert service
         def content = service.getContent()
         assert content
+    }
+    void exploreGetMusicCatalog() {
+        def content = service.getMusicCatalog()
+        content
     }
 }

@@ -29,7 +29,9 @@ class GuitarCourseScheduleContentService{
         musicCatalog
     }
     private def filterMusicCatalog(@NonNull def fullContent) {
-        def topLevelMap = fullContent.collect { key, value -> [ (key) : value.collect{ k, v -> k } ] }
+//        def topLevelMap = fullContent.collect { key, value -> [ schoolterm : "${key}" , payload : value.collect{ k, v -> k }
+        def topLevelMap = fullContent.collect { key, value -> [ schoolterm : key.toString() , payload : value
+                .collect{ k, v -> k.toString() } ]}
         topLevelMap
     }
 }

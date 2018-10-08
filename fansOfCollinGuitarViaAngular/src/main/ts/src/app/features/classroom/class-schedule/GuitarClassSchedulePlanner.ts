@@ -3,19 +3,19 @@ import {
   MUSIC_DEPT_CATALOG_2018_SPRING
 } from "./constants/2018/spring/GuitarClassSchedulePlanner";
 
-export interface IMusicDeptCatalogEntries   {
+export interface IMusicDeptCatalogEntries   {  // RETIRED
   relevent: boolean ;
   discipline: string ;
   class: number ;
   name: string ;
 }
-export interface IMusicDeptCatalogByTerm   {
+export interface IMusicDeptCatalogByTerm   {  // RETIRED
   schoolTermLabel: string ;
   schoolYear: number ;
   schoolSemester: string ;
   payload: IMusicDeptCatalogEntries[] ;
 }
-export interface IGuitarProgramCourseScheduleEntries   {
+export interface IGuitarProgramCourseScheduleEntries   {  // RETIRED
   active: boolean ;
   CRN: number ;
   Subj: string ;

@@ -25,7 +25,8 @@ export class MusicCatalogEntryComponent implements OnInit {
   }
 
   findClasses(key: any): any[] {
-    let myLookup: any[] = this.planner.findClassesFromMusicCatalogBySchoolTermAsArray(key);
+    // let myLookup: any[] = this.planner.findClassesFromMusicCatalogBySchoolTermAsArray(key);
+    let myLookup: any[] = null ; // STUBBED FOR COMPILE
     return myLookup;
   }
 

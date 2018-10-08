@@ -1,10 +1,10 @@
 <div
-  *ngFor="let guitarCourse of findClasses( inputKey ) ">
+  *ngFor="let musicCatalogEntry of findClasses( inputKey ) ">
   <div >
-    <div (click)="openBackDropCustomClass(guitarCourse,content)">
+    <div (click)="openBackDropCustomClass(musicCatalogEntry,content)">
       <div  class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-display-flex-row">
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}</div>
-        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.name}}</div>
+        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{musicCatalogEntry.class}}</div>
+        <div class="guitar-dept-display-flex-wrap  Grid-cell">{{musicCatalogEntry.name}}</div>
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@
         <div class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header guitar-dept-display-flex-row">
           <div class="guitar-dept-display-flex-wrap  Grid-cell">{{discipline}}
           </div>
-          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{guitarCourse.class}}
+          <div class="guitar-dept-display-flex-wrap  Grid-cell">{{musicCatalogEntry.class}}
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <course-schedule-entry [guitarCourse]="guitarCourse" [guitarCourseKey]="{ semester:  semester , year: year , discipline: discipline }"></course-schedule-entry>
+    <course-schedule-entry [musicCatalogEntry]="musicCatalogEntry" [musicCatalogEntryKey]="{ semester:  semester , year: year , discipline: discipline }"></course-schedule-entry>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>

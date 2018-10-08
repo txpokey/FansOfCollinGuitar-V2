@@ -1,21 +1,26 @@
 
 <section>
-  <div *ngFor="let schoolTerm of musicCatalogReportData.semestersByYearsFound">
-    <div *ngFor="let musicDiscipline of schoolTerm.discipline; index as index">
-      <p>
-        <a class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header"  data-toggle="collapse" href="#collapseExample{{index}}" role="button"
-           aria-expanded="false">
-          {{schoolTerm.schoolSemester}}&nbsp;{{schoolTerm.schoolYear}}&nbsp;:&nbsp; {{musicDiscipline}}
-        </a>
-      </p>
-      <div class="collapse" id="collapseExample{{index}}">
-        <div class="card card-body">
-          <music-catalog-entry
-            [inputKey]="assembleMusicCatalogElementInputKey( { schoolTerm: schoolTerm , discipline: musicDiscipline } )"></music-catalog-entry>
+
+    <div *ngIf="isReady()">
+
+        <div *ngFor="let schoolTerm of musicCatalogContent; index as index">
+
+            <p>
+                <a class="guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header"  data-toggle="collapse" href="#collapseExample{{index}}" role="button"
+                   aria-expanded="false">
+                    {{schoolTerm.schoolterm}}
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample{{index}}">
+            <div class="card card-body">
+                <div *ngFor="let catalogEntry of schoolTerm.payload">{{catalogEntry}}</div>
+            <!--<music-catalog-entry-->
+            <!--[inputKey]="assembleMusicCatalogElementInputKey( { schoolTerm: schoolTerm } )"></music-catalog-entry>-->
+            </div>
+            </div>
+
         </div>
-      </div>
 
     </div>
 
-  </div>
 </section>

@@ -29,7 +29,8 @@ export class CourseScheduleEntryComponent implements OnInit {
   // };
   findClassSectionsByKey( key: any ) : any[] {
     let headersForDisplayColumns = [ { pay: this.provideHeadersForDisplayColumns() } ] ;
-    let contentArray = this.planner.findClassesFromGuitarProgramScheduleBySchoolTermAsArray( key ) ;
+    // let contentArray = this.planner.findClassesFromGuitarProgramScheduleBySchoolTermAsArray( key ) ;
+    let contentArray = null ; // STUBBED for compile
     let candidate = [] ;
 
     candidate.push(...headersForDisplayColumns);
