@@ -23,19 +23,13 @@ class GuitarCourseScheduleContentService{
                         .sort()
         groupByCandidatePipe
     }
-    class CourseScheduleUtility {
-        def getMusicCatalog(@NonNull def content) {
-//            def foo = content.
-        }
+    def getMusicCatalog() {
+        def fullContent = getScheduleByYearByTermByCourseByTitle()
+        def musicCatalog = filterMusicCatalog(fullContent)
+        musicCatalog
+    }
+    private def filterMusicCatalog(@NonNull def fullContent) {
+        def topLevelMap = fullContent.collect { key, value -> [ (key) : value.collect{ k, v -> k } ] }
+        topLevelMap
     }
 }
-//"schoolTermLabel": "Spring 2018 Credit",
-//"schoolYear": 2018,
-//"schoolSemester": "spring",
-//"payload": [
-//        {
-//            "relevent": true,
-//            "discipline": "MUSI",
-//            "class": 1116,
-//            "name": "Sight Singing & Ear Training I "
-//        },

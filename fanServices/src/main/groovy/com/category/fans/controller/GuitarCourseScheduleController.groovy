@@ -26,4 +26,9 @@ class GuitarCourseScheduleController implements CrossOriginContract {
         final def scheduleByYearByTermByCourseByTitle = service.getContent()
         scheduleByYearByTermByCourseByTitle
     }
+    @GetMapping("musicCatalog")
+    def getMusicCatalog() {
+        final def musicCatalog = service.getMusicCatalog()
+        musicCatalog
+    }
 }
