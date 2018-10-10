@@ -5,7 +5,7 @@ import {
     GuitarApiObserverPollingContract
 } from "../../../../services/file-as-source-for-json/file-as-source-for-json.service";
 import {Component} from "@angular/core";
-import {NgbAccordionConfig} from "@ng-bootstrap/ng-bootstrap";
+import {NgbAccordionConfig, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ICourseCatalogEntries} from "../constants/ClassScheduleContracts";
 
 const setupUri  = ConstantsContract.SpringbootBaseUrl + "/fans/classes/musicCatalog" ;
@@ -19,8 +19,12 @@ const setupUri  = ConstantsContract.SpringbootBaseUrl + "/fans/classes/musicCata
 export class ClassSchedulePlannerComponent extends GuitarApiComponentBaseClass<ICourseCatalogEntries[]> implements GuitarApiObserverPollingContract {
 
     musicCatalogContent: ICourseCatalogEntries[] ;
-    constructor( private service: FileAsSourceForJsonService ) { super( setupUri , service.getHttpClient() ) ;}
+    selectedSchoolterm: any ;
+    selectedCourse: any ;
 
+    constructor(private service: FileAsSourceForJsonService, private modalService: NgbModal) {
+        super(setupUri, service.getHttpClient());
+    }
     isReady() : boolean {
         let ret : boolean = false ;
         if(this.getNetworker().isReady() ) {
@@ -31,5 +35,9 @@ export class ClassSchedulePlannerComponent extends GuitarApiComponentBaseClass<I
         }
         return ret ;
     }
-
+    openBackDropCustomClass(schoolterm, courseSelected, content) {
+        this.selectedSchoolterm = schoolterm;
+        this.selectedCourse = courseSelected;
+        this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
+    }
 }

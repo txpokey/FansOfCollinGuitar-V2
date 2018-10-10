@@ -30,4 +30,8 @@ class GuitarCourseScheduleServiceTest extends AbstractTestNGSpringContextTests {
         def content = service.getMusicCatalog()
         content
     }
+    void exploreSearchForCourseSections() {
+        def content = service.getSections( "Fall 2018 : MUAP" , "2261 : Concentration Applied Music-Guitar")
+        content
+    }
 }

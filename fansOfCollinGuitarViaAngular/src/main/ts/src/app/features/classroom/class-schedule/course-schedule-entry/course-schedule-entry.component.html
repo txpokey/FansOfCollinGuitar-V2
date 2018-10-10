@@ -1,23 +1,24 @@
-<div *ngFor="let courseBySections of findClassSectionsByKey( {
-      schoolSemester: semester,
-      schoolYear: year,
-      discipline: discipline,
-      course: course
-    } )">
-  <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
-    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.CRN}}
+<div *ngIf="isReady()">
+
+    <div *ngFor="let courseBySectionCandidate of courseBySections">
+        <div *ngFor="let courseBySection of courseBySectionCandidate.payload">
+            <div class="guitar-dept-display-flex-wrap Grid-bordered Grid-cell">
+                <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySection.crn}}
+                </div>
+                <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySection.section}}
+                </div>
+                <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySection.days}}
+                </div>
+                <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySection.time}}
+                </div>
+                <div class="guitar-dept-display-flex-wrap  Grid-cell">
+                    {{courseBySection.location}}
+                </div>
+                <div class="guitar-dept-display-flex-wrap  Grid-cell">
+                    {{courseBySection.instructor}}
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Sec}}
-    </div>
-    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Days}}
-    </div>
-    <div class="guitar-dept-display-flex-wrap  Grid-cell">{{courseBySections.pay.Time}}
-    </div>
-    <div class="guitar-dept-display-flex-wrap  Grid-cell">
-      {{courseBySections.pay.Location}}
-    </div>
-    <div class="guitar-dept-display-flex-wrap  Grid-cell">
-      {{courseBySections.pay.Instructor}}
-    </div>
-  </div>
+
 </div>

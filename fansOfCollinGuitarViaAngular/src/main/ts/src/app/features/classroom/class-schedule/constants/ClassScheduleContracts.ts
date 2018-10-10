@@ -5,7 +5,7 @@
 //     "name": "Sight Singing & Ear Training I "
 // },
 
-export interface ICourseCatalogEntries   {  // INWORK
+export interface ICourseCatalogEntries   {  // INPLAY
     // subject: string ;
     // course: number ;
     // title: string ;
@@ -19,21 +19,29 @@ export interface ICourseCatalogEntries   {  // INWORK
 //     schoolSemester: string ;
 //     payload: IMusicDeptCatalogEntries[] ;
 // }
-export interface ICourseScheduleEntries   {  // INWORK
-    active: boolean ;
-    CRN: number ;
-    Subj: string ;
-    Crse: number ;
-    Sec: string ;
-    Cred: number ;
-    Title: string ;
-    Days: string ;
-    Time: string ;
-    calendar: string ;
-    Location: string ;
-    Cap: number ;
-    Rem: number ;
-    WLCap: number ;
-    WLRem: string ;
-    Instructor: string ;
+export interface ICourseScheduleEntries {
+    courseSectionList: string ;
+    payload: ICourseScheduleEntry[] ;
+}
+export interface ICourseScheduleEntry   {  // INWORK
+    year : string ;
+    term : string ;
+    publish : string ;
+    status : string ;
+    crn : string ;
+    subject : string ;
+    course : string ;
+    section : string ;
+    credits : string ;
+    title : string ;
+    days : string ;
+    time : string ;
+    dates : string ;
+    location : string ;
+    maxSize : string ;
+    seatsOpen : string ;
+    maxWaiting : string ;
+    waitingOpen : string ;
+    instructor : string ;
+
 }
