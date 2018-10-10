@@ -15,6 +15,9 @@ name: dev2-YAML
 debug:
   false
 
+google:
+  channelId: UCYkk_DU_k1sWyOw_fy6Raug
+
 logging:
   level:
     org.springframework.web: INFO
