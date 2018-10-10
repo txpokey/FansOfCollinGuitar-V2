@@ -19,8 +19,8 @@ const setupUri  = ConstantsContract.SpringbootBaseUrl + "/fans/classes/musicCata
 export class ClassSchedulePlannerComponent extends GuitarApiComponentBaseClass<ICourseCatalogEntries[]> implements GuitarApiObserverPollingContract {
 
     musicCatalogContent: ICourseCatalogEntries[] ;
-    selectedSchoolterm: any ;
-    selectedCourse: any ;
+    selectedSchoolterm: string ;
+    selectedCourse: string ;
 
     constructor(private service: FileAsSourceForJsonService, private modalService: NgbModal) {
         super(setupUri, service.getHttpClient());

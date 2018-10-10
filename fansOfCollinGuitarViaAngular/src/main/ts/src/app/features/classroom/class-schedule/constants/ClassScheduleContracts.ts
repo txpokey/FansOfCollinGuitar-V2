@@ -1,29 +1,13 @@
-// {
-//     "relevent": true,
-//     "discipline": "MUSI",
-//     "class": 1116,
-//     "name": "Sight Singing & Ear Training I "
-// },
 
-export interface ICourseCatalogEntries   {  // INPLAY
-    // subject: string ;
-    // course: number ;
-    // title: string ;
+export interface ICourseCatalogEntries   {  // DONE
     schoolterm: string ;
     payload: any[] ;
 }
-
-// export interface IMusicDeptCatalogByTerm   {  // RETIRED
-//     schoolTermLabel: string ;
-//     schoolYear: number ;
-//     schoolSemester: string ;
-//     payload: IMusicDeptCatalogEntries[] ;
-// }
 export interface ICourseScheduleEntries {
     courseSectionList: string ;
     payload: ICourseScheduleEntry[] ;
 }
-export interface ICourseScheduleEntry   {  // INWORK
+export interface ICourseScheduleEntry   {  // DONE
     year : string ;
     term : string ;
     publish : string ;

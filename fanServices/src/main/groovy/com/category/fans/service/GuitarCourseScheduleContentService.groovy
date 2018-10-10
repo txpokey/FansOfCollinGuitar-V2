@@ -8,6 +8,28 @@ import org.springframework.stereotype.Service
 
 @Service("guitarCourseScheduleService")
 class GuitarCourseScheduleContentService{
+    private final static HEADERS_FOR_DISPLAY_COLUMNS = [
+            year: "Year",
+            term: "Term",
+            publish: "publish",
+            status: "Status",
+            crn: "CRN",
+            subject: "Subject",
+            course: "Course",
+            section: "Section",
+            credits: "Credits",
+            title: "Title",
+            days: "Days",
+            time: "Time",
+            dates: "Dates",
+            location: "Location",
+            maxSize: "MaxSize",
+            seatsOpen: "SeatsOpen",
+            maxWaiting: "MaxWaiting",
+            waitingOpen: "WaitingOpen",
+            instructor: "Instructor"
+    ]
+    private final static HEADER = [ new GuitarCourseSchedule(HEADERS_FOR_DISPLAY_COLUMNS) ]
 
     @Autowired
     private GuitarCourseScheduleRepository repository
@@ -65,8 +87,16 @@ class GuitarCourseScheduleContentService{
         final def pickByCourseTitle = { k,v -> k == byCourseByTitle }
         final def buildSectionMap = { k,v -> [ courseSectionList : k.toString() , payload: v ]}
         final def buildSectionsList =
-                { key, value -> [schoolterm: key.toString(), payload: value.findAll(pickByCourseTitle).collect(buildSectionMap)] }
+                { key, value ->
+                    def list = value.findAll(pickByCourseTitle).collect(buildSectionMap)
+                    def listPayload = list[0].payload
+                    def headers = HEADER.clone()
+                    def candidate = listPayload.inject(headers,{ seed, it -> seed += it })
+                    list[0].payload = candidate
+                    [schoolterm: key.toString(), payload : list ] }
         def candidateList = fullContent.findAll(pickBySchoolTerm).collect(buildSectionsList)
         candidateList
     }
+
+
 }

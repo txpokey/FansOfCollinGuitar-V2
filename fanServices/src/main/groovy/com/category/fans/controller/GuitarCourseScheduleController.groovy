@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @Slf4j
-//@RestController("guitarCourseScheduleController")
 @RestController
-//@Controller
 @RequestMapping("/fans/classes")
 class GuitarCourseScheduleController implements CrossOriginContract {
     @Override
