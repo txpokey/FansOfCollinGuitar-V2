@@ -72,14 +72,14 @@ class CollegeEventsBootstrap implements BootstrapContract {
             ] ,
             [ name : "Jay Armstrong" ,
               date : "10/12/2018" ,
-              time : "Friday 1-3pm" ,
-              room : "C104 Spring Creek" ,
+              time : "Wed 12pm" ,
+              room : "B-187 Spring Creek" ,
               event : "WNR Student Recital: Jay Armstrong"
             ] ,
             [ name : "Aaron Ringo, Luthier" ,
               date : "10/17/2018" ,
-              time : "Friday 1-3pm" ,
-              room : "C104 Spring Creek" ,
+              time : "Wed 12pm" ,
+              room : "B-187 Spring Creek" ,
               event : "WNR Recital: Aaron Ringo, Luthier"
             ] ,
 
