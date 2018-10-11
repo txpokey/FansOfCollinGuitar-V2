@@ -11,24 +11,27 @@
       "image": "Photo",
       "url": "#0"
     },
-    {
-      "test": true,
-      "name": "Fan Club Website: You Tube Updates",
-      "date": "10/10/2018",
-      "time": "12am",
-      "where": "internet",
-      "event": "Using Collin College Guitar Studies Website",
-      "image": "http://1000logos.net/wp-content/uploads/2017/05/Old-YouTube-logo.jpg",
-      "url": "../assets/html/news/2018/fall/current/guitarWebsite-news.html"
-    },
+
     {
       "test": true,
       "name": "Guitar Program Events for Fall 2018",
-      "date": "10/10/2018",
+      "date": "10/11/2018",
       "time": "12am",
       "where": "internet",
       "event": "latest events for Fall Semester",
       "image": "http://www.yourmomhatesthis.com/images/2017/06/2018-Calendar-09.png",
       "url": "../assets/html/news/2018/fall/current/guitarProgram-news.html"
-    }  ]
+    },
+
+    {
+      "test": true,
+      "name": "Fan Club Website: You Tube Updates",
+      "date": "10/11/2018",
+      "time": "12am",
+      "where": "internet",
+      "event": "Using Collin College Guitar Studies Website",
+      "image": "http://1000logos.net/wp-content/uploads/2017/05/Old-YouTube-logo.jpg",
+      "url": "../assets/html/news/2018/fall/current/guitarWebsite-news.html"
+    }
+  ]
 }
