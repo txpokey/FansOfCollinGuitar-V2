@@ -3956,7 +3956,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var setupUri = "/assets/json/news-controller--2018.summer.json";
+var setupUri = "/assets/json/news-controller--2018.fall.json";
 var NewsComponent = /** @class */ (function (_super) {
     __extends(NewsComponent, _super);
     function NewsComponent(tabStates, service) {
