@@ -1,0 +1,25 @@
+{
+  "title": "Fall 2018 Highlights",
+  "payload": [
+    {
+      "test": false,
+      "name": "2018 Fall Guitar Events at Collin College",
+      "date": "Date",
+      "time": "Time",
+      "where": "Location/Room",
+      "event": "Events",
+      "image": "Photo",
+      "url": "#0"
+    },
+    {
+      "test": true,
+      "name": "Fan Club Website: You Tube Updates",
+      "date": "10/10/2018",
+      "time": "12am",
+      "where": "internet",
+      "event": "Using Collin College Guitar Studies Website",
+      "image": "http://1000logos.net/wp-content/uploads/2017/05/Old-YouTube-logo.jpg",
+      "url": "../assets/html/news/2018/fall/current/guitarWebsite-news.html"
+    }
+  ]
+}
