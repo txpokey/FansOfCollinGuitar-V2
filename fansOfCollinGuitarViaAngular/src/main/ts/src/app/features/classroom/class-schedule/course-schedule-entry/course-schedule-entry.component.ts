@@ -53,63 +53,7 @@ export class CourseScheduleEntryComponent extends GuitarApiComponentBaseClass<IC
     }
     processIncomingPayload( incomingPayload : any ) : any[] {
         let pick0 : any = incomingPayload[0].payload ;
-        // let whatIsThereNow = pick0[0].payload;
-        // let candidateArray = [] ;
-        // candidateArray.push(...[HEADERS_FOR_DISPLAY_COLUMNS]);
-        // candidateArray.push(...whatIsThereNow);
-        // pick0[0].payload = candidateArray ;
         return pick0 ;
     }
 }
-
-// findClassSectionsByKey( key: any ) : any[] {
-//     let headersForDisplayColumns = [ { pay: this.provideHeadersForDisplayColumns() } ] ;
-//     // let contentArray = this.planner.findClassesFromGuitarProgramScheduleBySchoolTermAsArray( key ) ;
-//     let contentArray = null ; // STUBBED for compile
-//     let candidate = [] ;
-//
-//     candidate.push(...headersForDisplayColumns);
-//     candidate.push(...contentArray);
-//     return candidate ;
-// }
-// const HEADERS_FOR_DISPLAY_COLUMNS = {
-//     "Select": "Select",
-//     "CRN": "CRN",
-//     "Subj": "Subject",
-//     "Crse": "Course",
-//     "Sec": "Section",
-//     "Cred": 1,
-//     "Title": "Title",
-//     "Days": "Days",
-//     "Time": "Time",
-//     "Dates": "Calendar",
-//     "Location": "Location",
-//     "Cap": 20,
-//     "Rem": -2,
-//     "WLCap": 0,
-//     "WLRem": "0",
-//     "Instructor": "Instructor"
-// } ;
-const HEADERS_FOR_DISPLAY_COLUMNS = {
-    year: "Year",
-    term: "Term",
-    publish: "publish",
-    status: "Status",
-    crn: "CRN",
-    subject: "Subject",
-    course: "Course",
-    section: "Section",
-    credits: "Credits",
-    title: "Title",
-    days: "Days",
-    time: "Time",
-    dates: "Dates",
-    location: "Location",
-    maxSize: "MaxSize",
-    seatsOpen: "SeatsOpen",
-    maxWaiting: "MaxWaiting",
-    waitingOpen: "WaitingOpen",
-    instructor: "Instructor"
-
-} ;
 

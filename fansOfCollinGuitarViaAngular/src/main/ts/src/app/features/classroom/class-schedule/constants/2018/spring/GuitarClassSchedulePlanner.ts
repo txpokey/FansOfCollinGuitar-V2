@@ -1,5 +1,8 @@
 import {IGuitarProgramCourseScheduleByTerm, IMusicDeptCatalogByTerm} from "../../../GuitarClassSchedulePlanner";
 
+/**
+ * RETIRED 10/10/2018
+ */
 export const GUITAR_PROGRAM_SCHEDULE_2018_SPRING : IGuitarProgramCourseScheduleByTerm = {
   "schoolTermLabel": "Spring 2018 Credit",
   "schoolYear": 2018,
@@ -2149,7 +2152,9 @@ export const GUITAR_PROGRAM_SCHEDULE_2018_SPRING : IGuitarProgramCourseScheduleB
     }
   ]
 } ;
-
+/**
+ * RETIRED 10/10/2018
+ */
 export const MUSIC_DEPT_CATALOG_2018_SPRING : IMusicDeptCatalogByTerm = {
   "schoolTermLabel": "Spring 2018 Credit",
   "schoolYear": 2018,

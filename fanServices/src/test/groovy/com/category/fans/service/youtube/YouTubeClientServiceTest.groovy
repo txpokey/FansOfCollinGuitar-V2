@@ -55,31 +55,9 @@ class YouTubeClientServiceTest extends AbstractTestNGSpringContextTests{
     void walkEntireChannelByPlaylistByAllMemberPlayListVideosTest() {
         def captured = service.walkEntireChannelByPlaylistByAllMemberPlayListVideos()
         assert captured
+        def List countIntoList = captured.collect { def List it -> it.size() }
+        def countFinal = countIntoList.inject(0,{ sum, it -> sum += it })
+        countFinal
     }
-
-// --------------------
-
-//    private def walkEntireChannelByPlaylistByAllMemberPlayListVideos() {
-//        def jsonStream = service.getContentPlaylistsByChannel()
-//        def playLists = service.parseContentFromPlaylistsByChannel(jsonStream)
-//        def captured = []
-//        playLists.collect( captured , capturePlayListItemsClosure )
-//        captured
-//    }
-//
-//    private def capturePlayListItemsClosure = { playListMap ->
-//        def playListId = playListMap.playListId
-//        def jsonStream = service.getContentVideosByPlaylistId(playListId)
-//        def videoMaps = service.parseContentFromVideosByPlayList(jsonStream)
-//        def captured = []
-//        videoMaps.collect( captured ) { videoMap ->
-//            def aggregatorMap = [:]
-//            aggregatorMap << playListMap
-//            aggregatorMap << videoMap
-//            aggregatorMap
-//        }
-//        captured
-//    }
-
 
 }
