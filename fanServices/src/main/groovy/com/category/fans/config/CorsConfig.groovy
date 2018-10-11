@@ -21,8 +21,8 @@ class CorsConfig{
 //                originList.each { origin ->
 //                    routes.each { route -> registry.addMapping(route).allowedOrigins(origin) }
 //                }
-//                routes.each { route -> registry.addMapping(route).allowedOrigins(CROSS_SITE_ORIGIN_LIST) }
-                routes.each { route -> registry.addMapping(route).allowedOrigins("*") }
+                routes.each { route -> registry.addMapping(route).allowedOrigins(CROSS_SITE_ORIGIN_LIST) }
+//                routes.each { route -> registry.addMapping(route).allowedOrigins("*") }
                 routes
             }
         }

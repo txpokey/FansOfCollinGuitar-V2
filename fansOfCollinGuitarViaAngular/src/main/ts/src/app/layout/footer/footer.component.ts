@@ -1,15 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {IFooterConfig} from "./FooterConfig";
 import {
-  FileAsSourceForJsonService,
-  GuitarApiComponentBaseClass,
-  GuitarApiObserverPollingContract
+    FileAsSourceForJsonService,
+    GuitarApiComponentBaseClass,
+    GuitarApiObserverPollingContract
 } from "../../services/file-as-source-for-json/file-as-source-for-json.service";
 import {ConstantsContract} from "../../services/constants/ConstantsContract";
 
 const EMPTY_URL = '#0' ;
-// const setupUri  = "/assets/json/footer-controller.json" ;
-// const setupUri  = "http://localhost:8081/fans/footer" ;
+
 const setupUri  = ConstantsContract.SpringbootBaseUrl + "/fans/footer" ;
 
 @Component({
