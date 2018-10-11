@@ -233,7 +233,7 @@ module.exports = ".card-header,\n.fix-padding-problem {\n  /*$card-spacer-y: 0 0
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<section>\n  <div *ngFor=\"let schoolTerm of musicCatalogReportData.semestersByYearsFound\">\n    <div *ngFor=\"let musicDiscipline of schoolTerm.discipline; index as index\">\n      <p>\n        <a class=\"guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header\"  data-toggle=\"collapse\" href=\"#collapseExample{{index}}\" role=\"button\"\n           aria-expanded=\"false\">\n          {{schoolTerm.schoolSemester}}&nbsp;{{schoolTerm.schoolYear}}&nbsp;:&nbsp; {{musicDiscipline}}\n        </a>\n      </p>\n      <div class=\"collapse\" id=\"collapseExample{{index}}\">\n        <div class=\"card card-body\">\n          <music-catalog-entry\n            [inputKey]=\"assembleMusicCatalogElementInputKey( { schoolTerm: schoolTerm , discipline: musicDiscipline } )\"></music-catalog-entry>\n        </div>\n      </div>\n\n    </div>\n\n  </div>\n</section>\n"
+module.exports = "\n<section>\n\n    <div *ngIf=\"isReady()\">\n\n        <div *ngFor=\"let schoolterm of musicCatalogContent; index as index\">\n\n            <p>\n                <a class=\"guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header\"  data-toggle=\"collapse\" href=\"#collapseExample{{index}}\" role=\"button\"\n                   aria-expanded=\"false\">\n                    {{schoolterm.schoolterm}}\n                </a>\n            </p>\n            <div class=\"collapse\" id=\"collapseExample{{index}}\">\n            <div class=\"card card-body\">\n                <div *ngFor=\"let catalogEntry of schoolterm.payload\">\n                    <div (click)=\"openBackDropCustomClass(schoolterm.schoolterm,catalogEntry,content)\">\n                        <div  class=\"guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-display-flex-row\">\n                            <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{catalogEntry}}</div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            </div>\n\n        </div>\n\n    </div>\n\n</section>\n\n\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n    <div class=\"modal-header\">\n        <div class=\"modal-title\">\n            <div class=\"guitar-dept-display-flex-column guitar-dept-display-flex-wrap Grid-cell\">\n                Course By Section\n                <div class=\"guitar-dept-display-flex-row guitar-dept-display-flex-wrap Grid-cell\">\n\n                    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{selectedSchoolterm}}</div>\n\n                </div>\n\n                <div class=\"guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header guitar-dept-display-flex-row\">\n                    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{selectedCourse}}</div>\n                </div>\n            </div>\n\n        </div>\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\n            <span aria-hidden=\"true\">&times;</span>\n        </button>\n    </div>\n    <div class=\"modal-body\">\n        <course-schedule-entry [selectedCourse]=\"selectedCourse\" [selectedTerm]=\"selectedSchoolterm\"></course-schedule-entry>\n    </div>\n    <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-light\" (click)=\"c('Close click')\">Close</button>\n    </div>\n</ng-template>"
 
 /***/ }),
 
@@ -247,11 +247,20 @@ module.exports = "\n<section>\n  <div *ngFor=\"let schoolTerm of musicCatalogRep
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClassSchedulePlannerComponent", function() { return ClassSchedulePlannerComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../services/constants/ConstantsContract */ "./src/app/services/constants/ConstantsContract.ts");
 /* harmony import */ var _services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../services/file-as-source-for-json/file-as-source-for-json.service */ "./src/app/services/file-as-source-for-json/file-as-source-for-json.service.ts");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
-/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -265,190 +274,41 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var ClassSchedulePlannerComponent = /** @class */ (function () {
-    function ClassSchedulePlannerComponent(service, config) {
-        this.service = service;
-        this.referenceDictionary = null;
-        this.musicCatalogReportData = {};
-        this.guitarSectionReportData = {};
-        config.closeOthers = false;
-        config.type = 'transparent';
+var setupUri = _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_0__["ConstantsContract"].SpringbootBaseUrl + "/fans/classes/musicCatalog";
+var ClassSchedulePlannerComponent = /** @class */ (function (_super) {
+    __extends(ClassSchedulePlannerComponent, _super);
+    function ClassSchedulePlannerComponent(service, modalService) {
+        var _this = _super.call(this, setupUri, service.getHttpClient()) || this;
+        _this.service = service;
+        _this.modalService = modalService;
+        return _this;
     }
-    ClassSchedulePlannerComponent.prototype.ngOnInit = function () {
-        this.musicDeptCatalog = this.service.getMusicDeptCatalog();
-        this.guitarProgramSchedule = this.service.getGuitarProgramCourseSchedule();
-        this.computeGuitarProgramReportData();
-        this.computeMusicCalalogReportData();
-        this.referenceDictionary = this.computeReferenceDictionaryMap();
-        console.log("scheduleComponent is HERE!");
-    };
-    ClassSchedulePlannerComponent.prototype.hashKey = function (key) {
-        return this.service.hashKey(key);
-    };
-    ClassSchedulePlannerComponent.prototype.findClassesFromMusicCatalogBySchoolTermAsArray = function (lookupKey) {
-        var ret0 = this.musicCatalogReportData.groupBy.get(this.hashKey(lookupKey));
-        var ret = ret0.payload;
+    ClassSchedulePlannerComponent.prototype.isReady = function () {
+        var ret = false;
+        if (this.getNetworker().isReady()) {
+            var candidate = this.getNetworker().getPayload();
+            this.musicCatalogContent = candidate;
+            console.log("check on musicCatalog:> " + JSON.stringify(candidate));
+            ret = true;
+        }
         return ret;
     };
-    ClassSchedulePlannerComponent.prototype.findClassesFromGuitarProgramScheduleBySchoolTermAsArray = function (lookupKey) {
-        var ret = this.guitarSectionReportData.groupBy.get(this.hashKey(lookupKey));
-        // let ret = ret0.payload;
-        return ret;
-    };
-    ClassSchedulePlannerComponent.prototype.computeReferenceDictionaryMap = function () {
-        var map = new Map();
-        map.set('schoolYear', 'year');
-        map.set('schoolSemester', 'semester');
-        map.set('discipline', 'discipline');
-        map.set('Subj', 'discipline');
-        map.set('Crse', 'course');
-        map.set('course', 'course');
-        map.set('class', 'course');
-        map.set('name', 'className');
-        map.set('Title', 'className');
-        map.set('Sec', 'section');
-        map.set('schoolTermLabel', 'schoolTermLabel');
-        map.set('payload', 'payload');
-        return map;
-    };
-    ClassSchedulePlannerComponent.prototype.assembleMusicCatalogElementInputKey = function (inputReceived) {
-        var candidate = { semester: inputReceived.schoolTerm.schoolSemester, year: inputReceived.schoolTerm.schoolYear, discipline: inputReceived.discipline };
-        return candidate;
-    };
-    ClassSchedulePlannerComponent.prototype.computeGuitarProgramReportData = function () {
-        var _this = this;
-        var yearsFound = new Set(this.guitarProgramSchedule.map(function (obj) { return obj.schoolYear; }));
-        var semestersFound = new Set(this.guitarProgramSchedule.map(function (obj) { return obj.schoolSemester; }));
-        var guitarGroupBy = new Map();
-        var musicGroupBy = new Map();
-        this.guitarProgramSchedule.forEach(function (obj) {
-            return obj.payload.forEach(function (pay) {
-                _this.computeGroupByMapForGuitarSections(obj, pay, guitarGroupBy);
-                _this.computeGroupByMapForMusicCoursesUsingGuitarProgramData(obj, pay, musicGroupBy);
-            });
-        });
-        this.guitarSectionReportData.yearsFound = yearsFound;
-        this.guitarSectionReportData.semestersFound = semestersFound;
-        this.guitarSectionReportData.groupBy = guitarGroupBy;
-        this.guitarSectionReportData.musicCatalogGroupBy = musicGroupBy;
-        return;
-    };
-    ClassSchedulePlannerComponent.prototype.computeGroupByMapForGuitarSections = function (obj, pay, g) {
-        var musicKey = { schoolSemester: obj.schoolSemester, schoolYear: obj.schoolYear, discipline: pay.Subj };
-        var guitarKey = {
-            schoolSemester: obj.schoolSemester,
-            schoolYear: obj.schoolYear,
-            discipline: pay.Subj,
-            course: pay.Crse
-        };
-        var guitarKeyAsObject = {
-            schoolSemester: obj.schoolSemester,
-            schoolYear: obj.schoolYear,
-            discipline: pay.Subj,
-            course: pay.Crse
-        };
-        var hash = this.hashKey(guitarKey);
-        var withGKey = guitarKey['gKeyAsObject'] = guitarKeyAsObject;
-        var withMKey = guitarKey['mKeyAsObject'] = musicKey;
-        var newPay = guitarKey['pay'] = pay;
-        var discovered = g.get(hash);
-        var depth = Object(util__WEBPACK_IMPORTED_MODULE_2__["isUndefined"])(discovered) ? (discovered = []).push(guitarKey) : discovered.push(guitarKey);
-        var revalue = g.set(hash, discovered);
-        var allKeysNow = Array.from(g.keys());
-        var count = allKeysNow.length;
-        return;
-    };
-    ClassSchedulePlannerComponent.prototype.computeGroupByMapForMusicCoursesUsingGuitarProgramData = function (obj, pay, g) {
-        var musicKey = { schoolSemester: obj.schoolSemester, schoolYear: obj.schoolYear, discipline: pay.Subj };
-        var guitarKey = {
-            schoolSemester: obj.schoolSemester,
-            schoolYear: obj.schoolYear,
-            discipline: pay.Subj,
-            course: pay.Crse
-        };
-        var guitarKeyAsObject = {
-            schoolSemester: obj.schoolSemester,
-            schoolYear: obj.schoolYear,
-            discipline: pay.Subj,
-            course: pay.Crse
-        };
-        var musicKeyHash = this.hashKey(musicKey);
-        var guitarKeyHash = this.hashKey(guitarKey);
-        var withGKey = guitarKey['gKeyAsObject'] = guitarKeyAsObject;
-        var withMKey = guitarKey['mKeyAsObject'] = musicKey;
-        var newPay = guitarKey['pay'] = pay;
-        var discovered = g.get(musicKeyHash);
-        var depth = Object(util__WEBPACK_IMPORTED_MODULE_2__["isUndefined"])(discovered) ? (discovered = new Map()).set(guitarKeyHash, guitarKey) : discovered.set(guitarKeyHash, guitarKey);
-        var revalue = g.set(musicKeyHash, discovered);
-        var allKeysNow = Array.from(g.keys());
-        var count = allKeysNow.length;
-        return;
-    };
-    ClassSchedulePlannerComponent.prototype.computeMusicCalalogReportData = function () {
-        this.computerMusicCatalogReportSemesterByYearsData();
-        this.computerMusicCatalogReportGroupByData();
-    };
-    ClassSchedulePlannerComponent.prototype.computerMusicCatalogReportSemesterByYearsData = function () {
-        // let collector: any[] = [];
-        var yearsFound = new Set(this.musicDeptCatalog.map(function (obj) { return obj.schoolYear; }));
-        var semestersFound = new Set(this.musicDeptCatalog.map(function (obj) { return obj.schoolSemester; }));
-        var projectionOnDiscipline = new Set(this.musicDeptCatalog.map(function (obj) {
-            // let groupByDiscipline = [];
-            var disciplines = new Set(obj.payload.map(function (data) { return data.discipline; }));
-            var sortedDisciplines = Array.from(disciplines).sort();
-            var item = { schoolSemester: obj.schoolSemester, schoolYear: obj.schoolYear, discipline: sortedDisciplines };
-            return item;
-        }));
-        this.musicCatalogReportData.yearsFound = yearsFound;
-        this.musicCatalogReportData.semestersFound = semestersFound;
-        this.musicCatalogReportData.semestersByYearsFound = Array.from(projectionOnDiscipline);
-        return;
-    };
-    ClassSchedulePlannerComponent.prototype.computerMusicCatalogReportGroupByData = function () {
-        var _this = this;
-        var groupByCandidate = new Map();
-        this.musicDeptCatalog.forEach(function (term) {
-            term.payload.forEach(function (termPayloadItem) {
-                if (termPayloadItem.relevent) {
-                    _this.computeMusicDepartmentCatalogGroupByItemFromTermPayloadItem(term, termPayloadItem, groupByCandidate);
-                }
-            });
-            console.log("watchTheTerm:> " + term);
-        });
-        this.musicCatalogReportData.groupBy = groupByCandidate;
-        return;
-    };
-    ClassSchedulePlannerComponent.prototype.computeMusicDepartmentCatalogGroupByItemFromTermPayloadItem = function (term, termPayloadItem, groupByCandidate) {
-        var hashInput = {
-            schoolSemester: term.schoolSemester,
-            schoolYear: term.schoolYear,
-            discipline: termPayloadItem.discipline
-        };
-        var hashKey = this.hashKey(hashInput);
-        var discovered = groupByCandidate.get(hashKey);
-        // console.log( "watchTheHashKey:> " + hashKey );
-        var depth = Object(util__WEBPACK_IMPORTED_MODULE_2__["isUndefined"])(discovered) ? (discovered = {
-            hashInput: hashInput,
-            payload: [termPayloadItem]
-        }) : discovered.payload.push(termPayloadItem);
-        // console.log( "watchTheDiscovery:> " + discovered );
-        groupByCandidate.set(hashKey, discovered);
-        return;
+    ClassSchedulePlannerComponent.prototype.openBackDropCustomClass = function (schoolterm, courseSelected, content) {
+        this.selectedSchoolterm = schoolterm;
+        this.selectedCourse = courseSelected;
+        this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
     };
     ClassSchedulePlannerComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
             selector: 'class-schedule-planner',
             template: __webpack_require__(/*! ./class-schedule-planner.component.html */ "./src/app/features/classroom/class-schedule/class-schedule-planner/class-schedule-planner.component.html"),
             providers: [_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbAccordionConfig"]],
             styles: [__webpack_require__(/*! ./class-schedule-planner.component.css */ "./src/app/features/classroom/class-schedule/class-schedule-planner/class-schedule-planner.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["FileAsSourceForJsonService"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbAccordionConfig"]])
+        __metadata("design:paramtypes", [_services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["FileAsSourceForJsonService"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModal"]])
     ], ClassSchedulePlannerComponent);
     return ClassSchedulePlannerComponent;
-}());
+}(_services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["GuitarApiComponentBaseClass"]));
 
 
 
@@ -466,10 +326,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClassScheduleModule", function() { return ClassScheduleModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _music_catalog_entry_music_catalog_entry_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./music-catalog-entry/music-catalog-entry.component */ "./src/app/features/classroom/class-schedule/music-catalog-entry/music-catalog-entry.component.ts");
-/* harmony import */ var _course_schedule_entry_course_schedule_entry_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./course-schedule-entry/course-schedule-entry.component */ "./src/app/features/classroom/class-schedule/course-schedule-entry/course-schedule-entry.component.ts");
-/* harmony import */ var _class_schedule_planner_class_schedule_planner_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./class-schedule-planner/class-schedule-planner.component */ "./src/app/features/classroom/class-schedule/class-schedule-planner/class-schedule-planner.component.ts");
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var _class_schedule_planner_class_schedule_planner_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./class-schedule-planner/class-schedule-planner.component */ "./src/app/features/classroom/class-schedule/class-schedule-planner/class-schedule-planner.component.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var _course_schedule_entry_course_schedule_entry_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./course-schedule-entry/course-schedule-entry.component */ "./src/app/features/classroom/class-schedule/course-schedule-entry/course-schedule-entry.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -481,17 +340,18 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 var ClassScheduleModule = /** @class */ (function () {
     function ClassScheduleModule() {
     }
     ClassScheduleModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [
-                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__["NgbModule"]
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModule"]
             ],
-            declarations: [_music_catalog_entry_music_catalog_entry_component__WEBPACK_IMPORTED_MODULE_2__["MusicCatalogEntryComponent"], _course_schedule_entry_course_schedule_entry_component__WEBPACK_IMPORTED_MODULE_3__["CourseScheduleEntryComponent"], _class_schedule_planner_class_schedule_planner_component__WEBPACK_IMPORTED_MODULE_4__["ClassSchedulePlannerComponent"]],
-            exports: [_music_catalog_entry_music_catalog_entry_component__WEBPACK_IMPORTED_MODULE_2__["MusicCatalogEntryComponent"], _course_schedule_entry_course_schedule_entry_component__WEBPACK_IMPORTED_MODULE_3__["CourseScheduleEntryComponent"], _class_schedule_planner_class_schedule_planner_component__WEBPACK_IMPORTED_MODULE_4__["ClassSchedulePlannerComponent"]]
+            // declarations: [MusicCatalogEntryComponent, CourseScheduleEntryComponent, ClassSchedulePlannerComponent],
+            // exports: [MusicCatalogEntryComponent, CourseScheduleEntryComponent, ClassSchedulePlannerComponent]
+            declarations: [_class_schedule_planner_class_schedule_planner_component__WEBPACK_IMPORTED_MODULE_2__["ClassSchedulePlannerComponent"], _course_schedule_entry_course_schedule_entry_component__WEBPACK_IMPORTED_MODULE_4__["CourseScheduleEntryComponent"]],
+            exports: [_class_schedule_planner_class_schedule_planner_component__WEBPACK_IMPORTED_MODULE_2__["ClassSchedulePlannerComponent"], _course_schedule_entry_course_schedule_entry_component__WEBPACK_IMPORTED_MODULE_4__["CourseScheduleEntryComponent"]]
         })
     ], ClassScheduleModule);
     return ClassScheduleModule;
@@ -512,6 +372,9 @@ var ClassScheduleModule = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GUITAR_PROGRAM_SCHEDULE_2018_SPRING", function() { return GUITAR_PROGRAM_SCHEDULE_2018_SPRING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MUSIC_DEPT_CATALOG_2018_SPRING", function() { return MUSIC_DEPT_CATALOG_2018_SPRING; });
+/**
+ * RETIRED 10/10/2018
+ */
 var GUITAR_PROGRAM_SCHEDULE_2018_SPRING = {
     "schoolTermLabel": "Spring 2018 Credit",
     "schoolYear": 2018,
@@ -2661,6 +2524,9 @@ var GUITAR_PROGRAM_SCHEDULE_2018_SPRING = {
         }
     ]
 };
+/**
+ * RETIRED 10/10/2018
+ */
 var MUSIC_DEPT_CATALOG_2018_SPRING = {
     "schoolTermLabel": "Spring 2018 Credit",
     "schoolYear": 2018,
@@ -3038,7 +2904,7 @@ module.exports = "\n.dark-modal .modal-content {\n  background-color: #292b2c;\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let courseBySections of findClassSectionsByKey( {\n      schoolSemester: semester,\n      schoolYear: year,\n      discipline: discipline,\n      course: course\n    } )\">\n  <div class=\"guitar-dept-display-flex-wrap Grid-bordered Grid-cell\">\n    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{courseBySections.pay.CRN}}\n    </div>\n    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{courseBySections.pay.Sec}}\n    </div>\n    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{courseBySections.pay.Days}}\n    </div>\n    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{courseBySections.pay.Time}}\n    </div>\n    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">\n      {{courseBySections.pay.Location}}\n    </div>\n    <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">\n      {{courseBySections.pay.Instructor}}\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"isReady()\">\n\n    <div *ngFor=\"let courseBySectionCandidate of courseBySections\">\n        <div *ngFor=\"let courseBySection of courseBySectionCandidate.payload\">\n            <div class=\"guitar-dept-display-flex-wrap Grid-bordered Grid-cell\">\n                <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{courseBySection.crn}}\n                </div>\n                <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{courseBySection.section}}\n                </div>\n                <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{courseBySection.days}}\n                </div>\n                <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{courseBySection.time}}\n                </div>\n                <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">\n                    {{courseBySection.location}}\n                </div>\n                <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">\n                    {{courseBySection.instructor}}\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>"
 
 /***/ }),
 
@@ -3053,7 +2919,19 @@ module.exports = "<div *ngFor=\"let courseBySections of findClassSectionsByKey( 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CourseScheduleEntryComponent", function() { return CourseScheduleEntryComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _class_schedule_planner_class_schedule_planner_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../class-schedule-planner/class-schedule-planner.component */ "./src/app/features/classroom/class-schedule/class-schedule-planner/class-schedule-planner.component.ts");
+/* harmony import */ var _services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../services/file-as-source-for-json/file-as-source-for-json.service */ "./src/app/services/file-as-source-for-json/file-as-source-for-json.service.ts");
+/* harmony import */ var _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/constants/ConstantsContract */ "./src/app/services/constants/ConstantsContract.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3065,163 +2943,62 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-var CourseScheduleEntryComponent = /** @class */ (function () {
-    function CourseScheduleEntryComponent(planner) {
-        this.planner = planner;
+
+
+var setupUri = _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_2__["ConstantsContract"].SpringbootBaseUrl + "/fans/classes/search";
+var CourseScheduleEntryComponent = /** @class */ (function (_super) {
+    __extends(CourseScheduleEntryComponent, _super);
+    function CourseScheduleEntryComponent(service, modalService) {
+        var _this = _super.call(this, setupUri, service.getHttpClient()) || this;
+        _this.service = service;
+        _this.modalService = modalService;
+        return _this;
     }
+    /**
+     * selectedCourse is not in scope during constructor, so need to override ngOnInit() so that we can
+     * pass in that variable as a GET parameter on the http client request set up in the abstract base class
+     */
     CourseScheduleEntryComponent.prototype.ngOnInit = function () {
-        this.processInputKey(this.guitarCourse, this.guitarCourseKey);
+        var clientStub = _super.prototype.getHttpClient.call(this);
+        var specialUrl = setupUri + "?bySchoolTerm=" + this.selectedTerm + "&byCourseTitle=" + this.selectedCourse;
+        var agent = new _services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["GuitarApiObserver"](specialUrl, clientStub);
+        _super.prototype.setNetworker.call(this, agent);
+        var spun = agent.spinUp();
+        console.log("CourseScheduleEntryComponent.ngOnInit: spinup is HERE:uri> " + specialUrl + "\nspinup is" +
+            " HERE:spun> " + spun);
     };
-    // let guitarKey = {
-    //   schoolSemester: obj.schoolSemester,
-    //   schoolYear: obj.schoolYear,
-    //   discipline: pay.Subj,
-    //   course: pay.Crse
-    // };
-    CourseScheduleEntryComponent.prototype.findClassSectionsByKey = function (key) {
-        var headersForDisplayColumns = [{ pay: this.provideHeadersForDisplayColumns() }];
-        var contentArray = this.planner.findClassesFromGuitarProgramScheduleBySchoolTermAsArray(key);
-        var candidate = [];
-        candidate.push.apply(candidate, headersForDisplayColumns);
-        candidate.push.apply(candidate, contentArray);
-        return candidate;
+    CourseScheduleEntryComponent.prototype.isReady = function () {
+        var ret = false;
+        if (this.getNetworker().isReady()) {
+            var candidate = this.getNetworker().getPayload();
+            this.courseBySections = this.processIncomingPayload(candidate);
+            console.log("check on coursesDiscovered:> " + JSON.stringify(candidate));
+            ret = true;
+        }
+        return ret;
     };
-    CourseScheduleEntryComponent.prototype.processInputKey = function (guitarCourse, guitarCourseKey) {
-        this.discipline = guitarCourseKey.discipline;
-        this.semester = guitarCourseKey.semester;
-        this.year = guitarCourseKey.year;
-        this.course = guitarCourse.class;
-        this.className = guitarCourseKey.name;
-    };
-    CourseScheduleEntryComponent.prototype.provideHeadersForDisplayColumns = function () {
-        return HEADERS_FOR_DISPLAY_COLUMNS;
+    CourseScheduleEntryComponent.prototype.processIncomingPayload = function (incomingPayload) {
+        var pick0 = incomingPayload[0].payload;
+        return pick0;
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
-    ], CourseScheduleEntryComponent.prototype, "guitarCourse", void 0);
+    ], CourseScheduleEntryComponent.prototype, "selectedTerm", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
-    ], CourseScheduleEntryComponent.prototype, "guitarCourseKey", void 0);
+    ], CourseScheduleEntryComponent.prototype, "selectedCourse", void 0);
     CourseScheduleEntryComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'course-schedule-entry',
             template: __webpack_require__(/*! ./course-schedule-entry.component.html */ "./src/app/features/classroom/class-schedule/course-schedule-entry/course-schedule-entry.component.html"),
             styles: [__webpack_require__(/*! ./course-schedule-entry.component.css */ "./src/app/features/classroom/class-schedule/course-schedule-entry/course-schedule-entry.component.css")]
         }),
-        __metadata("design:paramtypes", [_class_schedule_planner_class_schedule_planner_component__WEBPACK_IMPORTED_MODULE_1__["ClassSchedulePlannerComponent"]])
+        __metadata("design:paramtypes", [_services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["FileAsSourceForJsonService"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModal"]])
     ], CourseScheduleEntryComponent);
     return CourseScheduleEntryComponent;
-}());
-
-var HEADERS_FOR_DISPLAY_COLUMNS = {
-    "Select": "Select",
-    "CRN": "CRN",
-    "Subj": "Subject",
-    "Crse": "Course",
-    "Sec": "Section",
-    "Cred": 1,
-    "Title": "Title",
-    "Days": "Days",
-    "Time": "Time",
-    "Dates": "Calendar",
-    "Location": "Location",
-    "Cap": 20,
-    "Rem": -2,
-    "WLCap": 0,
-    "WLRem": "0",
-    "Instructor": "Instructor"
-};
-
-
-/***/ }),
-
-/***/ "./src/app/features/classroom/class-schedule/music-catalog-entry/music-catalog-entry.component.css":
-/*!*********************************************************************************************************!*\
-  !*** ./src/app/features/classroom/class-schedule/music-catalog-entry/music-catalog-entry.component.css ***!
-  \*********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/*body {*/\n  /*text-align: initial ;*/\n  /*}*/\n"
-
-/***/ }),
-
-/***/ "./src/app/features/classroom/class-schedule/music-catalog-entry/music-catalog-entry.component.html":
-/*!**********************************************************************************************************!*\
-  !*** ./src/app/features/classroom/class-schedule/music-catalog-entry/music-catalog-entry.component.html ***!
-  \**********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div\n  *ngFor=\"let guitarCourse of findClasses( inputKey ) \">\n  <div >\n    <div (click)=\"openBackDropCustomClass(guitarCourse,content)\">\n      <div  class=\"guitar-dept-display-flex-wrap Grid-bordered Grid-cell guitar-dept-display-flex-row\">\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarCourse.class}}</div>\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarCourse.name}}</div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <div class=\"modal-title\">\n      <div class=\"guitar-dept-display-flex-column guitar-dept-display-flex-wrap Grid-cell\">\n        Course By Section\n        <div class=\"guitar-dept-display-flex-row guitar-dept-display-flex-wrap Grid-cell\">\n\n          <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{year}}</div>\n          <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{semester}}</div>\n\n        </div>\n\n        <div class=\"guitar-dept-display-flex-wrap  Grid-cell guitar-dept-column-header guitar-dept-display-flex-row\">\n          <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{discipline}}\n          </div>\n          <div class=\"guitar-dept-display-flex-wrap  Grid-cell\">{{guitarCourse.class}}\n          </div>\n        </div>\n      </div>\n\n    </div>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <course-schedule-entry [guitarCourse]=\"guitarCourse\" [guitarCourseKey]=\"{ semester:  semester , year: year , discipline: discipline }\"></course-schedule-entry>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-light\" (click)=\"c('Close click')\">Close</button>\n  </div>\n</ng-template>\n\n"
-
-/***/ }),
-
-/***/ "./src/app/features/classroom/class-schedule/music-catalog-entry/music-catalog-entry.component.ts":
-/*!********************************************************************************************************!*\
-  !*** ./src/app/features/classroom/class-schedule/music-catalog-entry/music-catalog-entry.component.ts ***!
-  \********************************************************************************************************/
-/*! exports provided: MusicCatalogEntryComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MusicCatalogEntryComponent", function() { return MusicCatalogEntryComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _class_schedule_planner_class_schedule_planner_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../class-schedule-planner/class-schedule-planner.component */ "./src/app/features/classroom/class-schedule/class-schedule-planner/class-schedule-planner.component.ts");
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var MusicCatalogEntryComponent = /** @class */ (function () {
-    function MusicCatalogEntryComponent(planner, modalService) {
-        this.planner = planner;
-        this.modalService = modalService;
-    }
-    MusicCatalogEntryComponent.prototype.ngOnInit = function () {
-        // let myPlan = this.planner.musicCatalogReportData;
-        // this.isLookupInScope();
-        this.processInputKey(this.inputKey);
-    };
-    MusicCatalogEntryComponent.prototype.findClasses = function (key) {
-        var myLookup = this.planner.findClassesFromMusicCatalogBySchoolTermAsArray(key);
-        return myLookup;
-    };
-    MusicCatalogEntryComponent.prototype.processInputKey = function (inputReceived) {
-        this.discipline = inputReceived.discipline;
-        this.semester = inputReceived.semester;
-        this.year = inputReceived.year;
-    };
-    MusicCatalogEntryComponent.prototype.openBackDropCustomClass = function (guitarCourse, content) {
-        this.guitarCourse = guitarCourse;
-        this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], MusicCatalogEntryComponent.prototype, "inputKey", void 0);
-    MusicCatalogEntryComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'music-catalog-entry',
-            template: __webpack_require__(/*! ./music-catalog-entry.component.html */ "./src/app/features/classroom/class-schedule/music-catalog-entry/music-catalog-entry.component.html"),
-            styles: [__webpack_require__(/*! ./music-catalog-entry.component.css */ "./src/app/features/classroom/class-schedule/music-catalog-entry/music-catalog-entry.component.css")]
-        }),
-        __metadata("design:paramtypes", [_class_schedule_planner_class_schedule_planner_component__WEBPACK_IMPORTED_MODULE_1__["ClassSchedulePlannerComponent"],
-            _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"]])
-    ], MusicCatalogEntryComponent);
-    return MusicCatalogEntryComponent;
-}());
+}(_services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__["GuitarApiComponentBaseClass"]));
 
 
 
