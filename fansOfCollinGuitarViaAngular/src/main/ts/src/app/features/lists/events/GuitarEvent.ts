@@ -5,7 +5,7 @@ export interface IGuitarEvent   {
   room: string ;
   event: string ;
 }
-export const GUITAREVENTS : IGuitarEvent[] = [
+export const GUITAREVENTS : IGuitarEvent[] = [  // RETIRED
   {
     "name": "2018 Spring Guitar Events at Collin College",
     "date": "Date",
