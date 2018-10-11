@@ -15116,6 +15116,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_file_as_source_for_json_file_as_source_for_json_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../services/file-as-source-for-json/file-as-source-for-json.service */ "./src/app/services/file-as-source-for-json/file-as-source-for-json.service.ts");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/constants/ConstantsContract */ "./src/app/services/constants/ConstantsContract.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -15138,9 +15139,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var playListsByChannelUri = "http://localhost:8081/fans/video/playListsByChannel";
+
+var SpringbootBaseUrl = _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_3__["ConstantsContract"].SpringbootBaseUrl;
+var playListsByChannelUri = "/fans/video/playListsByChannel";
 var EMPTY_URL = '#0';
-var setupUri = playListsByChannelUri;
+var setupUri = SpringbootBaseUrl + playListsByChannelUri;
 var PlayListsByChannelComponent = /** @class */ (function (_super) {
     __extends(PlayListsByChannelComponent, _super);
     function PlayListsByChannelComponent(service, modalService) {
@@ -15570,6 +15573,7 @@ var carouselSlideDeck = [0, 1, 2];
 // const setupUri  = "/assets/json/header-controller.json" ;
 // const setupUri  = "http://localhost:8081/fans/header" ;
 var setupUri = _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_2__["ConstantsContract"].SpringbootBaseUrl + "/fans/header";
+// const setupUri  = "/fans/header" ;
 var HeaderComponent = /** @class */ (function (_super) {
     __extends(HeaderComponent, _super);
     function HeaderComponent(service) {
@@ -15833,7 +15837,8 @@ __webpack_require__.r(__webpack_exports__);
 var ConstantsContract;
 (function (ConstantsContract) {
     ConstantsContract.JavaScriptBaseUrl = location.host;
-    ConstantsContract.SpringbootBaseUrl = "http://localhost:8081";
+    // export const SpringbootBaseUrl: string = "http://localhost:8081";
+    ConstantsContract.SpringbootBaseUrl = "http://localhost:80";
     ConstantsContract.BaseUrl = ConstantsContract.JavaScriptBaseUrl;
 })(ConstantsContract || (ConstantsContract = {}));
 

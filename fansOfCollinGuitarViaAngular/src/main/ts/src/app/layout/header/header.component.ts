@@ -11,6 +11,7 @@ const carouselSlideDeck = [0, 1, 2];
 // const setupUri  = "/assets/json/header-controller.json" ;
 // const setupUri  = "http://localhost:8081/fans/header" ;
 const setupUri  = ConstantsContract.SpringbootBaseUrl + "/fans/header" ;
+// const setupUri  = "/fans/header" ;
 
 @Component({
   selector: 'guitar-header',

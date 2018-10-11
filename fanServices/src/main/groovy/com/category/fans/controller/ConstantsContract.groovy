@@ -11,13 +11,27 @@ interface ConstantsLocatingJsonContract{
 
 }
 interface CrossOriginContract{
-    String CROSS_SITE_ORIGIN = CROSS_SITE_ORIGIN_NG_SERVE
-    String CROSS_SITE_ORIGIN_NG_SERVE = "http://localhost:4200"  // TODO: replace hardcoded URL
+//    String CROSS_SITE_ORIGIN = CROSS_SITE_ORIGIN_NG_SERVE
+//    String CROSS_SITE_ORIGIN_NG_SERVE = "http://localhost:4200"  // TODO: replace hardcoded URL
+//    String CROSS_SITE_ORIGIN_PROD_SERVE = "http://localhost:80"  // TODO: replace hardcoded URL
+//    String CROSS_SITE_ORIGIN_DEV_SERVE = "http://localhost:8081"  // TODO: replace hardcoded URL
+//    String CROSS_SITE_ORIGIN_DOCKER_SERVE = "http://localhost:9081"  // TODO: replace hardcoded URL
     String[] getRoutesNeededForCrossOriginRegistry()
 }
-class Constants implements CrossOriginContract {
+class Constants {
+    static String CROSS_SITE_ORIGIN_NG_SERVE = "http://localhost:8082"  // TODO: replace hardcoded URL
+    static String CROSS_SITE_ORIGIN_PROD_SERVE = "http://localhost:80"  // TODO: replace hardcoded URL
+    static String CROSS_SITE_ORIGIN_DEV_SERVE = "http://localhost:8081"  // TODO: replace hardcoded URL
+    static String CROSS_SITE_ORIGIN_DOCKER_SERVE = "http://localhost:9081"  // TODO: replace hardcoded URL
+    static String[] CROSS_SITE_ORIGIN_LIST = [
+        CROSS_SITE_ORIGIN_NG_SERVE ,
+        CROSS_SITE_ORIGIN_PROD_SERVE ,
+        CROSS_SITE_ORIGIN_DEV_SERVE ,
+        CROSS_SITE_ORIGIN_DOCKER_SERVE ,
+    ]
 
-    String[] getRoutesNeededForCrossOriginRegistry() { // TODO : why cant this be static?
+    static String[] getRoutesNeededForCrossOriginRegistry() {
+
         final CrossOriginContract[] controllers = getControllersNeededForCrossOriginRegistry()
         String[] candidate = []
 
@@ -26,7 +40,7 @@ class Constants implements CrossOriginContract {
         }
         return candidate
     }
-    private CrossOriginContract[] getControllersNeededForCrossOriginRegistry() {
+    static private CrossOriginContract[] getControllersNeededForCrossOriginRegistry() {
         final HomeController homeController = new HomeController()
         final HeaderController headerController = new HeaderController()
         final FooterController footerController = new FooterController()
@@ -39,5 +53,6 @@ class Constants implements CrossOriginContract {
                 guitarCourseScheduleController ,
                 videoController
         ]
+        candidate
     }
 }

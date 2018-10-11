@@ -9,10 +9,12 @@ import {
     IYouTubeVideosByPlaylistQueryResponse
 } from "../YouTubePlayListClientServiceContracts";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ConstantsContract} from "../../../../services/constants/ConstantsContract";
+import SpringbootBaseUrl = ConstantsContract.SpringbootBaseUrl;
 
-const playListsByChannelUri = "http://localhost:8081/fans/video/playListsByChannel";
+const playListsByChannelUri = "/fans/video/playListsByChannel";
 const EMPTY_URL = '#0';
-const setupUri = playListsByChannelUri;
+const setupUri = SpringbootBaseUrl + playListsByChannelUri;
 
 @Component({
     selector: 'ut-play-list-by-channel',
