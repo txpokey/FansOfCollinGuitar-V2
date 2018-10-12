@@ -15,9 +15,11 @@ interface CrossOriginContract{
 }
 class Constants {
     static String CROSS_SITE_ORIGIN_NG_SERVE_PORT = "http://localhost:8082"  // TODO: replace hardcoded URL
+    static String CROSS_SITE_ORIGIN_PROD = "http://fansofcollinguitar.org"  // TODO: replace hardcoded URL
     static String CROSS_SITE_ORIGIN_DOCKER_EXPOSES = "http://localhost:80"  // TODO: replace hardcoded URL
     static String CROSS_SITE_ORIGIN_DOCKER_HIDES = "http://localhost:8081"  // TODO: replace hardcoded URL
     static String[] CROSS_SITE_ORIGIN_LIST = [
+        CROSS_SITE_ORIGIN_PROD ,
         CROSS_SITE_ORIGIN_NG_SERVE_PORT ,
         CROSS_SITE_ORIGIN_DOCKER_EXPOSES ,
         CROSS_SITE_ORIGIN_DOCKER_HIDES ,

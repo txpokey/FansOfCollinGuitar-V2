@@ -7,18 +7,19 @@ import {
     GuitarApiObserverContract,
     GuitarApiObserverPollingContract
 } from "../../../../services/file-as-source-for-json/file-as-source-for-json.service";
-import {isUndefined} from "util";
 import {
     IYouTubePlaylistsByChannelQueryResponse,
     IYouTubeVideosByPlaylistQueryResponse
 } from "../YouTubePlayListClientServiceContracts";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {HttpClient} from "@angular/common/http";
+import {ConstantsContract} from "../../../../services/constants/ConstantsContract";
+import SpringbootBaseUrl = ConstantsContract.SpringbootBaseUrl;
 
 // ------
-const playListsUri = "http://localhost:8081/fans/video/videosByPlaylist";
+const playListsByChannelUri = "/fans/video/videosByPlaylist";
 const EMPTY_URL = '#0';
-const setupUri = playListsUri;
+const setupUri = SpringbootBaseUrl + playListsByChannelUri;
 
 @Component({
     selector: 'ut-play-list',
