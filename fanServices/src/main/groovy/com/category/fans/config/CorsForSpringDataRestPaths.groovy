@@ -9,17 +9,20 @@ import org.springframework.stereotype.Component
  class CorsForSpringDataRestPaths extends RepositoryRestConfigurerAdapter {
 //    private final String origin = Constants.CROSS_SITE_ORIGIN_NG_SERVE
     private final String originList = Constants.CROSS_SITE_ORIGIN_LIST
+    private final def route = "/api/**"
 
     @Override
     void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-        final def route = "/api/**"
+        config.getCorsRegistry().addMapping(route).allowedOrigins("*")
+    }
+
+    private addMappings(RepositoryRestConfiguration config) {
         originList.each {
             origin -> addMapping(config, origin, route)
         }
     }
 
     private addMapping(RepositoryRestConfiguration config, String origin, String route) {
-        config.getCorsRegistry().addMapping(route)
-                .allowedOrigins(origin)
+        config.getCorsRegistry().addMapping(route).allowedOrigins(origin)
     }
 }

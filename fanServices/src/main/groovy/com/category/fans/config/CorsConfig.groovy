@@ -18,17 +18,12 @@ class CorsConfig{
             void addCorsMappings(CorsRegistry registry) {
                 final String[] routes = getRoutesNeededForCrossOriginRegistry()
                 final String[] originList = CROSS_SITE_ORIGIN_LIST
-//                originList.each { origin ->
-//                    routes.each { route -> registry.addMapping(route).allowedOrigins(origin) }
-//                }
                 routes.each { route -> registry.addMapping(route).allowedOrigins(CROSS_SITE_ORIGIN_LIST) }
-//                routes.each { route -> registry.addMapping(route).allowedOrigins("*") }
                 routes
             }
         }
     }
     private static String[] getRoutesNeededForCrossOriginRegistry() {
-//        final Constants constants = new Constants()
         final String[] routes = Constants.getRoutesNeededForCrossOriginRegistry()
     }
 

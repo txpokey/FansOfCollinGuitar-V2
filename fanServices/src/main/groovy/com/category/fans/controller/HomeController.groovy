@@ -13,9 +13,12 @@ class HomeController implements CrossOriginContract {
         return "forward:/"
     }
 
+    private static final API_URI_LIST = [ "/api/collegeEvents"]  // cf. CorsForSpringDataRestPaths
+    private static final EMPTY_LIST   = []
+
     @Override
     String[] getRoutesNeededForCrossOriginRegistry() {
-        return [ "/api/collegeEvents"]
+        EMPTY_LIST
     }
 }
 
