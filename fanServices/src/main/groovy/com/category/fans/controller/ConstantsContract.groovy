@@ -14,15 +14,13 @@ interface CrossOriginContract{
     String[] getRoutesNeededForCrossOriginRegistry()
 }
 class Constants {
-    static String CROSS_SITE_ORIGIN_NG_SERVE = "http://localhost:8082"  // TODO: replace hardcoded URL
-    static String CROSS_SITE_ORIGIN_PROD_SERVE = "http://localhost:80"  // TODO: replace hardcoded URL
-    static String CROSS_SITE_ORIGIN_DEV_ALT = "http://localhost:8081"  // TODO: replace hardcoded URL
-    static String CROSS_SITE_ORIGIN_DOCKER_ALT = "http://localhost:9081"  // TODO: replace hardcoded URL
+    static String CROSS_SITE_ORIGIN_NG_SERVE_PORT = "http://localhost:8082"  // TODO: replace hardcoded URL
+    static String CROSS_SITE_ORIGIN_DOCKER_EXPOSES = "http://localhost:80"  // TODO: replace hardcoded URL
+    static String CROSS_SITE_ORIGIN_DOCKER_HIDES = "http://localhost:8081"  // TODO: replace hardcoded URL
     static String[] CROSS_SITE_ORIGIN_LIST = [
-        CROSS_SITE_ORIGIN_NG_SERVE ,
-        CROSS_SITE_ORIGIN_PROD_SERVE ,
-        CROSS_SITE_ORIGIN_DEV_ALT ,
-        CROSS_SITE_ORIGIN_DOCKER_ALT ,
+        CROSS_SITE_ORIGIN_NG_SERVE_PORT ,
+        CROSS_SITE_ORIGIN_DOCKER_EXPOSES ,
+        CROSS_SITE_ORIGIN_DOCKER_HIDES ,
     ]
 
     static String[] getRoutesNeededForCrossOriginRegistry() {

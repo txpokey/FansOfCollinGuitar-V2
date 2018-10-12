@@ -8,7 +8,9 @@ import {IGuitarEvent} from "./GuitarEvent";
 import {ConstantsContract} from "../../../services/constants/ConstantsContract";
 
 // const setupUri  = "/assets/json/guitarEvents-controller.json" ;
-const setupUri  = ConstantsContract.SpringbootBaseUrl + "/api/collegeEvents" ;
+const SpringbootBaseUrl  = ConstantsContract.SpringbootBaseUrl ;
+const setupURL  = SpringbootBaseUrl + "/api/collegeEvents" ;
+const setupUri  = "/api/collegeEvents" ;
 
 @Component({
   selector: 'guitar-events',

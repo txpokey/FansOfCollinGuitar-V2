@@ -3641,7 +3641,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 // const setupUri  = "/assets/json/guitarEvents-controller.json" ;
-var setupUri = _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_2__["ConstantsContract"].SpringbootBaseUrl + "/api/collegeEvents";
+var SpringbootBaseUrl = _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_2__["ConstantsContract"].SpringbootBaseUrl;
+var setupURL = SpringbootBaseUrl + "/api/collegeEvents";
+var setupUri = "/api/collegeEvents";
 var EventsComponent = /** @class */ (function (_super) {
     __extends(EventsComponent, _super);
     function EventsComponent(service) {
@@ -15423,8 +15425,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var EMPTY_URL = '#0';
-// const setupUri  = "/assets/json/footer-controller.json" ;
-// const setupUri  = "http://localhost:8081/fans/footer" ;
 var setupUri = _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_2__["ConstantsContract"].SpringbootBaseUrl + "/fans/footer";
 var FooterComponent = /** @class */ (function (_super) {
     __extends(FooterComponent, _super);
@@ -15571,9 +15571,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var carouselSlideDeck = [0, 1, 2];
 // const setupUri  = "/assets/json/header-controller.json" ;
-// const setupUri  = "http://localhost:8081/fans/header" ;
 var setupUri = _services_constants_ConstantsContract__WEBPACK_IMPORTED_MODULE_2__["ConstantsContract"].SpringbootBaseUrl + "/fans/header";
-// const setupUri  = "/fans/header" ;
 var HeaderComponent = /** @class */ (function (_super) {
     __extends(HeaderComponent, _super);
     function HeaderComponent(service) {
@@ -15837,7 +15835,7 @@ __webpack_require__.r(__webpack_exports__);
 var ConstantsContract;
 (function (ConstantsContract) {
     ConstantsContract.JavaScriptBaseUrl = location.host;
-    // export const SpringbootBaseUrl: string = "http://localhost:8081";
+    // use port for client-side of docker container running SpringBoot
     ConstantsContract.SpringbootBaseUrl = "http://localhost:80";
     ConstantsContract.BaseUrl = ConstantsContract.JavaScriptBaseUrl;
 })(ConstantsContract || (ConstantsContract = {}));
