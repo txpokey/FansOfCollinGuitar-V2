@@ -15,7 +15,7 @@ class ServiceTool{
      * @param location classpath relative location for resource
      * @return
      */
-    static String getContentFromClasspathResourceAsJson(@NonNull String location ) {
+    static String getContentFromClasspathResourceAsString(@NonNull String location ) {
         String data = ""
         ClassPathResource cpr = new ClassPathResource(location)
         try {
@@ -24,6 +24,11 @@ class ServiceTool{
         } catch (IOException e) {
             log.warn("IOException", e)
         }
+    }
+    static String getContentFromClasspathResourceAsString(@NonNull String[] locations ) {
+        String candidate = locations.inject( "" ,
+                { seed, location -> seed += getContentFromClasspathResourceAsJson( location )})
+        candidate
     }
     static InputStream getContentFromClasspathResourceAsInputStream(@NonNull String location) {
         ClassPathResource cpr = new ClassPathResource(location)

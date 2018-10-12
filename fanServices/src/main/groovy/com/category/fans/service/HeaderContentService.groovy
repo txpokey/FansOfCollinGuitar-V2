@@ -26,7 +26,7 @@ class HeaderContentService{
         new File(jsonLocation).text
     }
    private String getHeaderFromAssetsResourceAsJson() {
-        ServiceTool.getContentFromClasspathResourceAsJson(jsonLocation)
+        ServiceTool.getContentFromClasspathResourceAsString(jsonLocation)
     }
 
     private IHeaderConfig getHeaderConfigFromAssets() {

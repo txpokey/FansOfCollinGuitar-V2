@@ -55,11 +55,13 @@ class GuitarCourseScheduleContentService{
         groupByCandidate
     }
 
-
     private def processMusicCatalogDiscovered(@NonNull def fullContent) {
-        def topLevelMap = fullContent.collect
-        { key, value -> [schoolterm: key.toString(), payload: value.collect { k, v -> k.toString() }] }
-        topLevelMap
+        def topLevelListOfMaps = fullContent.collect
+            { key, value -> [schoolterm: key.toString(), payload: value.collect { k, v -> k.toString() }] }
+        def sortedMap = topLevelListOfMaps.sort{ a,b ->
+            b.schoolterm.compareTo( a.schoolterm )
+        }
+        sortedMap
     }
     private def processSectionsDiscovered(@NonNull def fullContent, @NonNull def bySchoolterm, @NonNull def byCourseByTitle) {
         final def pickBySchoolTerm = { key, value -> key == bySchoolterm }

@@ -26,7 +26,7 @@ class FooterContentService {
     }
 
     private String getFooterFromAssetsResourceAsJson() {
-        ServiceTool.getContentFromClasspathResourceAsJson(jsonLocation)
+        ServiceTool.getContentFromClasspathResourceAsString(jsonLocation)
     }
 
     private IFooter[] getFooterArrayByConvertingFromJson() {
