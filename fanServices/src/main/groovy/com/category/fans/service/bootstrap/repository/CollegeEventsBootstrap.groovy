@@ -71,7 +71,7 @@ class CollegeEventsBootstrap implements BootstrapContract {
               event : "Guitar Get Together"
             ] ,
             [ name : "Jay Armstrong" ,
-              date : "10/12/2018" ,
+              date : "10/10/2018" ,
               time : "Wed 12pm" ,
               room : "B-187 Spring Creek" ,
               event : "WNR Student Recital: Jay Armstrong"
