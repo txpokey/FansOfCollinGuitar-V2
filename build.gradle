@@ -1,20 +1,12 @@
 //sourceSets.main.java.srcDirs =
 //  ["src/main/java", "src/test/java", "src/main/resources" ]
 
-ext['groovy.version'] = '2.5.2' // need for compile groovy to pick up groovy fix
+ext['groovy.version'] = groovyVersion // need for compile groovy to pick up groovy fix
 
 allprojects {
     group = 'com.category.fans'
     version = '0.0.1-SNAPSHOT'
-    ext {
-        groovyVersion = "${groovyVersionProperty}"
 
-        springBootVersion = "${springBootVersionProperty}"
-        angularJsVersion = "${angularJsVersionProperty}"
-        bootstrapJsVersion = "${bootstrapJsVersionProperty}"
-        spockVersion = "${spockVersionProperty}"
-        testNgVersion = "${testNgVersionProperty}"
-    }
     apply plugin: 'groovy'
     apply plugin: 'eclipse'
     apply plugin: 'idea'
@@ -36,8 +28,8 @@ allprojects {
         compile('org.springframework.boot:spring-boot-starter-web')
         // -------------------------------------------
         compile("org.webjars:angularjs:${angularJsVersion}")
-        compile("org.webjars:bootstrap:${latestReleaseProperty}")
-        compile("org.webjars:webjars-locator:${latestReleaseProperty}")
+        compile("org.webjars:bootstrap:${latestRelease}")
+        compile("org.webjars:webjars-locator:${latestRelease}")
         // -------------------------------------------
         runtime('org.springframework.boot:spring-boot-devtools')
         compile('org.springframework.boot:spring-boot-starter-actuator')
@@ -51,10 +43,6 @@ allprojects {
 apply from: "${rootProject.projectDir}/etc/gradle/apply/ngTasks.gradle", to: allprojects
 
 buildscript {
-    ext {
-        springBootVersion = "${springBootVersionProperty}"
-        groovyVersion = "${groovyVersionProperty}"
-    }
     repositories {
         mavenCentral()
         maven { url "https://repo.spring.io/plugins-release/" }
@@ -62,21 +50,8 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersionProperty"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
         classpath "io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE"
     }
 }
 
-//dependencyManagement {
-//    imports {
-//        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudDependenciesVersion}"
-//        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:${springCloudServicesVersion}"
-//    }
-//}
-//dependencies {
-//    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-//    compile('org.springframework.boot:spring-boot-starter-data-rest')
-//    // -------------------------------------------
-//    compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
-//    // -------------------------------------------
-//}
