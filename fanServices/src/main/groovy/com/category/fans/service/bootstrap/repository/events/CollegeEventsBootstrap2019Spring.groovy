@@ -110,16 +110,3 @@ class CollegeEventsBootstrap2019Spring {
             ]
     ]
 }
-
-//
-//[ name : "Guitar Artist Showcase" ,
-//  date : "11/14/2019" ,
-//  time : "Wed 7pm " ,
-//  room : "The Arts Gallery (A-175)" ,
-//  event : "Guitar Artist Showcase"
-//]
-//
-//2/8-10 (FRI-SUN) 7th Annual Collin College Guitar Festival
-//-2/8 Faculty Concert: Dr. Robby Gibson and Kithara Duo, The ARTS Gallery (A-175) at 7pm
-//-2/9 Alum Faculty Recital: Solazur, The ARTS Gallery (A-175) at 2pm
-//-2/10 Student Concert: Living Legends Conference Center at 3pm
