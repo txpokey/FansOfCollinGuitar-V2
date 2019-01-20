@@ -19,6 +19,7 @@ class GuitarCourseScheduleServiceTest extends AbstractTestNGSpringContextTests {
 
     void sanityCheck() {
         assert service
+        log.debug("logging is being tested")
     }
 
     void confirmGetContent() {

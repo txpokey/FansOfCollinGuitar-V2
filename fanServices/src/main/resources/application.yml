@@ -18,14 +18,19 @@ debug:
 google:
   channelId: UCYkk_DU_k1sWyOw_fy6Raug
 
-logging:
-  level:
-    org.springframework.web: INFO
-    com.category.fans: DEBUG
-
 server:
   port: 8081
 #  port: 0 # random port
 
 
 #spring.data.rest.basePath=/api
+
+#---------------------------------
+logging:
+  level:
+    org.springframework.web: INFO
+    com.category.fans: DEBUG
+  file: logs/dev_app.log
+  pattern:
+    console: "%date{HH:mm:ss.SSS} [%thread] | %logger{10}.%method.%L : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n || %logger{10}.%method.%L"
