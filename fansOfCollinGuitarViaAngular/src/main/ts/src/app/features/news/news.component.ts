@@ -8,7 +8,7 @@ import {
   GuitarApiObserverPollingContract
 } from "../../services/file-as-source-for-json/file-as-source-for-json.service";
 
-const setupUri  = "/assets/json/news-controller--2018.fall.json" ;
+const setupUri  = "/assets/json/news-controller--2019.spring.json" ;
 
 @Component({
   selector: 'guitar-news',
